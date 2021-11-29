@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+}
+html,body {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    place-items: center;
+    background: #AAD3FA;
+}
+.card {
+    width: 380px;
+    background: white;
+    border-radius: 5px;
+    border: #CACACA;
+    border-style: solid;
+    margin-bottom: 40px;
+}
+.card form {
+    padding: 10px 30px 20px 30px;
+}
+.card form .field {
+    height: 50px;
+    width: 100%;
+    margin-top: 20px;
+    position: relative;
+}
+.card form .field input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    font-size: 14px;
+    padding-left: 20px;
+    border: 1 px solid lightgrey;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+.card form .field label{
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    color: #999999;
+    font-weight: 400;
+    font-size: 14px;
+    pointer-events: none;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+}
+form .field input:focus ~ label, 
+form .field input:valid ~ label{
+    top: 0%;
+    font-size: 16px;
+    font-weight: 600;
+    color: #052747;
+    background: white;
+    transform: translateY(-50%);
+}
+.field-icon {
+    float: right;
+    margin-top: -30px;
+    position: relative;
+    z-index: 2;
+  }
+form .content {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    font-size: 15px;
+    align-items: center;
+    justify-content: right;
+}
+.card form .field input[type="submit"]{
+    color: white;
+    border: none;
+    text-align: center;
+    border-radius: 5px;
+    width: 220px;
+    height: 40px;
+    margin-left: 47.5px;
+    margin-top: -10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    background: #00A3FF;
+    transition: all 0.3s ease;
+}
+form .field input[type="submit"]:active {
+    transform: scale(0.95);
+    box-shadow: 0px 1px 18px #4b7b96;
+}
+form .samauntung-link {
+    margin-top: 10px;
+    font-size: 13px;
+    text-align: center;
+}
+form .signup-link {
+    color: #262626;
+    margin-top: 20px;
+    font-size: 13px;
+    text-align: center;
+}
+form .password-link a {
+    color: #4158d0;
+    font-size: 13px;
+    text-decoration: none;
+}
+form .samauntung-link a {
+    color: #4158d0;
+    font-size: 13px;
+    text-decoration: none;
+}
+form .signup-link a {
+    color: #4158d0;
+    font-size: 13px;
+    text-decoration: none;
+}
+form .password-link a:hover, 
+form .samauntung-link a:hover,
+form .signup-link a:hover {
+    text-decoration: underline;
+}
+
