@@ -23,10 +23,9 @@
         </a> -->
         <a class="nav-link" href="customer.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Customer</span>
+          <span>Product</span>
         </a>
-
-        <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+        <!-- <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Bootstrap UI</h6>
             <a class="collapse-item" href="alerts.html">Alerts</a>
@@ -36,24 +35,34 @@
             <a class="collapse-item" href="popovers.html">Popovers</a>
             <a class="collapse-item" href="progress-bar.html">Progress Bars</a>
           </div>
-        </div>
+        </div> -->
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true"
+        <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true"
           aria-controls="collapseForm">
           <i class="fab fa-fw fa-wpforms"></i>
           <span>Forms</span>
-        </a>
-        <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+        </a> -->
+        <!-- <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Forms</h6>
             <a class="collapse-item" href="form_basics.html">Form Basics</a>
             <a class="collapse-item" href="form_advanceds.html">Form Advanceds</a>
           </div>
-        </div>
+        </div> -->
+        <a class="nav-link" href="#">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Orders</span>
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"
+        <a class="nav-link" href="file/ui-colors.html">
+          <i class="fas fa-fw fa-palette"></i>
+          <span>Inventaris</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"
           aria-controls="collapseTable">
           <i class="fas fa-fw fa-table"></i>
           <span>Tables</span>
@@ -64,20 +73,24 @@
             <a class="collapse-item" href="simple-tables.html">Simple Tables</a>
             <a class="collapse-item" href="datatables.html">DataTables</a>
           </div>
-        </div>
+        </div> -->
+        <a class="nav-link" href="file/charts.html">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Customer</span>
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="ui-colors.html">
+        <a class="nav-link" href="file/ui-colors.html">
           <i class="fas fa-fw fa-palette"></i>
-          <span>UI Colors</span>
+          <span>Wallet</span>
         </a>
       </li>
       <hr class="sidebar-divider">
       <div class="sidebar-heading">
-        Examples
-      </div>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true"
+        Report
+      </div> 
+       <li class="nav-item">
+        <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true"
           aria-controls="collapsePage">
           <i class="fas fa-fw fa-columns"></i>
           <span>Pages</span>
@@ -90,8 +103,12 @@
             <a class="collapse-item" href="404.html">404 Page</a>
             <a class="collapse-item" href="blank.html">Blank Page</a>
           </div>
-        </div>
-      </li>
+        </div> -->
+        <a class="nav-link" href="file/ui-colors.html">
+          <i class="fas fa-fw fa-palette"></i>
+          <span>profit</span>
+        </a>
+      </li> 
       <li class="nav-item">
         <a class="nav-link" href="charts.html">
           <i class="fas fa-fw fa-chart-area"></i>
