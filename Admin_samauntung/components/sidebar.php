@@ -22,7 +22,7 @@
           <span>Bootstrap UI</span>
         </a> -->
         <a class="nav-link" href="customer.php">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+        <i class="fas fa-fw fa-solid fa-box"></i>
           <span>Product</span>
         </a>
         <!-- <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
@@ -51,7 +51,7 @@
           </div>
         </div> -->
         <a class="nav-link" href="#">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+        <i class="fas fa-shopping-basket"></i>
           <span>Orders</span>
         </a>
       </li>
@@ -75,13 +75,13 @@
           </div>
         </div> -->
         <a class="nav-link" href="file/charts.html">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+        <i class="fas fa-users"></i>
           <span>Customer</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="file/ui-colors.html">
-          <i class="fas fa-fw fa-palette"></i>
+        <i class="fas fa-wallet"></i>
           <span>Wallet</span>
         </a>
       </li>
@@ -105,13 +105,13 @@
           </div>
         </div> -->
         <a class="nav-link" href="file/ui-colors.html">
-          <i class="fas fa-fw fa-palette"></i>
+        <i class="fas fa-signal"></i>
           <span>profit</span>
         </a>
       </li> 
       <li class="nav-item">
         <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
+        <i class="fas fa-signal"></i>
           <span>Charts</span>
         </a>
       </li>
