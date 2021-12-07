@@ -74,7 +74,7 @@
             <a class="collapse-item" href="datatables.html">DataTables</a>
           </div>
         </div> -->
-        <a class="nav-link" href="file/charts.html">
+        <a class="nav-link" href="file/cutomer.php">
         <i class="fas fa-users"></i>
           <span>Customer</span>
         </a>
