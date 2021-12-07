@@ -56,7 +56,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="file/ui-colors.html">
+        <a class="nav-link" href="inventaris.php">
           <i class="fas fa-fw fa-palette"></i>
           <span>Inventaris</span>
         </a>

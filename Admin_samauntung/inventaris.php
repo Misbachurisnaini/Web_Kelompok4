@@ -29,8 +29,6 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
-
- 
   <div class="container-fluid">
         <h1 class="mt-4"> Update Stock</h1>
     <td>
