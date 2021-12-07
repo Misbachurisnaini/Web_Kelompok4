@@ -259,7 +259,7 @@ if (!isset($_SESSION["admin"])) {
           <div class="card-header">
             <h5><strong>Your profil</strong></h5>
           </div>
-          <div class="rounded">
+          <div class="responsive-image">
             <img src="img/logo/logo.png">
           </div>
           <div class="card-body">
