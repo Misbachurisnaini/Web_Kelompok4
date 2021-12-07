@@ -259,6 +259,9 @@ if (!isset($_SESSION["admin"])) {
           <div class="card-header">
             <h5><strong>Your profil</strong></h5>
           </div>
+          <div class="rounded">
+            <img src="img/logo/logo.png">
+          </div>
           <div class="card-body">
             <form action="" method="POST">
               <div class="mb-2 px-4">
