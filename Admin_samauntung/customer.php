@@ -221,8 +221,7 @@
           </div>
 
           <div class="text-center">
-            <img src="img/think.svg" style="max-height: 90px">
-            <h4 class="pt-3">save your <b>imagination</b> here!</h4>
+           
           </div>
 
           <!-- Modal Logout -->
