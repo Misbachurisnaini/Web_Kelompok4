@@ -51,37 +51,41 @@
                   </tr>
               </thread> 
               <tbody>
-              <?php 
-                include "config/function.php";
-                $sql="select * from produk order by id_produk desc";
-                
-                $hasil=mysqli_query($conn,$sql);
-                $no=0;
-                while ($data = mysqli_fetch_array($hasil)) {
-                $no++;
-
-                ?>
-                <tbody>
-                  <tr>  
-                    
-                    <td><?php echo $data["nama_produk"]; ?></td> 
-                    <td><?php echo $data["stok_awal"]; ?></td>
-                    <td><?php echo $data["deskripsi_produk"];   ?></td> 
-                    <td><?php echo $data["stok_terkini"]; ?></td>
-
-                    
-                  </tr>
-                </tbody>  
-                <?php 
+        <?php
+    include 'koneksi.php';
+    if(isset($_POST["nama"])) {
+        $namaFile = $_FILES['foto']['name'];
+        $namaSementara = $_FILES['foto']['tmp_name'];
+        $dirUpload = "uploads/";
+        $terupload = move_uploaded_file($namaSementara, $dirUpload.$namaFile);
+        if ($terupload) {
+            $sql = "INSERT INTO produk 
+                    (id_kategori, nama_produk, gambar_produk, deskripsi_produk) 
+                    VALUES
+                    (".($_POST["kategori"]!=null?$_POST["kategori"]:"null").",'".$_POST["nama"]."','".$namaFile."','".$_POST["deskripsi"]."')";
+            if (mysqli_query($konek, $sql)){
+                $sql = "INSERT INTO produk_detail (id_produk, harga) VALUES (LAST_INSERT_ID(),".$_POST["harga"].")";
+                if(mysqli_query($konek, $sql)){
+                    echo '<script>alert("Data berhasil ditambah")</script>';
+                }else{
+                    echo '<script>alert("Error:'.mysqli_error($konek).'")</script>';
                 }
-                ?>
+            } else {
+                echo '<script>alert("Error:'.mysqli_error($konek).'")</script>';
+            }
+        } else {
+            echo "<script>alert('UPLOAD FILE GAGAL')</script>";
+        }
+    }
+?>
             </table>
         </div>
+
     <div>
         <div class="text-right">
-        <td>  
-            <a href="update-produk.php?id_produk_detail=<?php echo $data['id_produk']; ?>" class="btn btn-warning" role=" button">Update</a>
-        </td>     
+            <button type="button" class="btn btn-primary" data-toggel="modal" data-target="#myModal">
+                Update Stok
+            </button>    
 
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

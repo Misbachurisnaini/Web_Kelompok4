@@ -1,3 +1,17 @@
+<?php
+include 'koneksi.php';
+
+$query = mysqli_query($konek, "SELECT 
+  COUNT(customer_detail.id_customer) as total,
+  AVG(customer_detail.orders) as avg_order,
+  AVG(customer_detail.total_spend) as avg_spend,
+  AVG(customer_detail.total_spend/customer_detail.orders) as aov
+  FROM customer_detail,user WHERE customer_detail.id_customer = user.id_user AND user.user_level = 'user'");
+$data_analyzed=mysqli_fetch_array($query);
+$query = mysqli_query($konek, "SELECT user.id_user,user.user_name,user.user_email,customer_detail.nama,customer_detail.foto,customer_detail.last_active FROM user,customer_detail WHERE user.id_user=customer_detail.id_customer AND user.user_level = 'user'");
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,6 +26,7 @@
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
+  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -21,8 +36,8 @@
     <!-- Sidebar -->
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
-      
-        </nav> -->
+
+        <!-- TopBar -->
         <?php require "components/topbar.php"?>
         <!-- Topbar -->
 
@@ -37,83 +52,72 @@
             </ol>
           </div>
 
-          <table class="table" id="example">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>NAMA</th>
-                    <th>USERNAME</th>
-                    <th>LAST ACTIVE</th>
-                    <th>EMAIL</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody> 
-            <?php while($data=mysqli_fetch_array($query)){ ?>
-              <tr>
-                <td><img src="uploads/<?=$data["foto"]?>" width="50px" height="50px"></td>
-                <td><b><?=$data["nama"]?></b></td>
-                <td><?=$data["user_name"]?></td>
-                <td><?=date('M d, Y', strtotime($data["last_active"]))?></td>
-                <td style="color:#00A3FF"><?=$data["user_email"]?></td>
-                <td><a href="detail_customer.php?id=<?=$data["id_user"]?>"><i class="material-icons" style="color:black">visibility</i></a></td>
-                <td>
-                  <a href="edit_customer.php?id=<?=$data["id_user"]?>" class="btn btn-outline-dark">
-                    <i class="material-icons">edit</i>Edit
-                  </a>
-                </td>
-              </tr>
-            <?php } ?>
-            </tbody>
-        </table>
-        <div class="information">
-            <p><?=$data_analyzed["total"]?> customers</p>
-            <p><?=number_format((float)$data_analyzed["avg_order"], 2, ',', '.')?> average orders</p>
-            <p>Rp<?=number_format((float)$data_analyzed["avg_spend"], 2, ',', '.')?> average lifetime spend</p>
-            <p>Rp<?=number_format((float)$data_analyzed["aov"], 2, ',', '.')?> average order value</p>
+          <div class="row">
+            <div class="col-md-12">
+             <div class="card mb-4">
+              <div class="table-responsive p-3">
+                <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>#</th>
+                      <th>NAMA</th>
+                      <th>USERNAME</th>
+                      <th>LAST ACTIVE</th>
+                      <th>EMAIL</th>
+                      <th>AKSI</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php while($data=mysqli_fetch_array($query)){ ?>
+                      <tr>
+                        <td><img src="uploads/<?=$data["foto"]?>" width="50px" height="50px"></td>
+                        <td><b><?=$data["nama"]?></b></td>
+                        <td><?=$data["user_name"]?></td>
+                        <td><?=date('M d, Y', strtotime($data["last_active"]))?></td>
+                        <td style="color:#00A3FF"><?=$data["user_email"]?></td>
+                        <td><a href="detail_customer.php?id=<?=$data["id_user"]?>" class="btn btn-success"><i class="fas fa-eye"></i></a>
+                          <a href="edit_customer.php?id=<?=$data["id_user"]?>" class="btn btn-primary">
+                            <i class="material-icons"></i>Edit
+                          </a>
+                        </td>
+                      </tr>
+                    <?php } ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
-        <script>
-            $(document).ready(function() {
-                $('#example').DataTable(
-                  {
-                    "bInfo": false,
-                    "bLengthChange": false,
-                    "paging": false,
-                    language: { search: "",searchPlaceholder: "Cari Produk..." },
-                    "dom": "<'row'<'col-sm-12 col-md-12'fB>>"+
-                    "<'row'<'col-sm-12 col-md-12'tr>>" +
-                    "<'row'<'col-sm-12 col-md-12'p>>",
-                    buttons: [ {extend: 'pdfHtml5',download: 'open',exportOptions: {columns: [ 1, 2, 3, 4 ]}} ] 
-                  }
-                );
-            });
-            $('#ExportReporttoExcel').click(() => {
-                $('.buttons-pdf').click();
-            })
-        </script>
-        
-          <?php require "components/logout.php"?>
 
-        </div>
-        <!---Container Fluid-->
+        <?php require "components/logout.php"?>
+
       </div>
-     
-      <?php require "components/footer.php"?>
-      <!-- Footer -->
+      <!---Container Fluid-->
     </div>
+    <!-- Footer -->
+    <?php require "components/footer.php"?>
+    <!-- Footer -->
   </div>
+</div>
 
-  <!-- Scroll to top -->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
+<!-- Scroll to top -->
+<a class="scroll-to-top rounded" href="#page-top">
+  <i class="fas fa-angle-up"></i>
+</a>
 
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="js/ruang-admin.min.js"></script>
-
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="js/ruang-admin.min.js"></script>
+<!-- Page level plugins -->
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<!-- Page level custom scripts -->
+<script>
+  $(document).ready(function () {
+      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+    });
+  </script>
 </body>
 
 </html>
