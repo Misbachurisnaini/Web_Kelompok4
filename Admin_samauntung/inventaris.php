@@ -65,9 +65,9 @@
                   <tr>  
                     
                     <td><?php echo $data["nama_produk"]; ?></td> 
-                    <td><?php echo $data["stok"]; ?></td>
+                    <td><?php echo $data["stok_awal"]; ?></td>
                     <td><?php echo $data["deskripsi_produk"];   ?></td> 
-                    <td><?php echo $data["stok"]; ?></td>
+                    <td><?php echo $data["stok_terkini"]; ?></td>
 
                     
                   </tr>
@@ -77,11 +77,11 @@
                 ?>
             </table>
         </div>
-
     <div>
         <div class="text-right">
-            <td>  <a href="update-produk.php?id_produk_detail=<?php echo $data['id_produk']; ?>" class="btn btn-warning" role=" button">Update</a>
-            </td>    
+        <td>  
+            <a href="update-produk.php?id_produk_detail=<?php echo $data['id_produk']; ?>" class="btn btn-warning" role=" button">Update</a>
+        </td>     
 
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
