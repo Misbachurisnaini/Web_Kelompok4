@@ -220,10 +220,61 @@
             </ol>
           </div>
 
-          <div class="text-center">
-          
-          </div>
-
+          <table class="table" id="example">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>NAMA</th>
+                    <th>USERNAME</th>
+                    <th>LAST ACTIVE</th>
+                    <th>EMAIL</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody> 
+            <?php while($data=mysqli_fetch_array($query)){ ?>
+              <tr>
+                <td><img src="uploads/<?=$data["foto"]?>" width="50px" height="50px"></td>
+                <td><b><?=$data["nama"]?></b></td>
+                <td><?=$data["user_name"]?></td>
+                <td><?=date('M d, Y', strtotime($data["last_active"]))?></td>
+                <td style="color:#00A3FF"><?=$data["user_email"]?></td>
+                <td><a href="detail_customer.php?id=<?=$data["id_user"]?>"><i class="material-icons" style="color:black">visibility</i></a></td>
+                <td>
+                  <a href="edit_customer.php?id=<?=$data["id_user"]?>" class="btn btn-outline-dark">
+                    <i class="material-icons">edit</i>Edit
+                  </a>
+                </td>
+              </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+        <div class="information">
+            <p><?=$data_analyzed["total"]?> customers</p>
+            <p><?=number_format((float)$data_analyzed["avg_order"], 2, ',', '.')?> average orders</p>
+            <p>Rp<?=number_format((float)$data_analyzed["avg_spend"], 2, ',', '.')?> average lifetime spend</p>
+            <p>Rp<?=number_format((float)$data_analyzed["aov"], 2, ',', '.')?> average order value</p>
+        </div>
+        <script>
+            $(document).ready(function() {
+                $('#example').DataTable(
+                  {
+                    "bInfo": false,
+                    "bLengthChange": false,
+                    "paging": false,
+                    language: { search: "",searchPlaceholder: "Cari Produk..." },
+                    "dom": "<'row'<'col-sm-12 col-md-12'fB>>"+
+                    "<'row'<'col-sm-12 col-md-12'tr>>" +
+                    "<'row'<'col-sm-12 col-md-12'p>>",
+                    buttons: [ {extend: 'pdfHtml5',download: 'open',exportOptions: {columns: [ 1, 2, 3, 4 ]}} ] 
+                  }
+                );
+            });
+            $('#ExportReporttoExcel').click(() => {
+                $('.buttons-pdf').click();
+            })
+        </script>
           <!-- Modal Logout -->
           <!-- <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
             aria-hidden="true">
