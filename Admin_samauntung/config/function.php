@@ -1,7 +1,7 @@
 <?php 
 
 $servername = "localhost";
-$database = "samauntung";
+$database = "db_samauntung1";
 $username = "root";
 $password =  "";
 
