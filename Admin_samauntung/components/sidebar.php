@@ -23,7 +23,7 @@
         </a> -->
         <a class="nav-link" href="customer.php">
         <i class="fas fa-fw fa-solid fa-box"></i>
-          <span>Product</span>
+          <span>Dropshiper</span>
         </a>
         <!-- <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
