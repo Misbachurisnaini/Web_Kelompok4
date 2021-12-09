@@ -58,30 +58,30 @@ if (isset($_POST['login'])){
                         <!-- <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email address"> -->
                       </div>
                       <div class="form-group">
-                        <!-- <div class="input-group mb-3">
+                        <div class="input-group mb-3">
                         <input type="{{inputType}}" class="form-control" placeholder="Password" ng-model="passwordField">
                         <div class="input-group-prepend" ng-click="showPassword()">
                           <span class="input-group-text btn" id="basic-addon1"><i class="far fa-{{showHideIcon}}"></i></span>
-                        </div> -->
-                        <input type="password" class="form-control form-control-user"
-                          placeholder="Password" name="password" id="password" required>
+                        </div>
+                        <!-- <input type="password" class="form-control form-control-user"
+                          placeholder="Password" name="password" id="password" required> -->
                         <!-- <div class="form-group">
                           <input type="password" class="form-control form-control-user"
                             placeholder="Password" name="password" id="password" required>
                         </div> -->
                       </div>
                     </div>
-                    <!-- <div class="form-group">
+                    <div class="form-group">
                       <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">
                         <input type="checkbox" class="custom-control-input" id="customCheck">
                         <label for="customCheck" class="custom-control-label" >
                           <span>Remember Me</span>
                         </label>
                       </div>
-                    </div> -->
+                    </div>
                     <div class="form-group">
-                      <!-- <a href="index.html" class="btn btn-primary btn-block">Login</a> -->
-                      <button class="btn btn-primary btn-user btn-block" name="login" type="submit"> Login </button>
+                      <a href="index.html" class="btn btn-primary btn-block">Login</a>
+                      <!-- <button class="btn btn-primary btn-user btn-block" name="login" type="submit"> Login </button> -->
                     </div>
                     <div class="form-group">
                       <a href="#"><p style="text-align: right; font-size: small;">Forget Password ?</a>
