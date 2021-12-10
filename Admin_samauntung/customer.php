@@ -78,7 +78,7 @@ $query = mysqli_query($konek, "SELECT user.id_user,user.user_name,user.user_emai
                           <td style="color:#00A3FF"><?=$data["user_email"]?></td>
                           <td><a href="detail_customer.php?id=<?=$data["id_user"]?>" class="btn btn-success"><i class="fas fa-eye"></i></a>
                             <a href="edit_customer.php?id=<?=$data["id_user"]?>" class="btn btn-primary">
-                              <i class="material-icons"></i>Edit
+                              <i class="material-icons"></i>EDIT
                             </a>
                           </td>
                         </tr>
