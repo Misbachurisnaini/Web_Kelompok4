@@ -1,46 +1,52 @@
 <?php
-include 'koneksi.php';
+include 'koneksi.php'; 
 if(isset($_POST["nama"])) {
   $namaFile = $_FILES['foto']['name'];
   $namaSementara = $_FILES['foto']['tmp_name'];
   $dirUpload = "uploads/";
   $terupload = move_uploaded_file($namaSementara, $dirUpload.$namaFile);
   if ($terupload) {
-    $sql = "INSERT INTO produk 
-    (id_kategori, nama_produk, gambar_produk, deskripsi_produk) 
-    VALUES
-    (".($_POST["kategori"]!=null?$_POST["kategori"]:"null").",'".$_POST["nama"]."','".$namaFile."','".$_POST["deskripsi"]."')";
+    $sql = "UPDATE produk 
+    SET id_kategori = ".($_POST["kategori"]!=null?$_POST["kategori"]:"null").",
+    nama_produk = '".$_POST["nama"]."',
+    gambar_produk = '".$namaFile."',
+    deskripsi_produk = '".$_POST["deskripsi"]."'
+    WHERE id_produk = ".$_GET['id'];
     if (mysqli_query($konek, $sql)){
-      $sql = "INSERT INTO produk_detail (id_produk, stok, harga) VALUES (LAST_INSERT_ID(),".$_POST["stok"].",".$_POST["harga"].")";
+      $sql = "UPDATE produk_detail SET harga = ".$_POST["harga"].", stok = ".$_POST["stok"]." WHERE id_produk = ".$_GET['id'];
       if(mysqli_query($konek, $sql)){
         // echo '<script>alert("Data berhasil ditambah")</script>';
-        echo "<script>
-        alert('Data berhasil ditambah');
-        window.location.href='produk.php';
-        </script>";
-      }else{
-        // echo '<script>alert("Error:'.mysqli_error($konek).'")</script>';
        echo "<script>
-       alert('Error:".mysqli_error($konek)."');
+       alert('Data berhasil diubah');
        window.location.href='produk.php';
        </script>";
-     }
-   } else {
+     }else{
+        // echo '<script>alert("Error:'.mysqli_error($konek).'")</script>';
+      echo "<script>
+      alert('Error:".mysqli_error($konek)."');
+      window.location.href='produk.php';
+      </script>";
+    }
+  } else {
       // echo '<script>alert("Error:'.mysqli_error($konek).'")</script>';
-     echo "<script>
-     alert('Error:".mysqli_error($konek)."');
-     window.location.href='produk.php';
-     </script>";
-   }
- } else {
+    echo "<script>
+    alert('Error:".mysqli_error($konek)."');
+    window.location.href='produk.php';
+    </script>";
+  }
+} else {
     // echo "<script>alert('UPLOAD FILE GAGAL')</script>";
-  echo "<script>
-  alert('UPLOAD FILE GAGAL');
-  window.location.href='produk.php';
-  </script>";
+ echo "<script>
+ alert('UPLOAD FILE GAGAL');
+ window.location.href='produk.php';
+ </script>";
 }
 }
+$sql = "SELECT produk.deskripsi_produk, produk.nama_produk, produk.id_kategori, produk_detail.harga, produk_detail.stok FROM produk LEFT JOIN produk_detail ON produk.id_produk = produk_detail.id_produk WHERE produk.id_produk = ".$_GET['id'];
+$query = mysqli_query($konek, $sql);
+$data=mysqli_fetch_array($query);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +58,7 @@ if(isset($_POST["nama"])) {
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
-  <title>RuangAdmin - Tambah Produk</title>
+  <title>Ubah Customer Samauntung</title>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
@@ -65,6 +71,7 @@ if(isset($_POST["nama"])) {
     <!-- Sidebar -->
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
+
         <!-- TopBar -->
         <?php require "components/topbar.php"?>
         <!-- Topbar -->
@@ -72,11 +79,11 @@ if(isset($_POST["nama"])) {
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Tambah Katalog Produk</h1>
+            <h1 class="h3 mb-0 text-gray-800">Ubah Katalog Produk</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./">Home</a></li>
               <li class="breadcrumb-item">Katalog Produk</li>
-              <li class="breadcrumb-item active" aria-current="page">Tambah Katalog Produk</li>
+              <li class="breadcrumb-item active" aria-current="page">Ubah Katalog Produk</li>
             </ol>
           </div>
 
@@ -84,7 +91,7 @@ if(isset($_POST["nama"])) {
             <div class="col-md-12">
              <div class="card mb-4">
               <div class="card-body">
-                <form action="tambah_produk.php" method="post"  enctype="multipart/form-data">
+                <form action="edit_produk.php?id=<?=$_GET['id']?>" method="post"  enctype="multipart/form-data">
                   <div class="form-group">
                     <label for="foto">Foto Produk</label>
                     <div class="custom-file">
@@ -95,15 +102,15 @@ if(isset($_POST["nama"])) {
 
                   <div class="form-group required">
                     <label for="nama" class="control-label">Nama Produk</label>
-                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Ex :  Musae Chips - Milk" required>
+                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Ex :  Musae Chips - Milk" required value="<?=$data["nama_produk"]?>">
                   </div>
                   <div class="form-group">
                     <label for="kategori" class="control-label">Kategori Produk (Opsional)</label>
-                    <input type="number" class="form-control" id="kategori" name="kategori" placeholder="Ex :  Makanan & Minuman">
+                    <input type="number" class="form-control" id="kategori" name="kategori" placeholder="Ex :  Makanan & Minuman"value="<?=$data["id_kategori"]?>">
                   </div>
                   <div class="form-group">
                     <label for="stok" class="control-label">Stok</label>
-                    <input type="number" class="form-control" id="stok" name="stok" placeholder="Ex :  100" required>
+                    <input type="number" class="form-control" id="stok" name="stok" placeholder="Ex :  100" required value="<?=$data["stok"]?>">
                   </div>
                   <div class="form-group required">
                     <label for="harga" class="control-label">Harga Produk</label>
@@ -111,12 +118,12 @@ if(isset($_POST["nama"])) {
                       <div class="input-group-prepend">
                         <div class="input-group-text">Rp</div>
                       </div>
-                      <input type="number" class="form-control" id="harga" name="harga" placeholder="Ex :  15.000"  required>
+                      <input type="number" class="form-control" id="harga" name="harga" placeholder="Ex :  15.000"  required value="<?=$data["harga"]?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="deskripsi" class="control-label">Deskripsi Produk (Opsional)</label>
-                    <textarea class="form-control" id="deskripsi" rows="3" name="deskripsi" placeholder="Ex :  Weight  : 90 g"></textarea>
+                    <textarea class="form-control" id="deskripsi" rows="3" name="deskripsi" placeholder="Ex :  Weight  : 90 g"><?=$data["deskripsi_produk"]?></textarea>
                   </div>
                   <div style="display:flex;justify-content:right;margin-top:25px">
                     <button type="reset" class="btn btn-outline-dark" style="margin-right: 25px;">Batal</button>
@@ -158,7 +165,6 @@ if(isset($_POST["nama"])) {
                         $(this).next('.custom-file-label').html(fileName);
                       })
                     </script>
-
                   </body>
 
                   </html>

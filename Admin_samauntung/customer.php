@@ -47,7 +47,7 @@ $query = mysqli_query($konek, "SELECT user.id_user,user.user_name,user.user_emai
             <h1 class="h3 mb-0 text-gray-800">Dropshiper</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./">Home</a></li>
-              <li class="breadcrumb-item">Customer</li>
+              <!-- <li class="breadcrumb-item">Customer</li> -->
               <li class="breadcrumb-item active" aria-current="page">Dropshiper</li>
             </ol>
           </div>
@@ -55,35 +55,37 @@ $query = mysqli_query($konek, "SELECT user.id_user,user.user_name,user.user_emai
           <div class="row">
             <div class="col-md-12">
              <div class="card mb-4">
-              <div class="table-responsive p-3">
-                <table class="table align-items-center table-flush table-hover" id="dataTableHover">
-                  <thead class="thead-light">
-                    <tr>
-                      <th>#</th>
-                      <th>NAMA</th>
-                      <th>USERNAME</th>
-                      <th>LAST ACTIVE</th>
-                      <th>EMAIL</th>
-                      <th>AKSI</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php while($data=mysqli_fetch_array($query)){ ?>
+               <div class="card-body">
+                <div class="table-responsive p-3">
+                  <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                    <thead class="thead-light">
                       <tr>
-                        <td><img src="uploads/<?=$data["foto"]?>" width="50px" height="50px"></td>
-                        <td><b><?=$data["nama"]?></b></td>
-                        <td><?=$data["user_name"]?></td>
-                        <td><?=date('M d, Y', strtotime($data["last_active"]))?></td>
-                        <td style="color:#00A3FF"><?=$data["user_email"]?></td>
-                        <td><a href="detail_customer.php?id=<?=$data["id_user"]?>" class="btn btn-success"><i class="fas fa-eye"></i></a>
-                          <a href="edit_customer.php?id=<?=$data["id_user"]?>" class="btn btn-primary">
-                            <i class="material-icons"></i>Edit
-                          </a>
-                        </td>
+                        <th>#</th>
+                        <th>NAMA</th>
+                        <th>USERNAME</th>
+                        <th>LAST ACTIVE</th>
+                        <th>EMAIL</th>
+                        <th>AKSI</th>
                       </tr>
-                    <?php } ?>
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      <?php while($data=mysqli_fetch_array($query)){ ?>
+                        <tr>
+                          <td><img src="uploads/<?=$data["foto"]?>" width="50px" height="50px"></td>
+                          <td><b><?=$data["nama"]?></b></td>
+                          <td><?=$data["user_name"]?></td>
+                          <td><?=date('M d, Y', strtotime($data["last_active"]))?></td>
+                          <td style="color:#00A3FF"><?=$data["user_email"]?></td>
+                          <td><a href="detail_customer.php?id=<?=$data["id_user"]?>" class="btn btn-success"><i class="fas fa-eye"></i></a>
+                            <a href="edit_customer.php?id=<?=$data["id_user"]?>" class="btn btn-primary">
+                              <i class="material-icons"></i>Edit
+                            </a>
+                          </td>
+                        </tr>
+                      <?php } ?>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
