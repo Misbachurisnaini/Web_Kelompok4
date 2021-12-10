@@ -1,7 +1,7 @@
 <?php 
 
 $servername = "localhost";
-$database = "samauntung";
+$database = "db_samauntung1";
 $username = "root";
 $password =  "";
 
@@ -27,6 +27,22 @@ function query($query){
     }
     return $rows;
 }
+
+// function verifikasi($data){
+    
+//     global $conn;
+
+//     $email = $data['email'];
+//     $result = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email ");
+//     $row = mysqli_fect_assoc($result);
+
+//     if(isset($row['email'])){
+//         header("Location:");
+//         return;
+//     }else {
+//         return false;
+//     }
+// }
 
 function tambahadmin($data){
     // input data

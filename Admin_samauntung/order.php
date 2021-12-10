@@ -1,35 +1,3 @@
-<?php
-require 'config/function.php';
-
-// submit
-if(isset($_POST['submit'])) {
-    if ($_POST['password'] == $_POST['password2']){
-        if(tambahadmin($_POST) > 0){
-            echo "
-            <script>
-                    alert('Success to register!');
-                    location = 'index.php';
-                </script>
-                    ";
-        } else {
-            echo mysqli_error($conn);
-        }
-    } else {
-        echo "
-            <script>
-            alert('password konfirmasi tidak sama!');
-            </script>";
-    }
-}
-
-session_start();
-
-if (!isset($_SESSION["admin"])) {
-    header("Location: login.php");
-    exit;
-}
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -243,7 +211,7 @@ if (!isset($_SESSION["admin"])) {
 
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
-          <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Blank Page</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./">Home</a></li>
@@ -255,29 +223,6 @@ if (!isset($_SESSION["admin"])) {
           <div class="text-center">
             <img src="img/think.svg" style="max-height: 90px">
             <h4 class="pt-3">save your <b>imagination</b> here!</h4>
-          </div> -->
-          <div class="card-header">
-            <h5><strong>Tambah Admin</strong></h5>
-          </div>
-          <div class="card-body">
-            <form action="" method="POST">
-              <div class="mb-2 px-4">
-                <label for="" class="col-sm-2 col-form-label">Email</label>
-                <input oninvalid="this.setCustomValidity('format email tidak valid')" type="email" oninput="setCustomValidity('')" maxlength="50" class="form-control" name="email" id="email" placeholder="insert your active email" required>
-              </div>
-              <div class="mb-2 px-4">
-                <label for="" class="col-sm-2 col-form-label">Password</label>
-                <input oninvalid="this.setCustomValidity('format password terlalu pendek')" oninput="setCustomValidity('')" minlength="8" type="password" class="form-control" name="password" id="password" placeholder="insert your password" required>
-              </div>
-              <div class="mb-3 px-4">
-                <label for="" class="col-sm-2 col-form-label">Confirm Password</label>
-                <input oninvalid="this.setCustomValidity('format password terlalu pendek')" oninput="setCustomValidity('')" minlength="8" type="password" class="form-control" name="password2" id="password2" placeholder="confirm your password" required>
-              </div>
-              <div class="mb-2 px-4">
-                <button type="submit" name="submit" class="btn btn-primary">Add Admin</button>
-                <button type="clear" class="btn btn-outline-danger">Clear Form</button>
-              </div>
-            </form>
           </div>
 
           <!-- Modal Logout -->
