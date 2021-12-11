@@ -210,21 +210,47 @@
         <!-- Topbar -->
 
         <!-- Container Fluid-->
-        <div class="container-fluid" id="container-wrapper">
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Blank Page</h1>
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="./">Home</a></li>
-              <li class="breadcrumb-item">Pages</li>
-              <li class="breadcrumb-item active" aria-current="page">Blank Page</li>
-            </ol>
-          </div>
-
-          <div class="text-center">
-            <img src="img/think.svg" style="max-height: 90px">
-            <h4 class="pt-3">save your <b>imagination</b> here!</h4>
-          </div>
-
+        <div class="card-header"><h1 class="h5 mb-0 font-weight-bold text-gray-900">Orders</h1></div>
+        <div class="col-lg-12">
+          <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-item" role="tabpanel" aria-labelledby="v-pills-item-tab">
+              <div class="card card-outline-secondary my-4">
+                <div class="card-body">
+                  
+                <!-- Tab panes for item details and image sections -->
+                <div class="tab-content">
+                  <div id="itemDetailsTab" class="container-fluid tab-pane active"><br>
+                  
+                                    <div class="data-tables datatable-dark">
+										 <table id="dataTable3" class="display" style="width:100%"><thead class="thead-dark">
+											<tr>
+												<th>No</th>
+												<th>ID Pesanan</th>
+												<th>Nama Customer</th>
+												<th>Tanggal Order</th>
+												<th>Total</th>
+												<th>Status</th>
+                        <th>Affiliate</th>
+											</tr></thead><tbody>
+										</tbody>
+										</table>
+                                    </div>
+									<a href="datapesanan.php" target="_blank" class="btn btn-info">Export Data</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>	
+	$(document).ready(function() {
+    $('#dataTable3').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'print'
+        ]
+    } );
+	} );
+	</script>
           <!-- Modal Logout -->
           <!-- <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
             aria-hidden="true">
@@ -275,6 +301,15 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="js/ruang-admin.min.js"></script>
+  <!-- Start datatable js -->
+  <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
 
 </body>
 

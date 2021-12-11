@@ -216,7 +216,6 @@
             <div class="tab-pane fade show active" id="v-pills-item" role="tabpanel" aria-labelledby="v-pills-item-tab">
               <div class="card card-outline-secondary my-4">
                 <div class="card-body">
-                  
                 <!-- Tab panes for item details and image sections -->
                 <div class="tab-content">
                   <div id="itemDetailsTab" class="container-fluid tab-pane active"><br>
@@ -224,26 +223,24 @@
                   <!-- Div to show the ajax message from validations/db submission -->
                   <div id="itemDetailsMessage"></div>
                   <form>
-                    <div class="form-row">
-                      <div class="form-group col-md-12 font-weight-bold">
-                        <label for="itemImageFile">Foto Produk ( <span class="blueText">jpg</span>, <span class="blueText">jpeg</span>, <span class="blueText">gif</span>, <span class="blueText">png</span> only )</label>
-                        <input type="file" class="form-control-file btn btn-dark" id="itemImageFile" name="itemImageFile">
-                      </div>
-                    </div>
+                  <div class="form-group font-weight-bold">
+									<label>Gambar</label>
+									<input name="uploadgambar" type="file" class="form-control">
+								</div>
                     <div class="form-row">
                       <div class="form-group col-md-9 font-weight-bold" style="display:inline-block">
-                      <label for="itemDetailsName">Nama Produk<span class="requiredIcon">*</span></label>
+                      <label for="itemDetailsName">Nama Produk</label>
                       <input type="text" class="form-control" placeholder="Ex : Musae Chips - Milk" name="itemDetailsName" id="itemDetailsName" autocomplete="off">
                       <div id="itemDetailsNameSuggestionsDiv" class="customListDivWidth"></div>
                     </div>
                     <div class="form-group col-md-3 font-weight-bold" >
                       <label for="itemDetailsProductID">ID Produk</label>
-                      <input class="form-control invTooltip"  type="number" readonly  id="itemDetailsProductID" name="itemDetailsProductID" title="This will be auto-generated when you add a new item">
+                      <input class="form-control invTooltip"  type="number" readonly required value="<?php echo $format;?>" id="itemDetailsProductID" name="itemDetailsProductID" title="This will be auto-generated when you add a new item">
                     </div>
                   </div>
                   <div class="form-row">
                     <div class="form-group col-md-12 font-weight-bold">
-                      <label for="itemDetailsName">Kategori Produk<span class="requiredIcon">*</span></label>
+                      <label for="itemDetailsName">Kategori Produk</label>
                       <input type="text" class="form-control" placeholder="Ex : Makanan & Minuman" name="itemDetailsCategory" id="itemDetailsItemCategory" autocomplete="off">
                       <div id="itemDetailsCategory" class="customListDivWidth"></div>
                     </div>
@@ -256,11 +253,11 @@
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-4 font-weight-bold">
-                    <label for="itemDetailsPrice">Harga Produk<span class="requiredIcon">*</span></label>
+                    <label for="itemDetailsPrice">Harga Produk</label>
                     <input type="text" class="form-control" placeholder="Ex : 15000 " name="itemDetailsPrice" id="itemDetailsPrice">
                   </div>
                   <div class="form-group col-md-4 font-weight-bold">
-                    <label for="itemDetailsStock">Stok<span class="requiredIcon">*</span></label>
+                    <label for="itemDetailsStock">Stok</label>
                     <input type="number" class="form-control" value="0" name="itemDetailsStock" id="itemDetailsStock">
                   </div>
                   <div class="form-group col-md-4 font-weight-bold">
@@ -268,11 +265,13 @@
                     <input type="text" class="form-control" name="itemDetailsTotalStock" id="itemDetailsTotalStock" readonly>
                   </div>
                 </div>
-							  <button type="button" id="addItem" class="btn btn-success">Tambah Produk</button>
+							  <button type="button" id="addItem" class="btn btn-success">Tambah</button>
 							  <button type="button" id="updateItemDetailsButton" class="btn btn-primary">Update</button>
 							  <button type="button" id="deleteItem" class="btn btn-danger">Hapus</button>
 							  <button type="reset" class="btn" id="itemClear">Clear</button>
+               
               </form>
+            
             </div>
           </div>
         </div>
