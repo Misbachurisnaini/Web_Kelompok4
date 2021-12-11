@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+
 require "config/function.php";
 
 if(isset($_SESSION["admin"])){
@@ -10,9 +11,9 @@ if(isset($_SESSION["admin"])){
 
 // cek login
 if (isset($_POST['login'])){
-    if (login($_POST) == false){
-        $error = true;
-    }
+  if(login($_POST) == false){
+    $error = true;
+  }
 }
 ?>
 
@@ -59,7 +60,8 @@ if (isset($_POST['login'])){
                       </div>
                       <div class="form-group">
                         <div class="input-group mb-3">
-                          <input type="{{inputType}}" class="form-control" placeholder="Password" ng-model="passwordField">
+                          <input type="{{inputType}}" class="form-control" name="password" placeholder="Password" ng-model="passwordField"> 
+                         
                           <div class="input-group-prepend" ng-click="showPassword()">
                             <span class="input-group-text btn" id="basic-addon1"><i class="far fa-{{showHideIcon}}"></i></span>
                           </div>
@@ -80,11 +82,11 @@ if (isset($_POST['login'])){
                         </div>
                       </div>
                       <div class="form-group">
-                        <a href="index.html" class="btn btn-primary btn-block">Login</a>
-                        <!-- <button class="btn btn-primary btn-user btn-block" name="login" type="submit"> Login </button> -->
+                        <!-- <a href="index.html" class="btn btn-primary btn-block" >Login</a> -->
+                        <button class="btn btn-primary btn-user btn-block" name="login" type="submit"> Login </button>
                       </div>
                       <div class="form-group">
-                        <a href="#"><p style="text-align: right; font-size: small;">Forget Password ?</a>
+                        <a href="verifikasi.php"><p style="text-align: right; font-size: small;">Forget Password ?</a>
                       </div><hr>
                       <div class="text-center">
                         <a class="font-weight-bold medium" href="index.html">Go to SAMAUNTUNG</a>
