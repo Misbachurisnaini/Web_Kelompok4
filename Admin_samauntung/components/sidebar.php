@@ -50,9 +50,9 @@
             <a class="collapse-item" href="form_advanceds.html">Form Advanceds</a>
           </div>
         </div> -->
-        <a class="nav-link" href="#">
-        <i class="fas fa-shopping-basket"></i>
-          <span>Orders</span>
+        <a class="nav-link" href="produk.php">
+        <i class="fas fa-store"></i>
+          <span>Katalog Product</span>
         </a>
       </li>
       <li class="nav-item">

@@ -55,8 +55,8 @@ function tambahadmin($data){
     $pass = password_hash($pass, PASSWORD_DEFAULT);
 
     // tambah akun ke database
-    $akun = "INSERT INTO akun VALUES (0,'$email','$pass',2)";
-    mysqli_query($conn, $akun);
+    $user = "INSERT INTO user VALUES (0,'$email','$pass',2)";
+    mysqli_query($conn, $user);
 
     return mysqli_affected_rows($conn);
 }
@@ -68,7 +68,7 @@ function login($data)
     $email = $data['email'];
     $password = $data['password'];
 
-    $result = mysqli_query($conn, "SELECT * FROM akun WHERE email = '$email'");
+    $result = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email'");
     $row = mysqli_fetch_assoc($result);
 
     // cek email
@@ -80,7 +80,7 @@ function login($data)
                 $_SESSION['admin'] = true;
                 $_SESSION['email-admin'] = $email;
                 $_SESSION['id-admin'] = $row['id_user'];
-                $_SESSION['jenis-akun'] = $row['role'];
+                $_SESSION['jenis-akun'] = $row['user_level'];
 
                 header("Location:index.php");
                 return;

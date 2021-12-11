@@ -59,32 +59,32 @@ if (isset($_POST['login'])){
                       </div>
                       <div class="form-group">
                         <div class="input-group mb-3">
-                        <input type="{{inputType}}" class="form-control" placeholder="Password" ng-model="passwordField">
-                        <div class="input-group-prepend" ng-click="showPassword()">
-                          <span class="input-group-text btn" id="basic-addon1"><i class="far fa-{{showHideIcon}}"></i></span>
-                        </div>
+                          <input type="{{inputType}}" class="form-control" placeholder="Password" ng-model="passwordField">
+                          <div class="input-group-prepend" ng-click="showPassword()">
+                            <span class="input-group-text btn" id="basic-addon1"><i class="far fa-{{showHideIcon}}"></i></span>
+                          </div>
                         <!-- <input type="password" class="form-control form-control-user"
                           placeholder="Password" name="password" id="password" required> -->
                         <!-- <div class="form-group">
                           <input type="password" class="form-control form-control-user"
                             placeholder="Password" name="password" id="password" required>
                         </div> -->
+                        </div>
                       </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label for="customCheck" class="custom-control-label" >
-                          <span>Remember Me</span>
-                        </label>
+                      <div class="form-group">
+                        <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">
+                          <input type="checkbox" class="custom-control-input" id="customCheck">
+                          <label for="customCheck" class="custom-control-label" >
+                            <span>Remember Me</span>
+                          </label>
+                        </div>
                       </div>
-                    </div>
-                    <div class="form-group">
-                      <a href="index.html" class="btn btn-primary btn-block">Login</a>
-                      <!-- <button class="btn btn-primary btn-user btn-block" name="login" type="submit"> Login </button> -->
-                    </div>
-                    <div class="form-group">
-                      <a href="#"><p style="text-align: right; font-size: small;">Forget Password ?</a>
+                      <div class="form-group">
+                        <a href="index.html" class="btn btn-primary btn-block">Login</a>
+                        <!-- <button class="btn btn-primary btn-user btn-block" name="login" type="submit"> Login </button> -->
+                      </div>
+                      <div class="form-group">
+                        <a href="#"><p style="text-align: right; font-size: small;">Forget Password ?</a>
                       </div><hr>
                       <div class="text-center">
                         <a class="font-weight-bold medium" href="index.html">Go to SAMAUNTUNG</a>
@@ -93,34 +93,35 @@ if (isset($_POST['login'])){
                   </div>
                 </div>
               </div>
-            </div> 
-          </div>
+            </div>
+          </div> 
         </div>
       </div>
+    </div>
       
       <!-- Login Content -->
-      <script src="vendor/jquery/jquery.min.js"></script>
-      <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-      <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-      <script src="js/ruang-admin.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
-      <script>
-        var app = angular.module("myApp",[]);
-        app.controller("myCon", function($scope){
-          $scope.inputType = "password";
-          $scope.showHideIcon = "eye";
-          $scope.showPassword = function(){
-            if($scope.passwordField !== null){
-              if($scope.inputType =="password"){
-                $scope.inputType = "text";
-                $scope.showHideIcon = "eye-slash";
-              }else{
-                $scope.inputType = "password";
-                $scope.showHideIcon = "eye";
-              }
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/ruang-admin.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+    <script>
+      var app = angular.module("myApp",[]);
+      app.controller("myCon", function($scope){
+        $scope.inputType = "password";
+        $scope.showHideIcon = "eye";
+        $scope.showPassword = function(){
+          if($scope.passwordField !== null){
+            if($scope.inputType =="password"){
+              $scope.inputType = "text";
+              $scope.showHideIcon = "eye-slash";
+            }else{
+              $scope.inputType = "password";
+               $scope.showHideIcon = "eye";
             }
           }
-        })
-        </script>
-        </body>
-        </html>
+        }
+      })
+    </script>
+  </body>
+</html>
