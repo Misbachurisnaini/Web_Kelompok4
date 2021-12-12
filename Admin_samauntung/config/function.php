@@ -28,33 +28,27 @@ function query($query){
     return $rows;
 }
 
-function verifikasi($data)
-{
+function delete($query){
     global $conn;
 
-    $email = $data['email'];
-    var_dump($email);
+    $del = "DELETE FROM user WHERE id_user = $query ";
+    mysqli_query($conn, $del);
 
-    $result = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email'");
-    $row = mysqli_fetch_assoc($result);
+    return mysqli_affected_rows($conn);
+}
 
-    if(isset($row['email'])){
-        if($email === $row['email']){
-            // $_SESSION['admin'] = true;
-            // $_SESSION['email-admin'] = $email;
-            
+function editadmin($query) {
+    global $conn;
 
-            header("Location:forgotpassword.php");
-            return;
-            
-        }else{
-            return false;
-        }
-        // var_dump($email);
-        
-    }else{
-        return false;
-    }
+    htmlspecialchars($username = $query['username']);
+    htmlspecialchars($email = $query['email']);
+    htmlspecialchars($confirm = $query['confirm']);
+    htmlspecialchars($id_user = $query['id_user']);
+
+    $pass = password_hash($confirm, PASSWORD_DEFAULT);
+    $update = "UPDATE user SET user_name = '$username', email = '$email', password = '$pass' WHERE id_user = $id_user";
+    mysqli_query($conn, $update);
+    return mysqli_affected_rows($conn);
 }
 
 function tambahadmin($data){
@@ -156,29 +150,3 @@ function uploadGambar()
 
     return $newFileName;
 }
-
-function tambahcorosel($data)
-{
-    global $conn;
-
-    
-    // upload foto
-    $img = uploadGambar();
-
-    strtolower(htmlspecialchars($titlecorosel = $data['title-corosel']));
-    strtolower(htmlspecialchars($deskripsi = $data['deskripsi']));
-
-
-    if (!$img)
-    {
-        return false;
-    }
-
-    $add = "INSERT INTO corosel VALUES (0,'$titlecorosel', '$img', '$deskripsi')";
-
-    mysqli_query($conn, $add);
-
-    return mysqli_affected_rows($conn);
-}
-
-?>
