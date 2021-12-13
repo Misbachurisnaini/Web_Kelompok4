@@ -1,3 +1,19 @@
+
+<?php
+
+session_start();
+
+require "config/function.php";
+
+if(!isset($_SESSION["admin"])){
+    header("Location: login.php");
+    exit;
+}
+
+$data = query(" SELECT * FROM dropshiper ");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,6 +58,52 @@
         </div>
         <!---Container Fluid-->
 
+
+        <div class="col-lg-6">
+              <!-- Modal New Dropshiper -->
+          <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Rekomendasi Dropshiper Baru</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="table-responsive">
+                  <table class="table table-striped" id="dataTable" >
+                  <thead>
+                    <tr>
+                      <th scope="col">No</th>
+                      <th scope="col">Username</th>
+                      <th scope="col">Manage</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php $i=1 ?>
+                  <?php foreach($data as $p) : ?>
+                    <tr>
+                      <th scope="row"><?= $i++ ?></th>
+                      <th><?= $p['username']; ?></th>
+                      <th>
+                        <a href="newdropshiper.php" type="button" class="btn btn-primary text-white" data-tooltip="tooltip" data-placement="buttom" >
+                          Tampilkan
+                        </a>
+                      </th>
+                    </tr>
+                  <?php endforeach; ?>
+                  </tbody>
+                </table>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
         <div class="container-fluid">
         <div class="custom-table card shadow ms-1">
           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -53,33 +115,35 @@
             <div class="table-responsive">
               <table class="table table-striped" id="dataTable" >
                 <div class="py-2">
-                  <a href="addadmin.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                  <i class="fas fa-download fa-sm text-white-50"></i> New Dropshiper </a>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong"
+                    id="#modalLong">New Dropshiper</button>
                 </div>
                 <thead>
                   <tr>
-                    <th>No</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Level</th>
-                    <th>Manage</th>
+                    <th scope="col">No</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Level</th>
+                    <th scope="col">Manage</th>
                   </tr>
                 </thead>
                 <tbody>
+                  <?php $i=1 ?>
+                  <?php foreach($data as $p) : ?>
                   <tr>
-                    <th>1</th>
-                    <th>abc</th>
-                    <th>abc@gmail.com</th>
-                    <th>Gold</th>
+                    <th scope="row"><?= $i++ ?></th>
+                    <th><?= $p['username']; ?></th>
+                    <th><?= $p['email']; ?></th>
+                    <th><?= $p['nohp']; ?></th>
+                    <th><?= $p['alamat']; ?></th>
+                    <th><?= $p['levelship']; ?></th>
                     <th>
-                      <a href="" type="button" class="btn btn-primary text-white" data-tooltip="tooltip" data-placement="buttom" >
-                        <i class="fas fa-solid fa-pen"></i>
-                      </a>
-                      <a href="" type="button" class="btn btn-danger text-white" data-tooltip="tooltip" data-placement="buttom" >
+                      <a href="hapus_dropshiper.php" type="button" class="btn btn-danger text-white" data-tooltip="tooltip" data-placement="buttom" >
                         <i class="fas fa-solid fa-trash"></i>
                       </a>
                     </th>
                   </tr>
+                  <?php endforeach; ?>
                 </tbody>
               </table>
             </div>
