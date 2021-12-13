@@ -8,7 +8,7 @@ if(isset($_POST['submit'])) {
             echo "
             <script>
                     alert('Success to register!');
-                    location = 'index.php';
+                    // location = 'index.php';
                 </script>
                     ";
         } else {
@@ -22,12 +22,12 @@ if(isset($_POST['submit'])) {
     }
 }
 
-session_start();
+// session_start();
 
-if (!isset($_SESSION["admin"])) {
-    header("Location: login.php");
-    exit;
-}
+// if (!isset($_SESSION["admin"])) {
+//     header("Location: login.php");
+//     exit;
+// }
 
 ?>
 <!DOCTYPE html>
@@ -261,6 +261,10 @@ if (!isset($_SESSION["admin"])) {
           </div>
           <div class="card-body">
             <form action="" method="POST">
+            <div class="mb-2 px-4">
+                <label for="" class="col-sm-2 col-form-label">username</label>
+                <input oninvalid="this.setCustomValidity('username belum unik')" type="text" oninput="setCustomValidity('')" maxlength="50" class="form-control" name="user_name" id="user_name" placeholder="insert your unique name" required>
+              </div>
               <div class="mb-2 px-4">
                 <label for="" class="col-sm-2 col-form-label">Email</label>
                 <input oninvalid="this.setCustomValidity('format email tidak valid')" type="email" oninput="setCustomValidity('')" maxlength="50" class="form-control" name="email" id="email" placeholder="insert your active email" required>

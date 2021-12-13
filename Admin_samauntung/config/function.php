@@ -1,7 +1,7 @@
 <?php 
 
 $servername = "localhost";
-$database = "db_samauntung1";
+$database = "samauntung";
 $username = "root";
 $password =  "";
 
@@ -28,26 +28,34 @@ function query($query){
     return $rows;
 }
 
-// function verifikasi($data){
-    
-//     global $conn;
+function delete($query){
+    global $conn;
 
-//     $email = $data['email'];
-//     $result = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email ");
-//     $row = mysqli_fect_assoc($result);
+    $del = "DELETE FROM user WHERE id_user = $query ";
+    mysqli_query($conn, $del);
 
-//     if(isset($row['email'])){
-//         header("Location:");
-//         return;
-//     }else {
-//         return false;
-//     }
-// }
+    return mysqli_affected_rows($conn);
+}
+
+function editadmin($query) {
+    global $conn;
+
+    htmlspecialchars($username = $query['username']);
+    htmlspecialchars($email = $query['email']);
+    htmlspecialchars($confirm = $query['confirm']);
+    htmlspecialchars($id_user = $query['id_user']);
+
+    $pass = password_hash($confirm, PASSWORD_DEFAULT);
+    $update = "UPDATE user SET user_name = '$username', email = '$email', password = '$pass' WHERE id_user = $id_user";
+    mysqli_query($conn, $update);
+    return mysqli_affected_rows($conn);
+}
 
 function tambahadmin($data){
     // input data
     global $conn;
 
+    $username = stripcslashes($data['user_name']);
     $email = stripcslashes($data['email']);
     $pass = mysqli_real_escape_string($conn, $data['password2']);
 
@@ -55,7 +63,7 @@ function tambahadmin($data){
     $pass = password_hash($pass, PASSWORD_DEFAULT);
 
     // tambah akun ke database
-    $user = "INSERT INTO user VALUES (0,'$email','$pass',2)";
+    $user = "INSERT INTO user VALUES (0,'$username','$email','$pass',2)";
     mysqli_query($conn, $user);
 
     return mysqli_affected_rows($conn);
@@ -71,11 +79,9 @@ function login($data)
     $result = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email'");
     $row = mysqli_fetch_assoc($result);
 
-    // cek email
-    if (isset($row['email'])){
+    if(isset($row['email'])){
         if($email === $row['email']){
 
-            // cek password
             if(password_verify($password, $row['password'])){
                 $_SESSION['admin'] = true;
                 $_SESSION['email-admin'] = $email;
@@ -84,16 +90,15 @@ function login($data)
 
                 header("Location:index.php");
                 return;
-                
+            }else{
+                return false;
             }
         }else{
             return false;
         }
-       
-    }else{
-        return false;
     }
 }
+
 
 function uploadGambar()
 {
@@ -145,29 +150,3 @@ function uploadGambar()
 
     return $newFileName;
 }
-
-function tambahcorosel($data)
-{
-    global $conn;
-
-    
-    // upload foto
-    $img = uploadGambar();
-
-    strtolower(htmlspecialchars($titlecorosel = $data['title-corosel']));
-    strtolower(htmlspecialchars($deskripsi = $data['deskripsi']));
-
-
-    if (!$img)
-    {
-        return false;
-    }
-
-    $add = "INSERT INTO corosel VALUES (0,'$titlecorosel', '$img', '$deskripsi')";
-
-    mysqli_query($conn, $add);
-
-    return mysqli_affected_rows($conn);
-}
-
-?>

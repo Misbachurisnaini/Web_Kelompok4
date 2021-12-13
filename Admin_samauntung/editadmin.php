@@ -1,4 +1,68 @@
-<nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+<?php
+
+session_start();
+
+require "config/function.php";
+
+if(!isset($_SESSION["admin"])){
+    header("location: login.php");
+    exit;
+}
+
+if(!(isset($_GET['id']))) {
+  header("Location:manageadmin.php");
+  exit;
+}
+
+$id = $_GET['id'];
+$data = query("SELECT * FROM user WHERE id_user=$id")[0];
+
+if(isset($_POST['submit'])) {
+  if($_POST['password'] == $_POST['confirm']) {
+  if(editadmin($_POST)>0) {
+    echo
+        "<script>
+            alert('Data berhasil diedit!');
+            // location = 'manageadmin.php';
+        </script>";
+    } else {
+        echo mysqli_error($conn);
+        echo "
+        <script>
+            alert('Data gagal diedit!');
+            // location = 'manageadmin.php';
+        </script>";
+    }
+  }
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="img/logo/logo.png" rel="icon">
+  <title>RuangAdmin - Blank Page</title>
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="css/ruang-admin.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <?php require "components/sidebar.php"?>
+    <!-- Sidebar -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <!-- TopBar -->
+        <!-- <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
           <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
@@ -161,7 +225,7 @@
                 <span class="ml-2 d-none d-lg-inline text-white small">Maman Ketoprak</span>
               </a>
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="profil.php">
+                <a class="dropdown-item" href="#">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
                 </a>
@@ -174,11 +238,138 @@
                   Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="components/logout.php" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
               </div>
             </li>
           </ul>
-        </nav>
+        </nav> -->
+        <?php require "components/topbar.php"?>
+        <!-- Topbar -->
+
+        <!-- Container Fluid-->
+        <div class="container-fluid" id="container-wrapper">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Edit Admin</h1>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="./">Home</a></li>
+              <li class="breadcrumb-item">Pages</li>
+              <li class="breadcrumb-item active" aria-current="page">Blank Page</li>
+            </ol>
+          </div>
+
+          <!-- <div class="text-center">
+            <img src="img/think.svg" style="max-height: 90px">
+            <h4 class="pt-3">save your <b>imagination</b> here!</h4>
+          </div> -->
+
+          <!-- Modal Logout -->
+          <!-- <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure you want to logout?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                  <a href="login.html" class="btn btn-primary">Logout</a>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <?php require "components/logout.php"?>
+
+        </div>
+        <!---Container Fluid-->
+
+        <div class="container-fluid">
+          <div class="row no-gutters justify-content-center mb-4">
+            <div class="col-12">
+              <div class="card shadow">
+                <div class="card-header">
+                                    <ul class="nav nav-tabs card-header-tabs">
+                                        <li class="nav-item">
+                                            <a class="nav-link active">Data Akun</a>
+                                        </li>
+                                    </ul>
+                </div>
+                <div class="card-body shadow-sm">
+                  <div class="row justify-content-center mb-4">
+                    <div class="col-12">
+                      <div class="card">
+                        <div class="card-body shadow-sm">
+                          <div class="row justify-content-center">
+                            <div class="col-md-7 pt-2">
+                              <form action="" method="POST">
+                                <div class="form-group">
+                                  <input type="hidden" name="id_user" value="<?= $data['id_user'] ?>">
+                                  <label class="col-sm-4 col-form-label" for="">Username</label>
+                                  <input name="username" class="form-control" type="text" value="<?= $data['user_name'] ?>">
+                                </div>
+                                <div class="form-group">
+                                  <label class="col-sm-4 col-form-label" for="">Email</label>
+                                  <input name="email" class="form-control" type="text" value="<?= $data['email'] ?>">
+                                </div>
+                                <div class="form-group">
+                                  <label class="col-sm-4 col-form-label" for="">Password</label>
+                                  <input name="password" class="form-control" type="password" placeholder="insert your new password">
+                                </div>
+                                <div class="form-group">
+                                  <label class="col-sm-4 col-form-label" for="">Confirm Password</label>
+                                  <input name="confirm" class="form-control" type="password" placeholder="insert your new password">
+                                </div>
+                                <div class="mb-2 px-4 text-center" >
+                                  <button type="submit" name="submit" class="btn btn-primary">Update</button>
+                                  <button type="clear" class="btn btn-outline-danger">Clear Form</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+    </div>
+      <!-- Footer -->
+      <!-- <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>copyright &copy; <script> document.write(new Date().getFullYear()); </script> - developed by
+              <b><a href="https://indrijunanda.gitlab.io/" target="_blank">indrijunanda</a></b>
+            </span>
+          </div>
+        </div>
+      </footer> -->
+      <?php require "components/footer.php"?>
+      <!-- Footer -->
+    </div>
+  </div>
+
+  <!-- Scroll to top -->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="js/ruang-admin.min.js"></script>
+
+</body>
+
+</html>
