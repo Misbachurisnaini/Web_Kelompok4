@@ -21,7 +21,7 @@
           <i class="far fa-fw fa-window-maximize"></i>
           <span>Bootstrap UI</span>
         </a> -->
-        <a class="nav-link" href="customer.php">
+        <a class="nav-link" href="dropshiper.php">
         <i class="fas fa-fw fa-solid fa-box"></i>
           <span>Dropshiper</span>
         </a>
