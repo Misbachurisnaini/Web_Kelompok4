@@ -23,14 +23,14 @@ if(isset($_POST['submit'])) {
     echo
         "<script>
             alert('Data berhasil diedit!');
-            // location = 'manageadmin.php';
+            location = 'manageadmin.php';
         </script>";
     } else {
         echo mysqli_error($conn);
         echo "
         <script>
             alert('Data gagal diedit!');
-            // location = 'manageadmin.php';
+            location = 'manageadmin.php';
         </script>";
     }
   }
