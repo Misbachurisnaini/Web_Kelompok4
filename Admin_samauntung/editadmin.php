@@ -296,11 +296,11 @@ if(isset($_POST['submit'])) {
             <div class="col-12">
               <div class="card shadow">
                 <div class="card-header">
-                                    <ul class="nav nav-tabs card-header-tabs">
-                                        <li class="nav-item">
-                                            <a class="nav-link active">Data Akun</a>
-                                        </li>
-                                    </ul>
+                  <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                      <a class="nav-link active">Data Akun</a>
+                    </li>
+                  </ul>
                 </div>
                 <div class="card-body shadow-sm">
                   <div class="row justify-content-center mb-4">
