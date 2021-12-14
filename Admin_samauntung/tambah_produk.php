@@ -44,7 +44,9 @@ if(isset ($_POST['create']) ){
 
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
-        <div class="card-header"><h1 class="h5 mb-0 font-weight-bold text-gray-900">Tambah Produk</h1></div>
+        <div class="card-header">
+          <h1 class="h5 mb-0 font-weight-bold text-gray-900">Tambah Produk</h1>
+        </div>
           
           <?php require "components/logout.php"?>
         </div>
