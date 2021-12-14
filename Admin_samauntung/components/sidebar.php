@@ -80,7 +80,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="file/ui-colors.html">
+        <a class="nav-link" href="wallet.php">
         <i class="fas fa-wallet"></i>
           <span>Wallet</span>
         </a>
