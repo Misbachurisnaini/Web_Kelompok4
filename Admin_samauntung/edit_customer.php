@@ -47,7 +47,8 @@ if(isset($_POST["nama"])) {
     </script>";
   }
 }
-$query = mysqli_query($konek, "SELECT * FROM user,customer_detail WHERE user.id_user=customer_detail.id_customer AND user.user_level = 'user' AND user.id_user = ".$_GET['id']);
+$query = mysqli_query($konek, "SELECT * FROM user,customer_detail WHERE customer_detail.id_customer AND user.user_level = '2' AND user.id_user");
+
 $data=mysqli_fetch_array($query);
 ?>
 
@@ -95,85 +96,74 @@ $data=mysqli_fetch_array($query);
             <div class="col-md-12">
              <div class="card mb-4">
               <div class="card-body">
-                <form action="edit_customer.php?id=<?=$_GET['id']?>" method="post"  enctype="multipart/form-data">
-                 <div class="form-group">
-                  <label for="foto">Foto</label>
-                  <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="foto" name="foto">
-                    <label class="custom-file-label" for="foto">Pilih foto</label>
+                <form action="edit_customer.php?id=<?=$_GET['id']?>" method="post" enctype="multipart/form-data">
+                  <div class="form-group">
+                    <label for="foto">Foto</label>
+                    <input type="file" class="form-control"  name="foto">
                   </div>
-                </div>
-                <div class="form-group required">
-                  <label for="nama" class="control-label">Nama</label>
-                  <input type="text" class="form-control" id="nama" name="nama" placeholder="Ex :  Charles" required value="<?=$data["nama_produk"]?>">
-                </div>
-                <div class="form-group required">
-                  <label for="email" class="control-label">Email</label>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="Ex :  test@test.com" required value="<?=$data["user_email"]?>">
-                </div>
-                <div class="form-group required">
-                  <label for="orders" class="control-label">Order</label>
-                  <input type="number" class="form-control" id="orders" name="orders" placeholder="Ex :  1" value="<?=$data["orders"]?>">
-                </div>
-                <div class="form-group required">
-                  <label for="total_spend" class="control-label">Total Spend</label>
-                  <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">Rp</div>
+                  <div class="form-group required">
+                    <label for="nama" class="control-label">Nama</label>
+                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Ex :  Charles" required value="<?=$data["nama"]?>">
+                  </div>
+                  <div class="form-group required">
+                    <label for="email" class="control-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Ex :  test@test.com" required value="<?=$data["email"]?>">
+                  </div>
+                  <div class="form-group required">
+                    <label for="orders" class="control-label">Order</label>
+                    <input type="number" class="form-control" id="orders" name="orders" placeholder="Ex :  1" value="<?=$data["orders"]?>">
+                  </div>
+                  <div class="form-group required">
+                    <label for="total_spend" class="control-label">Total Spend</label>
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">Rp</div>
+                      </div>
+                      <input type="number" class="form-control" id="total_spend" name="total_spend" placeholder="Ex :  15.000"  required value="<?=$data["total_spend"]?>">
                     </div>
-                    <input type="number" class="form-control" id="total_spend" name="total_spend" placeholder="Ex :  15.000"  required value="<?=$data["total_spend"]?>">
                   </div>
-                </div>
-                <div class="form-group required">
-                  <label for="region" class="control-label">Country / Region</label>
-                  <input type="text" class="form-control" id="region" name="region" placeholder="Ex :  Indonesia" value="<?=$data["region"]?>">
-                </div>
-                <div class="form-group required">
-                  <label for="city" class="control-label">City</label>
-                  <input type="text" class="form-control" id="city" name="city" placeholder="Ex :  Jakarta" value="<?=$data["city"]?>">
-                </div>
-                <div class="form-group required">
-                  <label for="postal" class="control-label">Postal</label>
-                  <input type="number" class="form-control" id="postal" name="postal" placeholder="Ex :  12345" value="<?=$data["postal"]?>">
-                </div>
-                <div style="display:flex;justify-content:right;margin-top:25px">
-                  <button type="reset" class="btn btn-outline-dark" style="margin-right: 25px;">Batal</button>
-                  <button type="submit" class="btn btn-primary">Simpan</button>
-                </div>
-              </form>
+                  <div class="form-group required">
+                    <label for="region" class="control-label">Country / Region</label>
+                    <input type="text" class="form-control" id="region" name="region" placeholder="Ex :  Indonesia" value="<?=$data["region"]?>">
+                  </div>
+                  <div class="form-group required">
+                    <label for="city" class="control-label">City</label>
+                    <input type="text" class="form-control" id="city" name="city" placeholder="Ex :  Jakarta" value="<?=$data["city"]?>">
+                  </div>
+                  <div class="form-group required">
+                    <label for="postal" class="control-label">Postal</label>
+                    <input type="number" class="form-control" id="postal" name="postal" placeholder="Ex :  12345" value="<?=$data["postal"]?>">
+                  </div>
+                  <div style="display:flex;justify-content:right;margin-top:25px">
+                    <button type="reset" class="btn btn-outline-dark" style="margin-right: 25px;">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
+
+          <?php require "components/logout.php"?>
+
+        </div>
+        <!---Container Fluid-->
       </div>
-
-      <?php require "components/logout.php"?>
-
+      <!-- Footer -->
+      <?php require "components/footer.php"?>
+      <!-- Footer -->
     </div>
-    <!---Container Fluid-->
   </div>
-  <!-- Footer -->
-  <?php require "components/footer.php"?>
-  <!-- Footer -->
-</div>
-</div>
 
-<!-- Scroll to top -->
-<a class="scroll-to-top rounded" href="#page-top">
-  <i class="fas fa-angle-up"></i>
-</a>
+  <!-- Scroll to top -->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
 
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="js/ruang-admin.min.js"></script>
-<script>
-  $('#foto').on('change',function(){
-                        //get the file name
-                        var fileName = $(this).val();
-                        //replace the "Choose a file" label
-                        $(this).next('.custom-file-label').html(fileName);
-                      })
-                    </script>
-                  </body>
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="js/ruang-admin.min.js"></script>
+</body>
 
-                  </html>
+</html>

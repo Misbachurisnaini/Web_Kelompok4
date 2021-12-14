@@ -1,6 +1,7 @@
 <?php
 include 'koneksi.php';
-$query = mysqli_query($konek, "SELECT * FROM user,customer_detail WHERE user.id_user=customer_detail.id_customer AND user.user_level = 'user' AND user.id_user = ".$_GET['id']);
+
+$query = mysqli_query($konek, "SELECT * FROM user, customer_detail WHERE customer_detail.id_customer AND user.user_level = '2' AND user.id_user");
 $data=mysqli_fetch_array($query);
 ?>
 
@@ -14,7 +15,7 @@ $data=mysqli_fetch_array($query);
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
-  <title>Detail Customer Samauntung</title>
+  <title>Detail Dropshiper Samauntung</title>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
@@ -62,7 +63,7 @@ $data=mysqli_fetch_array($query);
                 </tr>
                 <tr>
                   <td style="padding-right:43px;color: #8E8E8E;font-weight:400;font-size:18px">EMAIL</td>
-                  <td style="color: #052747;font-weight:600;font-size:18px">: <?=$data["user_email"]?></td>
+                  <td style="color: #052747;font-weight:600;font-size:18px">: <?=$data["email"]?></td>
                 </tr>
                 <tr>
                   <td style="padding-right:43px;color: #8E8E8E;font-weight:400;font-size:18px">DATE REGISTER</td>

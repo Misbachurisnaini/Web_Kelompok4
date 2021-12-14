@@ -8,7 +8,7 @@ $query = mysqli_query($konek, "SELECT
   AVG(customer_detail.total_spend/customer_detail.orders) as aov
   FROM customer_detail,user WHERE customer_detail.id_customer = user.id_user AND user.user_level = 'user'");
 $data_analyzed=mysqli_fetch_array($query);
-$query = mysqli_query($konek, "SELECT user.id_user,user.user_name,user.user_email,customer_detail.nama,customer_detail.foto,customer_detail.last_active FROM user,customer_detail WHERE user.id_user=customer_detail.id_customer AND user.user_level = 'user'");
+$query = mysqli_query($konek, "SELECT user.id_user,user.user_name,user.email,customer_detail.nama,customer_detail.foto,customer_detail.last_active FROM user,customer_detail WHERE user.id_user=customer_detail.id_customer AND user.user_level = 'user'");
 ?>
 
 
@@ -75,7 +75,7 @@ $query = mysqli_query($konek, "SELECT user.id_user,user.user_name,user.user_emai
                           <td><b><?=$data["nama"]?></b></td>
                           <td><?=$data["user_name"]?></td>
                           <td><?=date('M d, Y', strtotime($data["last_active"]))?></td>
-                          <td style="color:#00A3FF"><?=$data["user_email"]?></td>
+                          <td style="color:#00A3FF"><?=$data["email"]?></td>
                           <td><a href="detail_customer.php?id=<?=$data["id_user"]?>" class="btn btn-success"><i class="fas fa-eye"></i></a>
                             <a href="edit_customer.php?id=<?=$data["id_user"]?>" class="btn btn-primary">
                               <i class="material-icons"></i>EDIT
