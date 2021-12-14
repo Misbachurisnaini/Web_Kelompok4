@@ -54,13 +54,7 @@
         <i class="fas fa-store"></i>
           <span>Katalog Product</span>
         </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="inventaris.php">
-          <i class="fas fa-fw fa-palette"></i>
-          <span>Inventaris</span>
-        </a>
-      </li>
+
       <li class="nav-item">
         <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"
           aria-controls="collapseTable">
