@@ -43,7 +43,13 @@ if(isset ($_POST['create']) ){
         <!-- Topbar -->
 
         <!-- Container Fluid-->
+        <div class="container-fluid" id="container-wrapper">
         <div class="card-header"><h1 class="h5 mb-0 font-weight-bold text-gray-900">Tambah Produk</h1></div>
+          
+          <?php require "components/logout.php"?>
+        </div>
+        <!---Container Fluid-->
+        <div class="container-fluid">
         <div class="col-lg-12">
           <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-item" role="tabpanel" aria-labelledby="v-pills-item-tab">
@@ -110,48 +116,13 @@ if(isset ($_POST['create']) ){
         </div>
       </div>
     </div>
-  </div>
-  
-  <!-- Modal Logout -->
-          <!-- <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                  <a href="login.html" class="btn btn-primary">Logout</a>
-                </div>
-              </div>
-            </div>
-          </div> -->
-          
-          <?php require "components/logout.php"?>
         </div>
-        <!---Container Fluid-->
       </div>
       <!-- Footer -->
-      <!-- <footer class="sticky-footer bg-white">      
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>copyright &copy; <script> document.write(new Date().getFullYear()); </script> - developed by
-            <b><a href="https://indrijunanda.gitlab.io/" target="_blank">indrijunanda</a></b>
-          </span>
-        </div>
-      </div>
-    </footer> -->
     <?php require "components/footer.php"?>
     <!-- Footer -->
+    </div>
   </div>
-</div>
 
 
  <!-- Scroll to top -->
