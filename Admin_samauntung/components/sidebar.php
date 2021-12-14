@@ -80,9 +80,7 @@
         </a>
       </li>
       <hr class="sidebar-divider">
-      <div class="sidebar-heading">
-        Report
-      </div> 
+      
        <li class="nav-item">
         <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true"
           aria-controls="collapsePage">
@@ -98,17 +96,9 @@
             <a class="collapse-item" href="blank.html">Blank Page</a>
           </div>
         </div> -->
-        <a class="nav-link" href="file/ui-colors.html">
-        <i class="fas fa-signal"></i>
-          <span>profit</span>
-        </a>
+
       </li> 
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-        <i class="fas fa-signal"></i>
-          <span>Charts</span>
-        </a>
-      </li>
+      
       <hr class="sidebar-divider">
       <div class="version" id="version-ruangadmin"></div>
     </ul>
