@@ -328,7 +328,7 @@ if (!isset($_SESSION["admin"])){
             <?php } ?>
           </div>
 
-          <div class="row mb-3">
+          <!-- <div class="row mb-3"> -->
            
           <!--Row-->
 
@@ -364,7 +364,7 @@ if (!isset($_SESSION["admin"])){
 
         </div>
         <!---Container Fluid-->
-
+      </div>
       <!-- Footer -->
       <!-- <footer class="sticky-footer bg-white">
         <div class="container my-auto">
@@ -377,8 +377,8 @@ if (!isset($_SESSION["admin"])){
       </footer> -->
       <?php require "components/footer.php"?>
       <!-- Footer -->
-    
-
+    </div>
+  </div>
   <!-- Scroll to top -->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
