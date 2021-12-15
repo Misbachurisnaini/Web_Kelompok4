@@ -124,7 +124,7 @@ $a = query(" SELECT * FROM pesanan ");
                       <td><span id="alamat_lengkap"></td>
                     </tr>
                     <tr>
-                      <th style="width:35%">Subtotal</th>
+                      <th style="width:35%">Subtotalt</th>
                       <td><span id="subtotal"></td>
                     </tr>
                   </tbody>
