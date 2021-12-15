@@ -41,6 +41,101 @@
 
         </div>
         <!---Container Fluid-->
+        <div class="container-fluid">
+          <div class="col-lg-6">
+            <div class="card mb-4">
+              <div class="card-body">
+                <div class="table-resposive">
+                  <thead>
+                  <h6 class="m-0 font-weight-bold text-primary">Total Balanced</h6>
+                  <br>
+                </thead>  
+                <tbody>
+                  <h1>
+                    Rp. 60.000,00
+                  </h1>
+                </tbody>
+                </div>
+                
+              </div>
+              
+            </div>
+            <ol class="breadcrumb">
+                    <li>
+                    <a href="manageadmin.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                      <i class="fas fa-download fa-sm text-white-50"></i> Manage Admin </a>
+                    <a href="manageadmin.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                      <i class="fas fa-download fa-sm text-white-50"></i> Manage Admin </a>
+                    </li>
+                  </ol>
+          </div>
+          
+          <div class="row">
+            <!-- Datatables -->
+            <div class="col-lg-12">
+              <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Transaction History</h6>
+                </div>
+                <div class="table-responsive p-3">
+                  <table class="table align-items-center table-flush" id="dataTable">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>No</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Date</th>
+                        <th>Price</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th>No</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Date</th>
+                        <th>Price</th>
+                        <th></th>
+                      </tr>
+                    </tfoot>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>abc</td>
+                        <td>abc@gmail.com</td>
+                        <td>17/12/2021</td>
+                        <td>Rp.50.000,00</td>
+                        <td>
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong"
+                            id="#modalLong"><i class="fas fa-eye"></i></button>
+
+                          <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Modal Long</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <p>gambar</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
       <!-- Footer -->
       <?php require "components/footer.php"?>
