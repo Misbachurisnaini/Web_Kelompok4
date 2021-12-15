@@ -44,9 +44,14 @@ if(isset ($_POST['create']) ){
 
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
-        <div class="card-header">
-          <h1 class="h5 mb-0 font-weight-bold text-gray-900">Tambah Produk</h1>
-        </div>
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Tambah Produk</h1>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="./">Home</a></li>
+              <li class="breadcrumb-item"><a href="produk.php">Katalog Produk</a></li>
+              <li class="breadcrumb-item">Tambah Produk</li>
+            </ol>
+          </div>
           
           <?php require "components/logout.php"?>
         </div>
@@ -99,15 +104,16 @@ if(isset ($_POST['create']) ){
                           <div class="input-group-prepend">
                             <div class="input-group-text">Rp</div>
                           </div>
-                          <input type="number" class="form-control" id="harga" name="harga" placeholder="Ex : 15.000"  required>
+                          <input type="number" class="form-control" id="harga" name="harga" placeholder="Ex : 15000"  required>
                         </div>
                       </div>
                     </div>
+                    <div class="form-row">
                     <div class="form-group col-md-12 font-weight-bold">
                       <label for="itemDetailsStock">Stok</label>
                       <input type="number" class="form-control" value="0" name="itemDetailsStock" id="itemDetailsStock" required>
                     </div>
-                  </div>
+</div>
                   <button class="btn btn-primary waves-effect" type="submit" name="create">Tambah Produk</button>
                   <a href="produk.php">
                     <button class="btn btn-danger waves-effect" type="button">Cancel</button>
@@ -118,8 +124,6 @@ if(isset ($_POST['create']) ){
         </div>
       </div>
     </div>
-        </div>
-      </div>
       <!-- Footer -->
     <?php require "components/footer.php"?>
     <!-- Footer -->
