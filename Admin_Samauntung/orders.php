@@ -51,7 +51,8 @@ $query = mysqli_query($konek, "SELECT * FROM pesanan,pesanan_detail") or die(mys
                   <thead class="thead-light">
                     <tr>
                       <th>NO ORDER</th>
-                      <th>DATE</th>
+                      <th>DATE IN</th>
+                      <th>DELIVERED AT</th>
                       <th>TOTAL</th>
                       <th>STATUS</th>
                       <th>AKSI</th>
@@ -65,6 +66,7 @@ $query = mysqli_query($konek, "SELECT * FROM pesanan,pesanan_detail") or die(mys
                       <tr>
                         <td><b><?=$data["id_pesanan"]?></b></td>
                         <td><?=date('M d, Y', strtotime($data["tanggal_pesanan"]))?></td>
+                        <td><?=date('M d, Y', strtotime($data["tanggal_terima"]))?></td>
                         <td><?=$data["total"]?></td>
                         <td><span class="badge badge-secondary"><?=$data["status"]?></span></td>
                         <td><a href="edit_order.php?id_pesanan=<?=$data["id_pesanan"]?>" class="btn btn-primary"><i class="material-icons"></i>Edit</a>
@@ -125,12 +127,12 @@ $query = mysqli_query($konek, "SELECT * FROM pesanan,pesanan_detail") or die(mys
               var id_produk = $(this).data('id_produk');
               var jumlah = $(this).data('jumlah');
               var alamat_lengkap = $(this).data('alamat_lengkap');
-               var subtotal = $(this).data('subtotal');
-               $('id_pesanan').text(id_pesanan);
-               $('id_produk').text(id_produk);
-               $('jumlah').text(jumlah);
-               $('alamat_lengkap').text(alamat_lengkap);
-               $('subtotal').text(subtotal);
+              var subtotal = $(this).data('subtotal');
+              $('id_pesanan').text(id_pesanan);
+              $('id_produk').text(id_produk);
+              $('jumlah').text(jumlah);
+              $('alamat_lengkap').text(alamat_lengkap);
+              $('subtotal').text(subtotal);
             })
           })
         </script>
