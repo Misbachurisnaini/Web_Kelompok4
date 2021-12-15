@@ -1,6 +1,18 @@
 <?php
-include 'koneksi.php';
-$query = mysqli_query($konek, "SELECT * FROM pesanan,pesanan_detail") or die(mysqli_error($konek));
+// include 'koneksi.php';
+// $query = mysqli_query($konek, "SELECT * FROM pesanan,pesanan_detail") or die(mysqli_error($konek));
+
+session_start();
+
+require "config/function.php";
+
+if(!isset($_SESSION["admin"])){
+    header("Location: login.php");
+    exit;
+}
+
+$a = query(" SELECT * FROM pesanan ");
+
 ?>
 
 
@@ -59,10 +71,10 @@ $query = mysqli_query($konek, "SELECT * FROM pesanan,pesanan_detail") or die(mys
                     </tr>
                   </thead>
                   <tbody>
-                    <?php 
-                    $sql = mysqli_query($konek, "SELECT * FROM pesanan,pesanan_detail") or die(mysqli_error($konek));
-                    if(mysqli_num_rows($sql) > 0){
-                      while($data=mysqli_fetch_array($query)){ ?>
+                    <?php foreach($a as $data) :
+                    // $sql = mysqli_query($konek, "SELECT * FROM pesanan,pesanan_detail") or die(mysqli_error($konek));
+                    // if(mysqli_num_rows($sql) > 0){
+                    //   while($data=mysqli_fetch_array($query)){ ?>
                       <tr>
                         <td><b><?=$data["id_pesanan"]?></b></td>
                         <td><?=date('M d, Y', strtotime($data["tanggal_pesanan"]))?></td>
@@ -73,7 +85,9 @@ $query = mysqli_query($konek, "SELECT * FROM pesanan,pesanan_detail") or die(mys
                           <a class="btn btn-warning" id="set_dtl" data-toggle="modal" data-target="#order-detail"><i class="fas fa-eye"></i></a>
                         </td>
                       </tr>
-                    <?php }} ?>
+                    <?php endforeach;
+                  // }} 
+                  ?>
                   </tbody>
                 </table>
               </div>
@@ -121,8 +135,8 @@ $query = mysqli_query($konek, "SELECT * FROM pesanan,pesanan_detail") or die(mys
         </div>
 
         <script>
-          $(document).ready(fuction() {
-            $(document).on('click', '#set_dtl', fucntion() {
+          $(document).ready(function() {
+            $(document).on('click', '#set_dtl', function() {
               var id_pesanan = $(this).data('id_pesanan');
               var id_produk = $(this).data('id_produk');
               var jumlah = $(this).data('jumlah');
