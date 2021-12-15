@@ -16,7 +16,7 @@
         <!-- Features -->
       </div>
       <li class="nav-item">
-        <a class="nav-link" href="dropshiper.php">
+        <a class="nav-link" href="customer.php">
         <i class="fas fa-fw fa-solid fa-box"></i>
           <span>Dropshiper</span>
         </a>
