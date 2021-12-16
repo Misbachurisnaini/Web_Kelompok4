@@ -1,7 +1,7 @@
 <?php 
 
 $servername = "localhost";
-$database = "samauntung";
+$database = "sama";
 $username = "root";
 $password =  "";
 
@@ -85,6 +85,7 @@ function login($data)
             if(password_verify($password, $row['password'])){
                 $_SESSION['admin'] = true;
                 $_SESSION['email-admin'] = $email;
+                $_SESSION['nama'] = $row['user_name'];
                 $_SESSION['id-admin'] = $row['id_user'];
                 $_SESSION['jenis-akun'] = $row['user_level'];
 
