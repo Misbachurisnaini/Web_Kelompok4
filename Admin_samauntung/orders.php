@@ -1,7 +1,4 @@
 <?php
-// include 'koneksi.php';
-// $query = mysqli_query($konek, "SELECT * FROM pesanan,pesanan_detail") or die(mysqli_error($konek));
-
 session_start();
 
 require "config/function.php";
@@ -71,10 +68,9 @@ $a = query(" SELECT * FROM pesanan ");
                     </tr>
                   </thead>
                   <tbody>
-                    <?php foreach($a as $data) :
-                    // $sql = mysqli_query($konek, "SELECT * FROM pesanan,pesanan_detail") or die(mysqli_error($konek));
-                    // if(mysqli_num_rows($sql) > 0){
-                    //   while($data=mysqli_fetch_array($query)){ ?>
+                    <?php
+                    foreach($a as $data) :
+                    ?>
                       <tr>
                         <td><b><?=$data["id_pesanan"]?></b></td>
                         <td><?=date('M d, Y', strtotime($data["tanggal_pesanan"]))?></td>
@@ -85,9 +81,7 @@ $a = query(" SELECT * FROM pesanan ");
                           <a class="btn btn-warning" id="set_dtl" data-toggle="modal" data-target="#order-detail"><i class="fas fa-eye"></i></a>
                         </td>
                       </tr>
-                    <?php endforeach;
-                  // }} 
-                  ?>
+                    <?php endforeach; ?>
                   </tbody>
                 </table>
               </div>
@@ -134,7 +128,22 @@ $a = query(" SELECT * FROM pesanan ");
           </div>
         </div>
 
-        <script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+          $('a#detail').click(function(){
+             var url = $(this).attr('href');
+             $.ajax({
+               url : url,
+               success:function(response){
+                 $('#order-detail').html(response);
+               }
+            });
+          });
+        });
+        </script>
+
+
+        <!-- <script>
           $(document).ready(function() {
             $(document).on('click', '#set_dtl', function() {
               var id_pesanan = $(this).data('id_pesanan');
@@ -149,7 +158,7 @@ $a = query(" SELECT * FROM pesanan ");
               $('subtotal').text(subtotal);
             })
           })
-        </script>
+        </script> -->
 
         <?php require "components/logout.php"?>
 
