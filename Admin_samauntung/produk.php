@@ -1,4 +1,14 @@
 <?php
+
+session_start();
+
+require "config/function.php";
+
+if(!isset($_SESSION["admin"])){
+    header("Location: login.php");
+    exit;
+}
+
 include 'koneksi.php';
 $query = mysqli_query($konek, "SELECT produk.gambar_produk,produk.id_produk, produk.nama_produk, kategori.nama_kategori, produk_detail.harga, produk_detail.stok FROM produk LEFT JOIN produk_detail ON produk.id_produk = produk_detail.id_produk LEFT JOIN kategori ON produk.id_kategori = kategori.id_kategori");
 ?>
