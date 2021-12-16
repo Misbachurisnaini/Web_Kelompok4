@@ -28,6 +28,7 @@ $a = query(" SELECT * FROM pesanan ");
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="css/bootstrap.css" type="text/css">  -->
 </head>
 
 <body id="page-top">
@@ -78,7 +79,7 @@ $a = query(" SELECT * FROM pesanan ");
                         <td><?=$data["total"]?></td>
                         <td><span class="badge badge-secondary"><?=$data["status"]?></span></td>
                         <td><a href="edit_order.php?id_pesanan=<?=$data["id_pesanan"]?>" class="btn btn-primary"><i class="material-icons"></i>Edit</a>
-                          <a class="btn btn-warning" id="set_dtl" data-toggle="modal" data-target="#order-detail"><i class="fas fa-eye"></i></a>
+                          <a href="detail_order.php?id=<?=$data["id_pesanan"]?>" class="btn btn-warning" id=set_dtl" data-toggle="modal" data-target="#order-detail"><i class="fas fa-eye"></i></a>
                         </td>
                       </tr>
                     <?php endforeach; ?>
@@ -89,93 +90,47 @@ $a = query(" SELECT * FROM pesanan ");
           </div>
         </div>
 
+        
         <div class="modal fade" id="order-detail" class="modal" tabindex="-1" role="dialog">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Orders Detail</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body table-responsive">
-                <table class="table table-bordered no-margin">
-                  <tbody>
-                    <tr>
-                      <th style="width:35%">Order Id</th>
-                      <td><span id="id_pesanan"></td>
-                    </tr>
-                    <tr>
-                      <th style="width:35%">Product Id</th>
-                      <td><span id="id_produk"></td>
-                    </tr>
-                    <tr>
-                      <th style="width:35%">Qty</th>
-                      <td><span id="jumlah"></td>
-                    </tr>
-                    <tr>
-                      <th style="width:35%">Address</th>
-                      <td><span id="alamat_lengkap"></td>
-                    </tr>
-                    <tr>
-                      <th style="width:35%">Subtotal</th>
-                      <td><span id="subtotal"></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+            </div> 
+          </div> 
+        </div> 
+
+          <?php require "components/logout.php"?>
+
         </div>
-
-        <script type="text/javascript">
-        $(document).ready(function(){
-          $('a#detail').click(function(){
-             var url = $(this).attr('href');
-             $.ajax({
-               url : url,
-               success:function(response){
-                 $('#order-detail').html(response);
-               }
-            });
-          });
-        });
-        </script>
-
-
-        <!-- <script>
-          $(document).ready(function() {
-            $(document).on('click', '#set_dtl', function() {
-              var id_pesanan = $(this).data('id_pesanan');
-              var id_produk = $(this).data('id_produk');
-              var jumlah = $(this).data('jumlah');
-              var alamat_lengkap = $(this).data('alamat_lengkap');
-              var subtotal = $(this).data('subtotal');
-              $('id_pesanan').text(id_pesanan);
-              $('id_produk').text(id_produk);
-              $('jumlah').text(jumlah);
-              $('alamat_lengkap').text(alamat_lengkap);
-              $('subtotal').text(subtotal);
-            })
-          })
-        </script> -->
-
-        <?php require "components/logout.php"?>
-
-      </div>
       <!---Container Fluid-->
-    </div>
+      </div>
     <!-- Footer -->
     <?php require "components/footer.php"?>
     <!-- Footer -->
+    </div>
   </div>
-</div>
+
+
+<!-- <div class="modal fade" id="modal_provinsi" tabindex="-1" role="dialog" aria-labelledby="provinsi" aria-hidden="true"></div> -->
 
 <!-- Scroll to top -->
 <a class="scroll-to-top rounded" href="#page-top">
   <i class="fas fa-angle-up"></i>
 </a>
 
+<!-- <script type="text/javascript">
+		$(document).ready(function(){
+			$('a#edit_data').click(function(){
+				var url = $(this).attr('href');
+				$.ajax({
+					url : url,
+					success:function(response){
+						$('#modal_provinsi').html(response);
+					}
+				});
+			});
+			
+		});
+	</script> -->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -183,6 +138,11 @@ $a = query(" SELECT * FROM pesanan ");
 <!-- Page level plugins -->
 <script src="vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- js untuk jquery -->
+<script src="js/jquery-1.11.2.min.js"></script>
+	<!-- js untuk bootstrap -->
+	<script src="js/bootstrap.js"></script>
 <!-- Page level custom scripts -->
 <script>
   $(document).ready(function () {
