@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+require "config/function.php";
+
+if(!isset($_SESSION["admin"])){
+    header("Location: login.php");
+    exit;
+}
+
+$a = query(" SELECT * FROM pesanan ");
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,10 +75,10 @@
             </div>
             <ol class="breadcrumb">
                     <li>
-                    <a href="manageadmin.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                      <i class="fas fa-download fa-sm text-white-50"></i> Manage Admin </a>
-                    <a href="manageadmin.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                      <i class="fas fa-download fa-sm text-white-50"></i> Manage Admin </a>
+                    <a href="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                      <i class="fas fa-download fa-sm text-white-50"></i> Input Transaction </a>
+                    <a href="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                      <i class="fas fa-download fa-sm text-white-50"></i> Report </a>
                     </li>
                   </ol>
           </div>
@@ -100,34 +113,22 @@
                       </tr>
                     </tfoot>
                     <tbody>
+                    <?php $i=1 ?>
+                    <?php
+                    foreach($a as $data) :
+                    ?>
                       <tr>
-                        <td>1</td>
-                        <td>abc</td>
-                        <td>abc@gmail.com</td>
-                        <td>17/12/2021</td>
-                        <td>Rp.50.000,00</td>
+                        <td scope="row"><?= $i++ ?></td>
+                        <td><?= $data['keterangan']; ?></td>
+                        <td><?= $data['alamat']; ?></td>
+                        <td><?= $data['ongkir']; ?></td>
+                        <td><?= $data['total']; ?></td>
                         <td>
-                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong"
-                            id="#modalLong"><i class="fas fa-eye"></i></button>
-
-                          <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Modal Long</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <p>gambar</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                          <a href="detail_wallet.php?id=<?=$data["id_pesanan"]?>" type="button" class="btn btn-primary text-white" data-tooltip="tooltip" data-placement="buttom" data-toggle="modal" data-target="#order-detail" >
+                          <i class="fas fa-eye"></i></a>
                         </td>
                       </tr>
+                      <?php endforeach; ?>
                     </tbody>
                   </table>
                 </div>
@@ -135,6 +136,13 @@
             </div>
           </div>
         </div>
+
+        <div class="modal fade" id="order-detail" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            </div> 
+          </div> 
+        </div> 
 
       </div>
       <!-- Footer -->
@@ -152,6 +160,11 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="js/ruang-admin.min.js"></script>
+  <!-- js untuk jquery -->
+<script src="js/jquery-1.11.2.min.js"></script>
+	<!-- js untuk bootstrap -->
+	<script src="js/bootstrap.js"></script>
+<!-- Page level custom scripts -->
 
 </body>
 
