@@ -1,4 +1,14 @@
 <?php
+
+session_start();
+
+require "config/function.php";
+
+if(!isset($_SESSION["admin"])){
+    header("Location: login.php");
+    exit;
+}
+
 include 'koneksi.php'; 
 if(isset($_POST["id_pesanan"])) {
   $namaFile = $_FILES['pesanan'];
@@ -142,7 +152,6 @@ $query = mysqli_query($konek, $sql);
           </div>
         </div>
       </div>
-    </div>
 
     <?php require "components/logout.php"?>
 
