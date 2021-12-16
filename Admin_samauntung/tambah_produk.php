@@ -1,18 +1,14 @@
 <?php
+session_start();
+require "config/function.php";
+
+if(!isset($_SESSION["admin"])){
+    header("Location: login.php");
+    exit;
+}
+
 include "koneksi.php";
 
-session_start();
-if(isset ($_POST['create']) ){
-  $id = $_POST['id_produk'];
-  $kategori = $_POST['id_kategori'];
-  $nama = $_POST['nama_produk'];
-  $gambar = $_POST['gambar_produk'];
-  $deskripsi = $_POST['deskripsi_produk'];
-  
-  $query = "INSERT INTO produk VALUES ('', '$kategori', '$ukuran', '$nama', '$gambar', '$deskripsi')";
-  $result = mysqli_query($konek, $query);
-  header('Location: produk.php');
-}
 ?>
 
 <!DOCTYPE html>
