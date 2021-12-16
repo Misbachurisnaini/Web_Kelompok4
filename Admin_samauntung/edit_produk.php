@@ -1,4 +1,14 @@
 <?php
+
+session_start();
+
+require "config/function.php";
+
+if(!isset($_SESSION["admin"])){
+    header("Location: login.php");
+    exit;
+}
+
 include 'koneksi.php'; 
 if(isset($_POST["nama"])) {
   $namaFile = $_FILES['foto']['name'];
@@ -13,7 +23,7 @@ if(isset($_POST["nama"])) {
     deskripsi_produk = '".$_POST["deskripsi"]."'
     WHERE id_produk = ".$_GET['id'];
     if (mysqli_query($konek, $sql)){
-      $sql = "UPDATE produk_detail SET harga = ".$_POST["harga"].", stok = ".$_POST["stok"]." WHERE id_produk = ".$_GET['id'];
+      $sql = "UPDATE produk SET harga = ".$_POST["harga"].", stok = ".$_POST["stok"]." WHERE id_produk = ".$_GET['id'];
       if(mysqli_query($konek, $sql)){
         // echo '<script>alert("Data berhasil ditambah")</script>';
        echo "<script>
@@ -42,7 +52,7 @@ if(isset($_POST["nama"])) {
  </script>";
 }
 }
-$sql = "SELECT produk.deskripsi_produk, produk.nama_produk, produk.id_kategori, produk_detail.harga, produk_detail.stok FROM produk LEFT JOIN produk_detail ON produk.id_produk = produk_detail.id_produk WHERE produk.id_produk = ".$_GET['id'];
+$sql = "SELECT produk.deskripsi_produk, produk.nama_produk, produk.id_kategori, produk.harga, produk.stok FROM produk WHERE produk.id_produk = ".$_GET['id'];
 $query = mysqli_query($konek, $sql);
 $data=mysqli_fetch_array($query);
 ?>
