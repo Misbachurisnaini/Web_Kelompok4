@@ -1,5 +1,15 @@
 <?php
-include 'koneksi.php';
+
+session_start();
+
+require "config/function.php";
+
+if(!isset($_SESSION["admin"])){
+    header("Location: login.php");
+    exit;
+}
+
+include "koneksi.php";
 
 $query = mysqli_query($konek, "SELECT 
   COUNT(customer_detail.id_customer) as total,
