@@ -1,8 +1,8 @@
 <?php
-include 'koneksi.php';
+// include 'koneksi.php';
 
-$query = mysqli_query($konek, "SELECT * FROM user, customer_detail WHERE customer_detail.id_customer AND user.user_level = '2' AND user.id_user");
-$data=mysqli_fetch_array($query);
+// $query = mysqli_query($konek, "SELECT * FROM user, customer_detail WHERE customer_detail.id_customer AND user.user_level = '2' AND user.id_user");
+// $data=mysqli_fetch_array($query);
 ?>
 
 <!DOCTYPE html>

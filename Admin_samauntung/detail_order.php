@@ -2,13 +2,6 @@
 
  require "config/function.php";
 
- $id = $_GET['id'];
- $data_detail = query("SELECT * FROM pesanan_detail WHERE id_pesanan = $id ")[0];
-// $data_detail = query("SELECT pesanan.alamat, pesanan_detail.id_pesanan, pesanan_detail.id_produk, pesanan_detail.jumlah, pesanan_detail.subtotal FROM pesanan RIGHT JOIN pesanan_detail ON pesanan_detail.id_pesanan = pesanan.id_pesanan ORDER BY pesanan.id_pesanan WHERE id_pesanan = $id ")[0];
-//  while($row=mysqli_fetch_assoc($result)){
-//   $nama_provinsi=$row['nama_provinsi']; 
-//  }
-
 ?>
 
 <!-- <div class="modal fade" id="order-detail" class="modal" tabindex="-1" role="dialog"> -->
@@ -21,33 +14,49 @@
                 </button>
               </div>
               <div class="modal-body table-responsive">
-                <table class="table table-bordered no-margin">
+                <table class="table table-bordered no-margin" id="dataTableHover">
                   <tbody>
+                  <?php 
+                  $query = "SELECT * FROM pesanan_detail 
+                  INNER JOIN produk ON pesanan_detail.id_produk = produk.id_produk
+                  INNER JOIN customer ON pesanan_detail.id_customer = customer.id_customer
+                  ";
+                  
+                  $sql_rm = mysqli_query($conn, $query) or die (mysqli_error($conn));
+                  while ($data = mysqli_fetch_array($sql_rm)) {
+                  ?>
                     <tr>
                       <th style="width:35%">Order Id</th>
-                      <td><span id="id_pesanan"><?= $data_detail['id_pesanan']; ?></td>
+                      <td><?= $data["id_pesanan"]; ?></td>
                     </tr>
                     <tr>
                       <th style="width:35%">Product Id</th>
-                      <td><span id="id_produk"><?= $data_detail['id_produk']; ?></td>
+                      <td><?= $data["nama_produk"]; ?></td>
                     </tr>
                     <tr>
                       <th style="width:35%">Qty</th>
-                      <td><span id="jumlah"><?= $data_detail['jumlah']; ?></td>
+                      <td><?= $data["jumlah"]; ?></td>
                     </tr>
                     <tr>
                       <th style="width:35%">Address</th>
-                      <td><span id="alamat_lengkap"></td>
+                      <td><?= $data["alamat"]; ?></td>
                     </tr>
                     <tr>
                       <th style="width:35%">Subtotal</th>
-                      <td><span id="subtotal"><?= $data_detail['subtotal']; ?></td>
+                      <td><?= $data["subtotal"]; ?></td>
                     </tr>
+                    <?php } ?>
                   </tbody>
                 </table>
               </div>
             </div>
         <!-- </div> -->
+
+        <script>
+  $(document).ready(function () {
+      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+    });
+  </script>
 
 <!-- <div class="modal fade" id="order-detail" class="modal" tabindex="-1" role="dialog"> -->
     <!-- <div class="modal-dialog" role="document">

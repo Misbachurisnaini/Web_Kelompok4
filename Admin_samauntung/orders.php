@@ -8,8 +8,6 @@ if(!isset($_SESSION["admin"])){
     exit;
 }
 
-$a = query(" SELECT * FROM pesanan ");
-
 ?>
 
 
@@ -60,7 +58,9 @@ $a = query(" SELECT * FROM pesanan ");
                 <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                   <thead class="thead-light">
                     <tr>
-                      <th>NO ORDER</th>
+                      <th>NO</th>
+                      <th>ID ORDER</th>
+                      <th>USERNAME</th>
                       <th>DATE IN</th>
                       <th>DELIVERED AT</th>
                       <th>TOTAL</th>
@@ -69,11 +69,21 @@ $a = query(" SELECT * FROM pesanan ");
                     </tr>
                   </thead>
                   <tbody>
-                    <?php
-                    foreach($a as $data) :
-                    ?>
+                  <?php $i=1 ?>
+                  <?php 
+                  $query = "SELECT * FROM pesanan_detail 
+                  INNER JOIN produk ON pesanan_detail.id_produk = produk.id_produk
+                  INNER JOIN pesanan ON pesanan_detail.id_pesanan = pesanan.id_pesanan
+                  INNER JOIN customer ON pesanan_detail.id_customer = customer.id_customer
+                  ";
+                  
+                  $sql_rm = mysqli_query($conn, $query) or die (mysqli_error($conn));
+                  while ($data = mysqli_fetch_array($sql_rm)) {
+                  ?>
                       <tr>
+                        <td scope="row"><b><?= $i++ ?></b></td>
                         <td><b><?=$data["id_pesanan"]?></b></td>
+                        <td><b><?=$data["username"]?></b></td>
                         <td><?=date('M d, Y', strtotime($data["tanggal_pesanan"]))?></td>
                         <td><?=date('M d, Y', strtotime($data["tanggal_terima"]))?></td>
                         <td><?=$data["total"]?></td>
@@ -82,7 +92,7 @@ $a = query(" SELECT * FROM pesanan ");
                           <a href="detail_order.php?id=<?=$data["id_pesanan"]?>" class="btn btn-warning" id=set_dtl" data-toggle="modal" data-target="#order-detail"><i class="fas fa-eye"></i></a>
                         </td>
                       </tr>
-                    <?php endforeach; ?>
+                    <?php } ?>
                   </tbody>
                 </table>
               </div>

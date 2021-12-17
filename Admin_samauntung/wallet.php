@@ -44,7 +44,6 @@ $a = query(" SELECT * FROM pesanan ");
             <h1 class="h3 mb-0 text-gray-800">Wallet</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./">Home</a></li>
-              <li class="breadcrumb-item">Pages</li>
               <li class="breadcrumb-item active" aria-current="page">Wallet</li>
             </ol>
           </div>
@@ -113,22 +112,29 @@ $a = query(" SELECT * FROM pesanan ");
                       </tr>
                     </tfoot>
                     <tbody>
-                    <?php $i=1 ?>
-                    <?php
-                    foreach($a as $data) :
-                    ?>
+                      <?php $i=1 ?>
+                      <?php 
+                      $query = "SELECT * FROM pesanan_detail 
+                      INNER JOIN produk ON pesanan_detail.id_produk = produk.id_produk
+                      INNER JOIN pesanan ON pesanan_detail.id_pesanan = pesanan.id_pesanan
+                      INNER JOIN customer ON pesanan_detail.id_customer = customer.id_customer
+                      ";
+                      
+                      $sql_rm = mysqli_query($conn, $query) or die (mysqli_error($conn));
+                      while ($data = mysqli_fetch_array($sql_rm)) {
+                      ?>
                       <tr>
                         <td scope="row"><?= $i++ ?></td>
-                        <td><?= $data['keterangan']; ?></td>
-                        <td><?= $data['alamat']; ?></td>
-                        <td><?= $data['ongkir']; ?></td>
+                        <td><?= $data['username']; ?></td>
+                        <td><?= $data['email_cs']; ?></td>
+                        <td><?=date('M d, Y', strtotime($data["tanggal_pesanan"]))?></td>
                         <td><?= $data['total']; ?></td>
                         <td>
                           <a href="detail_wallet.php?id=<?=$data["id_pesanan"]?>" type="button" class="btn btn-primary text-white" data-tooltip="tooltip" data-placement="buttom" data-toggle="modal" data-target="#order-detail" >
                           <i class="fas fa-eye"></i></a>
                         </td>
                       </tr>
-                      <?php endforeach; ?>
+                      <?php } ?>
                     </tbody>
                   </table>
                 </div>

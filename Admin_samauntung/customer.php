@@ -9,18 +9,7 @@ if(!isset($_SESSION["admin"])){
     exit;
 }
 
-include "koneksi.php";
-
-$query = mysqli_query($konek, "SELECT 
-  COUNT(customer_detail.id_customer) as total,
-  AVG(customer_detail.orders) as avg_order,
-  AVG(customer_detail.total_spend) as avg_spend,
-  AVG(customer_detail.total_spend/customer_detail.orders) as aov
-  FROM customer_detail,user WHERE customer_detail.id_customer = user.id_user AND user.user_level = 'user'");
-$data_analyzed=mysqli_fetch_array($query);
-$query = mysqli_query($konek, "SELECT user.id_user,user.user_name,user.email,customer_detail.nama,customer_detail.foto,customer_detail.last_active FROM user,customer_detail WHERE user.id_user=customer_detail.id_customer AND user.user_level = 'user'");
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +21,7 @@ $query = mysqli_query($konek, "SELECT user.id_user,user.user_name,user.email,cus
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
-  <title>Customer Samauntung</title>
+  <title>Katalog Produk Samauntung</title>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
@@ -65,57 +54,127 @@ $query = mysqli_query($konek, "SELECT user.id_user,user.user_name,user.email,cus
           <div class="row">
             <div class="col-md-12">
              <div class="card mb-4">
-               <div class="card-body">
-                <div class="table-responsive p-3">
-                  <table class="table align-items-center table-flush table-hover" id="dataTableHover">
-                    <thead class="thead-light">
-                      <tr>
-                        <th>#</th>
-                        <th>NAMA</th>
-                        <th>USERNAME</th>
-                        <th>LAST ACTIVE</th>
-                        <th>EMAIL</th>
-                        <th>AKSI</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php while($data=mysqli_fetch_array($query)){ ?>
-                        <tr>
-                          <td><img src="uploads/<?=$data["foto"]?>" width="50px" height="50px"></td>
-                          <td><b><?=$data["nama"]?></b></td>
-                          <td><?=$data["user_name"]?></td>
-                          <td><?=date('M d, Y', strtotime($data["last_active"]))?></td>
-                          <td style="color:#00A3FF"><?=$data["email"]?></td>
-                          <td><a href="detail_customer.php?id=<?=$data["id_user"]?>" class="btn btn-success"><i class="fas fa-eye"></i></a>
-                            <a href="edit_customer.php?id=<?=$data["id_user"]?>" class="btn btn-primary">
-                              <i class="material-icons"></i>EDIT
-                            </a>
-                          </td>
-                        </tr>
-                      <?php } ?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+            <div class="card-body">
+              <div class="table-responsive p-3">
+               <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                <thead class="thead-light">
+                  <tr>
+                    <th> </th>
+                    <th>NAMA</th>
+                    <th>USERNAME</th>
+                    <th>EMAIL</th>
+                    <th>ALAMAT</th>
+                    <th>DATE REGISTER</th>
+                    <th>TINDAKAN</th>
+                  </tr>
+                </thead>
+                <tbody> 
+                      <?php 
+                      $query = "SELECT * FROM customer 
+                      ";
+                      
+                      $sql_rm = mysqli_query($conn, $query) or die (mysqli_error($conn));
+                      while ($data = mysqli_fetch_array($sql_rm)) {
+                      ?>
+                    <tr>
+                      <td><img src="uploads/<?=$data["foto"]?>" width="50px" height="50px"></td>
+                      <td><?=$data["nama"]?></td>
+                      <td><?=$data["username"]?></td>
+                      <td><?=$data["email_cs"]?></td>
+                      <td><?=$data["alamat"]?></td>
+                      <td><?=$data["date_register"]?></td>
+                        <td>
+                          <!-- <a href="" class="btn btn-primary"><i class="material-icons"></i>Edit</a> -->
+                          <a href="detail_customer.php" class="btn btn-warning" id=set_dtl" data-toggle="modal" data-target="#order-detail"><i class="fas fa-eye"></i></a>
+                          <a href="hapuscustomer.php?id=<?= $data['id_customer']; ?>" type="button" class="btn btn-danger text-white" data-tooltip="tooltip" data-placement="buttom" >
+                            <i class="fas fa-solid fa-trash"></i>
+                        </td>
+                      <!-- <td class="text-center">
+                        <div class="dropdown">
+                          <button class="btn btn-warning" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v"></i>
+                          </button>
+                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#shareModal" data-whatever="<?=$data['id_produk']?>">
+                              <i class="fas fa-share"></i> Bagikan
+                            </button>
+                            <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#deleteModal" data-whatever="<?=$data['id_produk']?>">
+                              <i class="fas fa-trash" ></i> Hapus
+                            </button>
+                          </div>
+                        </div>      
+                      </td> -->
+                    </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-
-        <?php require "components/logout.php"?>
-
       </div>
-      <!---Container Fluid-->
     </div>
-    <!-- Footer -->
-    <?php require "components/footer.php"?>
-    <!-- Footer -->
+
+    <div class="modal fade" id="order-detail" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            </div> 
+          </div> 
+        </div>
+
+    <?php require "components/logout.php"?>
+
   </div>
+  <!---Container Fluid-->
+</div>
+<!-- Footer -->
+<?php require "components/footer.php"?>
+<!-- Footer -->
+</div>
 </div>
 
 <!-- Scroll to top -->
 <a class="scroll-to-top rounded" href="#page-top">
   <i class="fas fa-angle-up"></i>
 </a>
+
+<!-- <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel"><i class="fas fa-exclamation-triangle"></i> Hapus Produk Ini</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Yakin ingin menghapus item ini?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">BATAL</button>
+        <a type="button" class="btn btn-danger">HAPUS</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="shareModalLabel">Bagikan Produk Ini</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div style="display: flex;justify-content:center">
+          <img src="foto/fb.png" style="margin-right: 25px;margin-left:25px">
+          <img src="foto/wa.png" style="margin-right: 25px;margin-left:25px">
+          <img src="foto/cp.png" style="margin-right: 25px;margin-left:25px">
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
 
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -124,12 +183,30 @@ $query = mysqli_query($konek, "SELECT user.id_user,user.user_name,user.email,cus
 <!-- Page level plugins -->
 <script src="vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- js untuk jquery -->
+<script src="js/jquery-1.11.2.min.js"></script>
+	<!-- js untuk bootstrap -->
+	<script src="js/bootstrap.js"></script>
+<!-- Page level custom scripts -->
+
 <!-- Page level custom scripts -->
 <script>
   $(document).ready(function () {
       $('#dataTableHover').DataTable(); // ID From dataTable with Hover
     });
   </script>
+  <!-- <script>
+    $(function(){
+      $('#deleteModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var recipient = button.data('whatever');
+        console.log(recipient);
+        var modal = $(this);
+        modal.find('.modal-footer a').attr("href", 'delete_produk.php?id='+recipient);
+      });
+    });
+  </script> -->
 </body>
 
 </html>
