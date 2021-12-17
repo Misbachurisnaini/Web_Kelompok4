@@ -73,6 +73,7 @@ function login($data)
 {
     global $conn;
 
+    $nama = $data['user_name'];
     $email = $data['email'];
     $password = $data['password'];
 
@@ -85,7 +86,7 @@ function login($data)
             if(password_verify($password, $row['password'])){
                 $_SESSION['admin'] = true;
                 $_SESSION['email-admin'] = $email;
-                $_SESSION['nama'] = $row['user_name'];
+                $_SESSION['nama-admin'] = $nama;
                 $_SESSION['id-admin'] = $row['id_user'];
                 $_SESSION['jenis-akun'] = $row['user_level'];
 
