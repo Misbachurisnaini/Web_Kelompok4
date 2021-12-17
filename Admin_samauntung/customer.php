@@ -84,7 +84,7 @@ if(!isset($_SESSION["admin"])){
                       <td><?=$data["alamat"]?></td>
                       <td><?=$data["date_register"]?></td>
                         <td>
-                          <!-- <a href="" class="btn btn-primary"><i class="material-icons"></i>Edit</a> -->
+                          <a href="edit_customer.php?id=<?= $data['id_customer']; ?>" class="btn btn-primary"><i class="material-icons"></i>Edit</a>
                           <a href="detail_customer.php" class="btn btn-warning" id=set_dtl" data-toggle="modal" data-target="#order-detail"><i class="fas fa-eye"></i></a>
                           <a href="hapuscustomer.php?id=<?= $data['id_customer']; ?>" type="button" class="btn btn-danger text-white" data-tooltip="tooltip" data-placement="buttom" >
                             <i class="fas fa-solid fa-trash"></i>

@@ -1,58 +1,48 @@
 <?php
-include 'koneksi.php'; 
-if(isset($_POST["nama"])) {
-  $namaFile = $_FILES['foto']['name'];
-  $namaSementara = $_FILES['foto']['tmp_name'];
-  $dirUpload = "uploads/";
-  $terupload = move_uploaded_file($namaSementara, $dirUpload.$namaFile);
-  if ($terupload) {
-    $sql = "UPDATE user
-    SET user_email = '".$_POST["email"]."' 
-    WHERE id_user = ".$_GET['id'];
-    if (mysqli_query($konek, $sql)){
-      $sql = "UPDATE customer_detail
-      SET nama = '".$_POST["nama"]."',
-      foto = '".$namaFile."',
-      orders = ".$_POST["orders"].",
-      total_spend = ".$_POST["total_spend"].",
-      region = '".$_POST["region"]."',
-      city = '".$_POST["city"]."',
-      postal = '".$_POST["postal"]."'
-      WHERE id_customer = ".$_GET['id'];
-      if(mysqli_query($konek, $sql)){
-        // echo '<script>alert("Data berhasil diubah")</script>';
-        echo "<script>
-        alert('Data berhasil diubah');
-        window.location.href='customer.php';
-        </script>";
-      }else{
-        // echo '<script>alert("Error:'.mysqli_error($konek).'")</script>';
-        echo "<script>
-        alert('Error:".mysqli_error($konek)."');
-        window.location.href='customer.php';
-        </script>";
-      }
-    } else {
-      // echo '<script>alert("Error:'.mysqli_error($konek).'")</script>';
-      echo "<script>
-      alert('Error:".mysqli_error($konek)."');
-      window.location.href='customer.php';
-      </script>";
-    }
-  } else {
-    // echo "<script>alert('UPLOAD FILE GAGAL')</script>";
-    echo "<script>
-    alert('UPLOAD FILE GAGAL');
-    window.location.href='customer.php';
-    </script>";
-  }
+session_start();
+
+if (!isset($_SESSION["admin"])) {
+    header("Location: login.php");
+    exit;
 }
-$query = mysqli_query($konek, "SELECT * FROM user,customer_detail WHERE customer_detail.id_customer AND user.user_level = '2' AND user.id_user");
-
-$data=mysqli_fetch_array($query);
-?>
 
 
+
+require "config/function.php";
+
+if (!(isset($_GET['id']))) {
+    header("Location:customer.php");
+    exit;
+}
+
+$id = $_GET['id'];
+
+// $data = query("SELECT customer.* , customer_detail.orders, customer_detail.total_spend FROM customer INNER JOIN customer_detail ON customer.id_customer_detail = customer_detail.id_customer_detail AND customer.id_customer = '$id'")[0];
+$data = query("SELECT * FROM customer WHERE id_customer")[0];
+$data2 = query("SELECT * FROM customer_detail WHERE id_customer_detail")[0];
+// $data = query("SELECT * FROM customer LEFT JOIN customer_detail ON customer.id_customer_detail = customer_detail.id_customer_detail")[0];
+
+//SELECT * FROM pesanan_detail 
+// INNER JOIN produk ON pesanan_detail.id_produk = produk.id_produk
+
+if (isset($_POST['simpan-produk'])) {
+    if (editcustomer($_POST) > 0) {
+        echo "
+        <script>
+            alert('Data berhasil diedit!');
+            location = 'customer.php';
+        </script>";
+    } else {
+        echo mysqli_error($conn);
+        echo "
+        <script>
+            alert('Data gagal diedit!');
+            location = 'customer.php';
+        </script>";
+    }
+}
+
+// ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -96,10 +86,14 @@ $data=mysqli_fetch_array($query);
             <div class="col-md-12">
              <div class="card mb-4">
               <div class="card-body">
-                <form action="edit_customer.php?id=<?=$_GET['id']?>" method="post" enctype="multipart/form-data">
+                <form action="" method="post" enctype="multipart/form-data">
+
+                <input type="hidden" name="id_customer" value="<?= $data["id_customer"] ?>">
+                <input type="hidden" name="id_customer_detail" value="<?= $data2["id_customer_detail"] ?>">
                   <div class="form-group">
                     <label for="foto">Foto</label>
-                    <input type="file" class="form-control"  name="foto">
+                    <input type="file" class="form-control"  name="image">
+                    <input type="hidden" name="image-old" value="<?= $data["foto"] ?>">
                   </div>
                   <div class="form-group required">
                     <label for="nama" class="control-label">Nama</label>
@@ -107,11 +101,15 @@ $data=mysqli_fetch_array($query);
                   </div>
                   <div class="form-group required">
                     <label for="email" class="control-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Ex :  test@test.com" required value="<?=$data["email"]?>">
+                    <input type="email" class="form-control" id="email" name="email_cs" placeholder="Ex :  test@test.com" required value="<?=$data["email_cs"]?>">
+                  </div>
+                  <div class="form-group required">
+                    <label for="alamat" class="control-label">alamat</label>
+                    <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Ex :  Indonesia" value="<?=$data["alamat"]?>">
                   </div>
                   <div class="form-group required">
                     <label for="orders" class="control-label">Order</label>
-                    <input type="number" class="form-control" id="orders" name="orders" placeholder="Ex :  1" value="<?=$data["orders"]?>">
+                    <input type="number" class="form-control" id="orders" name="orders" placeholder="Ex :  1" value="<?=$data2["orders"]?>">
                   </div>
                   <div class="form-group required">
                     <label for="total_spend" class="control-label">Total Spend</label>
@@ -119,24 +117,13 @@ $data=mysqli_fetch_array($query);
                       <div class="input-group-prepend">
                         <div class="input-group-text">Rp</div>
                       </div>
-                      <input type="number" class="form-control" id="total_spend" name="total_spend" placeholder="Ex :  15.000"  required value="<?=$data["total_spend"]?>">
+                      <input type="number" class="form-control" id="total_spend" name="total_spend" placeholder="Ex :  15.000"  required value="<?=$data2["total_spend"]?>">
                     </div>
                   </div>
-                  <div class="form-group required">
-                    <label for="region" class="control-label">Country / Region</label>
-                    <input type="text" class="form-control" id="region" name="region" placeholder="Ex :  Indonesia" value="<?=$data["region"]?>">
-                  </div>
-                  <div class="form-group required">
-                    <label for="city" class="control-label">City</label>
-                    <input type="text" class="form-control" id="city" name="city" placeholder="Ex :  Jakarta" value="<?=$data["city"]?>">
-                  </div>
-                  <div class="form-group required">
-                    <label for="postal" class="control-label">Postal</label>
-                    <input type="number" class="form-control" id="postal" name="postal" placeholder="Ex :  12345" value="<?=$data["postal"]?>">
-                  </div>
+                  
                   <div style="display:flex;justify-content:right;margin-top:25px">
                     <button type="reset" class="btn btn-outline-dark" style="margin-right: 25px;">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit"  name="simpan-produk" class="btn btn-primary">Simpan</button>
                   </div>
                 </form>
               </div>
