@@ -155,10 +155,14 @@ function editcustomer($query)
 
     //$update2 = "UPDATE customer_detail SET orders = '$orders', total_spend = '$total' WHERE id_customer_detail = '$id_dcs'";
 
-    $update = "UPDATE customer c JOIN customer_detail d 
-    ON c.id_customer = '$id_cs' = d.id_customer 
-    SET c.nama = '$nama', c.email_cs = '$email', c.alamat = '$alamat' = d.orders = '$orders', d.total_spend = '$total'
-    ";
+    // $update = "UPDATE customer c JOIN customer_detail d 
+    // ON c.id_customer = '$id_cs' = d.id_customer 
+    // SET c.nama = '$nama', c.email_cs = '$email', c.alamat = '$alamat' = d.orders = '$orders', d.total_spend = '$total'
+    // ";
+//     $update = mysql_query("UPDATE `product`,`categories`SET `product`.`category_name` = '" . $catname . "',`categories`.`category_name` = '" . $catname . "'WHERE `items`.`id` = '" . $catname . "'
+// ");
+
+    $update = "UPDATE customer, customer_detail SET customer.nama = '$nama', customer.email_cs = '$email', customer.alamat = '$alamat', customer.foto = '$img', customer_detail.orders = '$orders', customer_detail.total_spend = '$total' WHERE customer.id_customer = '$id_cs'";
 
     mysqli_query($conn, $update);
 
