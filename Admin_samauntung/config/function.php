@@ -69,11 +69,34 @@ function tambahadmin($data){
     return mysqli_affected_rows($conn);
 }
 
+function tambahProduk($data)
+{
+    global $conn;
+
+    strtolower(htmlspecialchars($namaProduk = $data['nama_produk']));
+    htmlspecialchars($kategori = $data['nama_kategori']);
+    htmlspecialchars($stok = $data['stok']);
+    htmlspecialchars($harga = $data['harga']);
+    strtolower(htmlspecialchars($deskripsi = $data['deskripsi_produk']));
+
+    // upload foto
+    $img = uploadGambar();
+
+    if (!$img) {
+        return false;
+    }
+
+    $add = "INSERT INTO produk VALUES (0, '$namaProduk', '$kategori', '$stok', '$harga', '$deskripsi', '$img')";
+
+    mysqli_query($conn, $add);
+
+    return mysqli_affected_rows($conn);
+}
+
 function login($data)
 {
     global $conn;
 
-    $nama = $data['user_name'];
     $email = $data['email'];
     $password = $data['password'];
 
@@ -86,7 +109,6 @@ function login($data)
             if(password_verify($password, $row['password'])){
                 $_SESSION['admin'] = true;
                 $_SESSION['email-admin'] = $email;
-                $_SESSION['nama-admin'] = $nama;
                 $_SESSION['id-admin'] = $row['id_user'];
                 $_SESSION['jenis-akun'] = $row['user_level'];
 
