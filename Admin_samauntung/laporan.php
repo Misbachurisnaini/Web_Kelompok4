@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
         $bulan = date($_POST['bulan']);
 
         $query = query("SELECT pesanan_detail.*, customer.*, pesanan.* FROM pesanan_detail
-        INNER JOIN customer ON pesanan_detail.id_customer = customer.id_customerr 
+        INNER JOIN customer ON pesanan_detail.id_customer = customer.id_customer 
         INNER JOIN pesanan ON pesanan_detail.id_pesanan = pesanan.id_pesanan
         AND MONTH(pesanan.tanggal_pesanan) = '$bulan' 
         AND pesanan.status = 'selesai'
