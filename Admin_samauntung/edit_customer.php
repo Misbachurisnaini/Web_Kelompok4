@@ -17,13 +17,9 @@ if (!(isset($_GET['id']))) {
 
 $id = $_GET['id'];
 
-// $data = query("SELECT customer.* , customer_detail.orders, customer_detail.total_spend FROM customer INNER JOIN customer_detail ON customer.id_customer_detail = customer_detail.id_customer_detail AND customer.id_customer = '$id'")[0];
+
 $data = query("SELECT * FROM customer WHERE id_customer")[0];
 $data2 = query("SELECT * FROM customer_detail WHERE id_customer_detail")[0];
-// $data = query("SELECT * FROM customer LEFT JOIN customer_detail ON customer.id_customer_detail = customer_detail.id_customer_detail")[0];
-
-//SELECT * FROM pesanan_detail 
-// INNER JOIN produk ON pesanan_detail.id_produk = produk.id_produk
 
 if (isset($_POST['simpan-produk'])) {
     if (editcustomer($_POST) > 0) {
@@ -37,12 +33,12 @@ if (isset($_POST['simpan-produk'])) {
         echo "
         <script>
             alert('Data gagal diedit!');
-            location = 'customer.php';
+            // location = 'customer.php';
         </script>";
     }
 }
 
-// ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 
