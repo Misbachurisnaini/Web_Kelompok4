@@ -77,7 +77,7 @@ if(!isset($_SESSION["admin"])){
                       while ($data = mysqli_fetch_array($sql_rm)) {
                       ?>
                     <tr>
-                      <td><img src="uploads/<?=$data["foto"]?>" width="50px" height="50px"></td>
+                      <td><img src="img/posting/<?=$data['foto']?>" width="50px" height="50px"></td>
                       <td><?=$data["nama"]?></td>
                       <td><?=$data["username"]?></td>
                       <td><?=$data["email_cs"]?></td>
