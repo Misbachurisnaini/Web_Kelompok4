@@ -1,6 +1,8 @@
 <?php 
 session_start();
 
+require "config/function.php";
+
 if (!isset($_SESSION["admin"])){
     header("Location: login.php");
     exit;
@@ -144,53 +146,56 @@ if (!isset($_SESSION["admin"])){
             <?php } ?>
           </div>
 
-          <!-- <div class="row mb-3"> -->
-           
-          <!--Row-->
-
-          <!-- <div class="row">
-            <div class="col-lg-12 text-center">
-              <p>Do you like this template ? you can download from <a href="https://github.com/indrijunanda/RuangAdmin"
-                  class="btn btn-primary btn-sm" target="_blank"><i class="fab fa-fw fa-github"></i>&nbsp;GitHub</a></p>
-            </div>
-          </div> -->
-
-          <!-- Modal Logout -->
-          <!-- <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                  <a href="login.html" class="btn btn-primary">Logout</a>
+          <?php
+          $monthlyTrans = query("SELECT total FROM pesanan WHERE MONTH(tanggal_pesanan) = MONTH(CURRENT_TIMESTAMP) AND status = 'selesai'");
+          $monthlySum = 0;
+          for ($i = 0; $i < count($monthlyTrans); $i++) {
+            $monthlySum = $monthlySum + $monthlyTrans[$i]['total'];
+          }
+          ?>
+          <div class="row justify-content-center">
+            <!-- Total Pendapatan Bulan ini -->
+            <div class="col-xl-4 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Toal Pendapatan (Bulan ini)</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">Rp <?= number_format($monthlySum, 0, "", ","); ?></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-calendar fa-4x text-gray-300"></i>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div> -->
-          <?php require "components/logout.php"?>
 
+            <?php $pesanan = count(query("SELECT id_pesanan FROM pesanan WHERE MONTH(tanggal_pesanan) = MONTH(CURRENT_TIMESTAMP) AND status = 'selesai'")); ?>
+            <!-- Total Transaksi Bulan ini -->
+            <div class="col-xl-4 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Transaksi (Bulan ini)</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $pesanan; ?></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-handshake fa-4x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal Logout -->
+          <?php require "components/logout.php"?>
         </div>
         <!---Container Fluid-->
       </div>
       <!-- Footer -->
-      <!-- <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>copyright &copy; <script> document.write(new Date().getFullYear()); </script> - developed by
-              <b><a href="https://indrijunanda.gitlab.io/" target="_blank">indrijunanda</a></b>
-            </span>
-          </div>
-        </div>
-      </footer> -->
       <?php require "components/footer.php"?>
       <!-- Footer -->
     </div>
