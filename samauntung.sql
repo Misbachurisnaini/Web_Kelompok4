@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Des 2021 pada 10.07
--- Versi server: 10.4.20-MariaDB
--- Versi PHP: 7.3.29
+-- Waktu pembuatan: 19 Des 2021 pada 10.41
+-- Versi server: 10.4.17-MariaDB
+-- Versi PHP: 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,10 +31,33 @@ CREATE TABLE `cart` (
   `id_cart` int(11) NOT NULL,
   `id_produk` int(11) NOT NULL,
   `harga_produk` int(11) NOT NULL,
-  `qty_produk` int(5) NOT NULL,
+  `qty_produk` int(11) NOT NULL,
   `subtotal_produk` int(11) NOT NULL,
   `total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `customer`
+--
+
+CREATE TABLE `customer` (
+  `id_customer` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `email_cs` varchar(255) NOT NULL,
+  `alamat` varchar(255) NOT NULL,
+  `date_register` date NOT NULL,
+  `foto` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `customer`
+--
+
+INSERT INTO `customer` (`id_customer`, `username`, `nama`, `email_cs`, `alamat`, `date_register`, `foto`) VALUES
+(1, 'wappi17', 'wapi', 'wapi@gmail.com', '0', '2021-12-01', 'ppp.jpeg');
 
 -- --------------------------------------------------------
 
@@ -43,25 +66,18 @@ CREATE TABLE `cart` (
 --
 
 CREATE TABLE `customer_detail` (
+  `id_customer_detail` int(11) NOT NULL,
   `id_customer` int(11) NOT NULL,
-  `nama` varchar(50) NOT NULL,
-  `last_active` date NOT NULL,
-  `date_register` date NOT NULL,
   `orders` int(11) NOT NULL,
-  `total_spend` int(11) NOT NULL,
-  `region` char(3) NOT NULL,
-  `city` varchar(50) NOT NULL,
-  `postal` char(5) NOT NULL,
-  `foto` varchar(50) NOT NULL
+  `total_spend` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `customer_detail`
 --
 
-INSERT INTO `customer_detail` (`id_customer`, `nama`, `last_active`, `date_register`, `orders`, `total_spend`, `region`, `city`, `postal`, `foto`) VALUES
-(2, 'user satua', '2021-12-02', '2021-11-09', 3, 50000, 'ID', 'lumajang', '67352', '5818.jpg'),
-(3, 'user dua', '2021-12-02', '2021-11-08', 2, 100000, 'ID', 'lumajang', '67352', 'user.jpeg');
+INSERT INTO `customer_detail` (`id_customer_detail`, `id_customer`, `orders`, `total_spend`) VALUES
+(1, 1, 45, 325);
 
 -- --------------------------------------------------------
 
@@ -70,8 +86,8 @@ INSERT INTO `customer_detail` (`id_customer`, `nama`, `last_active`, `date_regis
 --
 
 CREATE TABLE `kategori` (
-  `id_kategori` int(2) NOT NULL,
-  `nama_kategori` varchar(25) NOT NULL
+  `id_kategori` int(11) NOT NULL,
+  `nama_kategori` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -79,9 +95,8 @@ CREATE TABLE `kategori` (
 --
 
 INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
-(1, 'Makarina'),
-(2, 'Musae Chips'),
-(3, 'Mie Nyaman');
+(1, 'makanan'),
+(2, 'minuman');
 
 -- --------------------------------------------------------
 
@@ -91,16 +106,21 @@ INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
 
 CREATE TABLE `pesanan` (
   `id_pesanan` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
   `tanggal_pesanan` date NOT NULL,
   `tanggal_terima` date NOT NULL,
   `status` enum('belum bayar','verifikasi','sudah bayar','sedang dikirim','selesai') NOT NULL,
   `total` int(11) NOT NULL,
-  `ongkir` varchar(25) NOT NULL,
-  `alamat_lengkap` varchar(50) NOT NULL,
-  `bukti bayar` varchar(225) NOT NULL,
-  `keterangan` varchar(50) NOT NULL
+  `ongkir` int(11) NOT NULL,
+  `bukti_bayar` text NOT NULL,
+  `keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `pesanan`
+--
+
+INSERT INTO `pesanan` (`id_pesanan`, `tanggal_pesanan`, `tanggal_terima`, `status`, `total`, `ongkir`, `bukti_bayar`, `keterangan`) VALUES
+(1, '2021-12-06', '2021-12-08', 'sudah bayar', 100000, 12000, 'nnnn', 'kkkk');
 
 -- --------------------------------------------------------
 
@@ -111,10 +131,18 @@ CREATE TABLE `pesanan` (
 CREATE TABLE `pesanan_detail` (
   `id_pesanan_detail` int(11) NOT NULL,
   `id_pesanan` int(11) NOT NULL,
+  `id_customer` int(11) NOT NULL,
   `id_produk` int(11) NOT NULL,
   `jumlah` int(11) NOT NULL,
   `subtotal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `pesanan_detail`
+--
+
+INSERT INTO `pesanan_detail` (`id_pesanan_detail`, `id_pesanan`, `id_customer`, `id_produk`, `jumlah`, `subtotal`) VALUES
+(6, 1, 1, 2, 23, 50000);
 
 -- --------------------------------------------------------
 
@@ -123,39 +151,22 @@ CREATE TABLE `pesanan_detail` (
 --
 
 CREATE TABLE `produk` (
-  `id_produk` int(5) NOT NULL,
-  `id_kategori` int(2) DEFAULT NULL,
-  `nama_produk` varchar(50) NOT NULL,
-  `gambar_produk` varchar(225) NOT NULL,
-  `deskripsi_produk` varchar(250) NOT NULL
+  `id_produk` int(11) NOT NULL,
+  `id_kategori` int(11) NOT NULL,
+  `nama_produk` varchar(100) NOT NULL,
+  `gambar_produk` varchar(255) NOT NULL,
+  `deskripsi_produk` text NOT NULL,
+  `stok` int(11) NOT NULL,
+  `harga` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `produk`
 --
 
-INSERT INTO `produk` (`id_produk`, `id_kategori`, `nama_produk`, `gambar_produk`, `deskripsi_produk`) VALUES
-(1, 4, 'testostawawa', 'Ellipse 9.png', 'awaawa');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `produk_detail`
---
-
-CREATE TABLE `produk_detail` (
-  `id_produk_detail` int(11) NOT NULL,
-  `id_produk` int(11) NOT NULL,
-  `stok` int(5) NOT NULL,
-  `harga` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `produk_detail`
---
-
-INSERT INTO `produk_detail` (`id_produk_detail`, `id_produk`, `stok`, `harga`) VALUES
-(0, 1, 0, 52322534);
+INSERT INTO `produk` (`id_produk`, `id_kategori`, `nama_produk`, `gambar_produk`, `deskripsi_produk`, `stok`, `harga`) VALUES
+(1, 1, 'kripik', '3 Ice Cream Cups Mockup.png', 'enak', 50, 15000),
+(2, 2, 'es teh', 'Bucin Taehyung.jpg', 'teh manis', 10, 2000);
 
 -- --------------------------------------------------------
 
@@ -166,19 +177,18 @@ INSERT INTO `produk_detail` (`id_produk_detail`, `id_produk`, `stok`, `harga`) V
 CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
   `user_name` varchar(100) NOT NULL,
-  `user_email` varchar(50) NOT NULL,
-  `user_password` varchar(50) NOT NULL,
-  `user_level` enum('admin','user') NOT NULL
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `user_level` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`id_user`, `user_name`, `user_email`, `user_password`, `user_level`) VALUES
-(1, 'admin', ' admin1@gmail.com', ' admin1@gmail.com', 'admin'),
-(2, 'user1', 'user1@user.com', 'user1', 'user'),
-(3, 'user2', 'user2@user.com', 'user2', 'user');
+INSERT INTO `user` (`id_user`, `user_name`, `email`, `password`, `user_level`) VALUES
+(1, 'superadmin', 'superadmin@gmail.com', '$2y$10$9tkTDAkqyxpqYF7sG9jvS.rAmHPJbu.4FxQaCtoTBuF/K9/ie9oru', 1),
+(2, 'admin1', 'admin1@gmail.com', '$2y$10$9tkTDAkqyxpqYF7sG9jvS.rAmHPJbu.4FxQaCtoTBuF/K9/ie9oru', 2);
 
 --
 -- Indexes for dumped tables
@@ -188,13 +198,21 @@ INSERT INTO `user` (`id_user`, `user_name`, `user_email`, `user_password`, `user
 -- Indeks untuk tabel `cart`
 --
 ALTER TABLE `cart`
-  ADD PRIMARY KEY (`id_cart`);
+  ADD PRIMARY KEY (`id_cart`),
+  ADD KEY `id_produk` (`id_produk`);
+
+--
+-- Indeks untuk tabel `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`id_customer`);
 
 --
 -- Indeks untuk tabel `customer_detail`
 --
 ALTER TABLE `customer_detail`
-  ADD PRIMARY KEY (`id_customer`);
+  ADD PRIMARY KEY (`id_customer_detail`),
+  ADD KEY `id_customer` (`id_customer`);
 
 --
 -- Indeks untuk tabel `kategori`
@@ -212,19 +230,17 @@ ALTER TABLE `pesanan`
 -- Indeks untuk tabel `pesanan_detail`
 --
 ALTER TABLE `pesanan_detail`
-  ADD PRIMARY KEY (`id_pesanan_detail`);
+  ADD PRIMARY KEY (`id_pesanan_detail`),
+  ADD KEY `id_pesanan` (`id_pesanan`),
+  ADD KEY `id_produk` (`id_produk`),
+  ADD KEY `id_customer` (`id_customer`);
 
 --
 -- Indeks untuk tabel `produk`
 --
 ALTER TABLE `produk`
-  ADD PRIMARY KEY (`id_produk`);
-
---
--- Indeks untuk tabel `produk_detail`
---
-ALTER TABLE `produk_detail`
-  ADD PRIMARY KEY (`id_produk_detail`);
+  ADD PRIMARY KEY (`id_produk`),
+  ADD KEY `id_kategori` (`id_kategori`);
 
 --
 -- Indeks untuk tabel `user`
@@ -237,28 +253,82 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT untuk tabel `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id_cart` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `id_customer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `customer_detail`
+--
+ALTER TABLE `customer_detail`
+  MODIFY `id_customer_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `kategori`
+--
+ALTER TABLE `kategori`
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT untuk tabel `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `pesanan_detail`
 --
 ALTER TABLE `pesanan_detail`
-  MODIFY `id_pesanan_detail` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pesanan_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `customer_detail`
+--
+ALTER TABLE `customer_detail`
+  ADD CONSTRAINT `customer_detail_ibfk_1` FOREIGN KEY (`id_customer`) REFERENCES `customer` (`id_customer`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `pesanan_detail`
+--
+ALTER TABLE `pesanan_detail`
+  ADD CONSTRAINT `pesanan_detail_ibfk_1` FOREIGN KEY (`id_pesanan`) REFERENCES `pesanan` (`id_pesanan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pesanan_detail_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pesanan_detail_ibfk_3` FOREIGN KEY (`id_customer`) REFERENCES `customer` (`id_customer`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `produk`
+--
+ALTER TABLE `produk`
+  ADD CONSTRAINT `produk_ibfk_1` FOREIGN KEY (`id_kategori`) REFERENCES `kategori` (`id_kategori`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
