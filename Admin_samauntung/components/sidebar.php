@@ -39,6 +39,12 @@
           <span>Wallet</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="laporan.php">
+        <i class="fas fa-wallet"></i>
+          <span>Laporan</span>
+        </a>
+      </li>
       <hr class="sidebar-divider">
       
        <li class="nav-item">
