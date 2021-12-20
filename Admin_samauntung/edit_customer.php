@@ -117,9 +117,10 @@ if (isset($_POST['simpan-produk'])) {
                     </div>
                   </div>
                   
-                  <div style="display:flex;justify-content:right;margin-top:25px">
-                    <button type="reset" class="btn btn-outline-dark" style="margin-right: 25px;">Batal</button>
-                    <button type="submit"  name="simpan-produk" class="btn btn-primary">Simpan</button>
+                  <div class="d-flex flex-row-reverse mb-5">
+                      <button id="simpan-produk" name="simpan-produk" type="submit" class="btn btn-primary ml-3">Simpan</button>
+                      <button type="reset" class="btn btn-secondary ml-3">Reset</button>
+                      <a id="batal-produk" class="btn btn-outline-secondary" href="customer.php">Batal</a>
                   </div>
                 </form>
               </div>
