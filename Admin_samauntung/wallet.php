@@ -54,26 +54,30 @@ $a = query(" SELECT * FROM pesanan ");
         </div>
         <!---Container Fluid-->
         <div class="container-fluid">
-          <div class="col-lg-6">
-            <div class="card mb-4">
-              <div class="card-body">
-                <div class="table-resposive">
-                  <thead>
-                  <h6 class="m-0 font-weight-bold text-primary">Total Balanced</h6>
-                  <br>
-                </thead>  
-                <tbody>
-                  <h1>
-                    Rp. 60.000,00
-                  </h1>
-                </tbody>
+
+        <?php
+          $monthlyTrans = query("SELECT total FROM pesanan WHERE MONTH(tanggal_pesanan) = MONTH(CURRENT_TIMESTAMP) AND status = 'selesai'");
+          $monthlySum = 0;
+          for ($i = 0; $i < count($monthlyTrans); $i++) {
+            $monthlySum = $monthlySum + $monthlyTrans[$i]['total'];
+          }
+          ?>
+        <div class="col-xl-4 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Pendapatan</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">Rp <?= number_format($monthlySum, 0, "", ","); ?></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-calendar fa-4x text-gray-300"></i>
+                    </div>
+                  </div>
                 </div>
-                
               </div>
-              
             </div>
-          </div>
-          
+
           <div class="row">
             <!-- Datatables -->
             <div class="col-lg-12">
