@@ -70,7 +70,6 @@ $query = mysqli_query($konek, "SELECT produk.gambar_produk,produk.id_produk, pro
                     <th>KATEGORI</th>
                     <th>HARGA</th>
                     <th>STATUS</th>
-                    <th>EDIT</th>
                     <th>TINDAKAN</th>
                   </tr>
                 </thead>
@@ -83,24 +82,12 @@ $query = mysqli_query($konek, "SELECT produk.gambar_produk,produk.id_produk, pro
                       <td>Rp<?=$data["harga"]?></td>
                       <td style="color:green">Stok : <?=$data["stok"]?></td>
                       <td>
-                        <a href="edit_produk.php?id=<?=$data["id_produk"]?>" class="btn btn-primary">
-                          Edit
-                        </a>
-                      </td>
-                      <td class="text-center">
-                        <div class="dropdown">
-                          <button class="btn btn-warning" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v"></i>
-                          </button>
-                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                            <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#shareModal" data-whatever="<?=$data['id_produk']?>">
-                              <i class="fas fa-share"></i> Bagikan
-                            </button>
-                            <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#deleteModal" data-whatever="<?=$data['id_produk']?>">
-                              <i class="fas fa-trash" ></i> Hapus
-                            </button>
-                          </div>
-                        </div>      
+                        <a href="edit_produk.php?id=<?=$data["id_produk"]?>" type="button" class="btn btn-primary text-white" data-tooltip="tooltip" data-placement="buttom" >
+                        <i class="fas fa-solid fa-pen"></i>
+                      </a>
+                      <a href="hapusadmin.php?id=<?= $p['id_user']; ?>" type="button" class="btn btn-danger text-white" data-tooltip="tooltip" data-placement="buttom" >
+                        <i class="fas fa-solid fa-trash"></i>
+                      </a>
                       </td>
                     </tr>
                   <?php } ?>

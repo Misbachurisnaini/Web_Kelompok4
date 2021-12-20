@@ -128,10 +128,8 @@ function editcustomer($query)
     global $conn;
 
     htmlspecialchars($nama = $query['nama']);
-    // htmlspecialchars($username = $query['username']);
     htmlspecialchars($email = $query['email_cs']);
     htmlspecialchars($alamat = $query['alamat']);
-    // htmlspecialchars($date = $query['date_register']);
     htmlspecialchars($id_cs = $query['id_customer']);
     htmlspecialchars($imageOld = $query['image-old']);
     htmlspecialchars($orders = $query['orders']);
@@ -149,18 +147,36 @@ function editcustomer($query)
         }
     }
 
-    // $update = "UPDATE customer SET nama = '$nama', 
-    // email_cs = '$email', alamat = '$alamat', image = '$img' 
-    // WHERE id_customer = $id_cs";
+    $update = "UPDATE customer, customer_detail SET customer.nama = '$nama', customer.email_cs = '$email', customer.alamat = '$alamat', customer.foto = '$img', customer_detail.orders = '$orders', customer_detail.total_spend = '$total' WHERE customer.id_customer = '$id_cs'";
 
-    //$update2 = "UPDATE customer_detail SET orders = '$orders', total_spend = '$total' WHERE id_customer_detail = '$id_dcs'";
+    mysqli_query($conn, $update);
 
-    // $update = "UPDATE customer c JOIN customer_detail d 
-    // ON c.id_customer = '$id_cs' = d.id_customer 
-    // SET c.nama = '$nama', c.email_cs = '$email', c.alamat = '$alamat' = d.orders = '$orders', d.total_spend = '$total'
-    // ";
-//     $update = mysql_query("UPDATE `product`,`categories`SET `product`.`category_name` = '" . $catname . "',`categories`.`category_name` = '" . $catname . "'WHERE `items`.`id` = '" . $catname . "'
-// ");
+    return mysqli_affected_rows($conn);
+}
+
+function editorders($query)
+{
+    global $conn;
+
+    htmlspecialchars($nama = $query['nama']);
+    htmlspecialchars($email = $query['email_cs']);
+    htmlspecialchars($alamat = $query['alamat']);
+    htmlspecialchars($id_cs = $query['id_customer']);
+    htmlspecialchars($imageOld = $query['image-old']);
+    htmlspecialchars($orders = $query['orders']);
+    htmlspecialchars($total = $query['total_spend']);
+    htmlspecialchars($id_dcs = $query['id_customer_detail']);
+
+    // apakah user upload foto baru
+    if ($_FILES['image']['error'] === 4) {
+        $img = $imageOld;
+    } else {
+        $img = uploadGambar();
+        unlink("img/posting/$imageOld");
+        if (!$img) {
+            return false;
+        }
+    }
 
     $update = "UPDATE customer, customer_detail SET customer.nama = '$nama', customer.email_cs = '$email', customer.alamat = '$alamat', customer.foto = '$img', customer_detail.orders = '$orders', customer_detail.total_spend = '$total' WHERE customer.id_customer = '$id_cs'";
 
@@ -168,6 +184,7 @@ function editcustomer($query)
 
     return mysqli_affected_rows($conn);
 }
+
 
 function uploadGambar()
 {

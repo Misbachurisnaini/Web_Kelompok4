@@ -1,4 +1,47 @@
+<?php
+session_start();
 
+if (!isset($_SESSION["admin"])) {
+    header("Location: login.php");
+    exit;
+}
+
+
+
+require "config/function.php";
+
+if (!(isset($_GET['id']))) {
+    header("Location:orders.php");
+    exit;
+}
+
+$id = $_GET['id'];
+
+
+$data = query("SELECT * FROM pesanan_detail 
+INNER JOIN produk ON pesanan_detail.id_produk = produk.id_produk
+INNER JOIN pesanan ON pesanan_detail.id_pesanan = pesanan.id_pesanan
+INNER JOIN customer ON pesanan_detail.id_customer = customer.id_customer
+")[0];
+
+if (isset($_POST['simpan-produk'])) {
+    if (editorders($_POST) > 0) {
+        echo "
+        <script>
+            alert('Data berhasil diedit!');
+            location = 'orders.php';
+        </script>";
+    } else {
+        echo mysqli_error($conn);
+        echo "
+        <script>
+            alert('Data gagal diedit!');
+            // location = 'orders.php';
+        </script>";
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,12 +80,12 @@
               <li class="breadcrumb-item active" aria-current="page">Edit Orders</li>
             </ol>
           </div>
-
+ 
           <div class="row">
             <div class="col-md-12">
              <div class="card mb-4">
               <div class="card-body">
-                <form action="edit_order.php?id=<?=$_GET['id']?>" method="post"  enctype="multipart/form-data">
+                <form action="" method="post"  enctype="multipart/form-data">
                   <div class="form-group required">
                     <label for="produk" class="control-label">Id Produk</label>
                     <input type="text" class="form-control" id="produk" name="produk" required value="<?=$data["id_produk"]?>">

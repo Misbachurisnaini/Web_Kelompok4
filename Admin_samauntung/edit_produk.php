@@ -135,10 +135,12 @@ $data=mysqli_fetch_array($query);
                     <label for="deskripsi" class="control-label">Deskripsi Produk (Opsional)</label>
                     <textarea class="form-control" id="deskripsi" rows="3" name="deskripsi" placeholder="Ex :  Weight  : 90 g"><?=$data["deskripsi_produk"]?></textarea>
                   </div>
-                  <div style="display:flex;justify-content:right;margin-top:25px">
-                    <button type="reset" class="btn btn-outline-dark" style="margin-right: 25px;">Batal</button>
-                    <button type="submit" class="btn btn-success">Simpan</button>
+                  <div class="d-flex flex-row-reverse mb-5">
+                  <button type="submit" class="btn btn-success ml-3">Simpan</button>
+                      <button type="reset" class="btn btn-secondary ml-3">Reset</button>
+                      <a id="batal-produk" class="btn btn-outline-secondary" href="customer.php">Batal</a>
                   </div>
+                  
                 </form>
               </div>
             </div>

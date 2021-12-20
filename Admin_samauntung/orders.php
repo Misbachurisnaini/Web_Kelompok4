@@ -26,7 +26,6 @@ if(!isset($_SESSION["admin"])){
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-  <!-- <link rel="stylesheet" href="css/bootstrap.css" type="text/css">  -->
 </head>
 
 <body id="page-top">

@@ -46,7 +46,6 @@ if(!isset($_SESSION["admin"])){
             <h1 class="h3 mb-0 text-gray-800">Dropshiper</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./">Home</a></li>
-              <!-- <li class="breadcrumb-item">Customer</li> -->
               <li class="breadcrumb-item active" aria-current="page">Dropshiper</li>
             </ol>
           </div>
@@ -118,44 +117,6 @@ if(!isset($_SESSION["admin"])){
   <i class="fas fa-angle-up"></i>
 </a>
 
-<!-- <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog  modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel"><i class="fas fa-exclamation-triangle"></i> Hapus Produk Ini</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Yakin ingin menghapus item ini?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">BATAL</button>
-        <a type="button" class="btn btn-danger">HAPUS</a>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel" aria-hidden="true">
-  <div class="modal-dialog  modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="shareModalLabel">Bagikan Produk Ini</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div style="display: flex;justify-content:center">
-          <img src="foto/fb.png" style="margin-right: 25px;margin-left:25px">
-          <img src="foto/wa.png" style="margin-right: 25px;margin-left:25px">
-          <img src="foto/cp.png" style="margin-right: 25px;margin-left:25px">
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
 
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
