@@ -60,10 +60,8 @@ if(!isset($_SESSION["admin"])){
                 <thead class="thead-light">
                   <tr>
                     <th> </th>
-                    <th>NAMA</th>
                     <th>USERNAME</th>
                     <th>EMAIL</th>
-                    <th>ALAMAT</th>
                     <th>DATE REGISTER</th>
                     <th>TINDAKAN</th>
                   </tr>
@@ -78,32 +76,15 @@ if(!isset($_SESSION["admin"])){
                       ?>
                     <tr>
                       <td><img src="img/posting/<?=$data['foto']?>" width="50px" height="50px"></td>
-                      <td><?=$data["nama"]?></td>
                       <td><?=$data["username"]?></td>
                       <td><?=$data["email_cs"]?></td>
-                      <td><?=$data["alamat"]?></td>
                       <td><?=$data["date_register"]?></td>
                         <td>
                           <a href="edit_customer.php?id=<?= $data['id_customer']; ?>" class="btn btn-primary"><i class="material-icons"></i>Edit</a>
-                          <a href="detail_customer.php" class="btn btn-warning" id=set_dtl" data-toggle="modal" data-target="#order-detail"><i class="fas fa-eye"></i></a>
-                          <a href="hapuscustomer.php?id=<?= $data['id_customer']; ?>" type="button" class="btn btn-danger text-white" data-tooltip="tooltip" data-placement="buttom" >
+                          <a href="detail_customer.php" class="btn btn-warning" id=set_dtl" data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-eye"></i></a>
+                          <a href="hapusadmin.php?id=<?= $p['id_customer']; ?>" type="button" class="btn btn-danger text-white" data-tooltip="tooltip" data-placement="buttom" >
                             <i class="fas fa-solid fa-trash"></i>
                         </td>
-                      <!-- <td class="text-center">
-                        <div class="dropdown">
-                          <button class="btn btn-warning" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v"></i>
-                          </button>
-                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                            <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#shareModal" data-whatever="<?=$data['id_produk']?>">
-                              <i class="fas fa-share"></i> Bagikan
-                            </button>
-                            <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#deleteModal" data-whatever="<?=$data['id_produk']?>">
-                              <i class="fas fa-trash" ></i> Hapus
-                            </button>
-                          </div>
-                        </div>      
-                      </td> -->
                     </tr>
                   <?php } ?>
                 </tbody>
@@ -114,8 +95,8 @@ if(!isset($_SESSION["admin"])){
       </div>
     </div>
 
-    <div class="modal fade" id="order-detail" class="modal" tabindex="-1" role="dialog">
-          <div class="modal-dialog" role="document">
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
             <div class="modal-content">
             </div> 
           </div> 
