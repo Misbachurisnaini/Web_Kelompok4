@@ -53,23 +53,20 @@ if (!isset($_SESSION["admin"])){
           <div class="row">
             <div class="col-xl-12 mb-2">
               <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-dark">Status Pesanan</h6>
-                </div>
                 <div class="card-body">
                   <div class="row justify-content-center">
 
-                  <?php
-                  $monthlyTrans = query("SELECT total FROM pesanan WHERE MONTH(tanggal_pesanan) = MONTH(CURRENT_TIMESTAMP) AND status = 'selesai'");
-                  $monthlySum = 0;
-                  for ($i = 0; $i < count($monthlyTrans); $i++) {
-                    $monthlySum = $monthlySum + $monthlyTrans[$i]['total'];
-                  }
-                  ?>
+                    <?php
+                    $monthlyTrans = query("SELECT subtotal FROM pesanan_detail INNER JOIN pesanan WHERE MONTH(tanggal_pesanan) = MONTH(CURRENT_TIMESTAMP) AND status = 'selesai'");
+                    $monthlySum = 0;
+                    for ($i = 0; $i < count($monthlyTrans); $i++) {
+                      $monthlySum = $monthlySum + $monthlyTrans[$i]['subtotal'];
+                    }
+                    ?>
                     <!-- Pendapatan Bulan ini -->
                     <div class="col-xl-3 col-md-6 mb-4">
                       <div class="card border-left-warning shadow-sm h-100 py-2">
-                        <a class="text-decoration-none" href="pesanan.php?status=dikonfirmasi">
+                        <a class="text-decoration-none" href="wallet.php">
                           <div class="card-body">
                             <div class="row no-gutters align-items-center">
                               <div class="col mr-2">
@@ -89,7 +86,7 @@ if (!isset($_SESSION["admin"])){
                     <!-- Total Transaksi -->
                     <div class="col-xl-3 col-md-6 mb-4">
                       <div class="card border-left-danger shadow-sm h-100 py-2">
-                        <a class="text-decoration-none" href="pesanan.php?status=tertunda">
+                        <a class="text-decoration-none" href="orders.php">
                           <div class="card-body">
                             <div class="row no-gutters align-items-center">
                               <div class="col mr-2">
@@ -105,15 +102,16 @@ if (!isset($_SESSION["admin"])){
                       </div>
                     </div>
 
-                    
+                    <?php $customer = count(query("SELECT id_customer FROM customer")); ?>
+                    <!-- Dropshiper -->
                     <div class="col-xl-3 col-md-6 mb-4">
                       <div class="card border-left-warning shadow-sm h-100 py-2">
-                        <a class="text-decoration-none" href="pesanan.php?status=menunggu">
+                        <a class="text-decoration-none" href="customer.php">
                           <div class="card-body">
                             <div class="row no-gutters align-items-center">
                               <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pesanan Menunggu</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Dropshiper</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $customer; ?></div>
                               </div>
                               <div class="col-auto">
                                 <i class="fas fa-clipboard fa-4x text-gray-300"></i>
@@ -124,16 +122,22 @@ if (!isset($_SESSION["admin"])){
                       </div>
                     </div>
 
-                    
-                    <!-- Pesanan Diproses -->
+                    <?php
+                    $monthlyTrans = query("SELECT stok FROM produk");
+                    $monthlySum = 0;
+                    for ($i = 0; $i < count($monthlyTrans); $i++) {
+                      $monthlySum = $monthlySum + $monthlyTrans[$i]['stok'];
+                    }
+                    ?>
+                    <!-- Katalog Produk -->
                     <div class="col-xl-3 col-md-6 mb-4">
                       <div class="card border-left-info shadow-sm h-100 py-2">
-                        <a class="text-decoration-none" href="pesanan.php?status=diproses">
+                        <a class="text-decoration-none" href="produk.php">
                           <div class="card-body">
                             <div class="row no-gutters align-items-center">
                               <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Pesanan Diproses</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Produk</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= number_format($monthlySum, 0, "", ","); ?></div>
                               </div>
                               <div class="col-auto">
                                 <i class="fas fa-cogs fa-4x text-gray-300"></i>
@@ -150,6 +154,21 @@ if (!isset($_SESSION["admin"])){
           </div>
           <!-- </div> -->
 
+          <div class="row">
+          <div class="col-lg-12">
+              <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
+                </div>
+                <div class="card-body">
+                  <div class="chart-area">
+                    <canvas id="myBarChart"></canvas>
+                  </div>
+                  <hr>
+                </div>
+              </div>
+            </div>
+          </div>
           <!-- Modal Logout -->
           <?php require "components/logout.php"?>
         </div>
@@ -169,6 +188,102 @@ if (!isset($_SESSION["admin"])){
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="js/ruang-admin.min.js"></script>
+  <script src="vendor/chart.js/Chart.min.js"></script>
+  <!-- Page level custom scripts -->
+  <script src="js/demo/chart-bar-demo.js"></script>
+  <script>
+    // Bar Chart Example / diagram batang
+    var ctx = document.getElementById("myBarChart");
+    var myBarChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [{
+          label: "Pendapatan",
+          backgroundColor: "#4e73df",
+          hoverBackgroundColor: "#2e59d9",
+          borderColor: "#4e73df",
+          data: [
+            <?php
+            for ($j = 1; $j <= 12; $j++) {
+              $trans = query("SELECT subtotal FROM pesanan_detail INNER JOIN pesanan WHERE MONTH(tanggal_pesanan) = $j AND status = 'selesai'");
+              $sum = 0;
+              for ($i = 0; $i < count($trans); $i++) {
+                $sum = $sum + $trans[$i]['subtotal'];
+              }
+              echo ($j == 12 ? $sum :  $sum . ",");
+            }
+            ?>
+          ],
+        }],
+      },
+      options: {
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            left: 10,
+            right: 25,
+            top: 25,
+            bottom: 0
+          }
+        },
+        scales: {
+          xAxes: [{
+            time: {
+              unit: 'month'
+            },
+            gridLines: {
+              display: false,
+              drawBorder: false
+            },
+            ticks: {
+              maxTicksLimit: 12
+            },
+            maxBarThickness: 25,
+          }],
+          yAxes: [{
+            ticks: {
+              maxTicksLimit: 10,
+              padding: 10,
+              // Include a dollar sign in the ticks
+              callback: function(value, index, values) {
+                return 'Rp ' + number_format(value);
+              }
+            },
+            gridLines: {
+              color: "rgb(234, 236, 244)",
+              zeroLineColor: "rgb(234, 236, 244)",
+              drawBorder: false,
+              borderDash: [2],
+              zeroLineBorderDash: [2]
+            }
+          }],
+        },
+        legend: {
+          display: false
+        },
+        tooltips: {
+          titleMarginBottom: 10,
+          titleFontColor: '#6e707e',
+          titleFontSize: 14,
+          backgroundColor: "rgb(255,255,255)",
+          bodyFontColor: "#858796",
+          borderColor: '#dddfeb',
+          borderWidth: 1,
+          xPadding: 15,
+          yPadding: 15,
+          displayColors: false,
+          caretPadding: 10,
+          callbacks: {
+            label: function(tooltipItem, chart) {
+              var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+              return datasetLabel + ': Rp ' + number_format(tooltipItem.yLabel);
+            }
+          }
+        },
+      }
+    });
+  </script>
   
 </body>
 

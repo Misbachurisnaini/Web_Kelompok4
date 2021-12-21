@@ -1,27 +1,6 @@
 <?php
 require 'config/function.php';
 
-// submit
-// if(isset($_POST['submit'])) {
-//     if ($_POST['password'] == $_POST['password2']){
-//         if(tambahadmin($_POST) > 0){
-//             echo "
-//             <script>
-//                     alert('Success to register!');
-//                     location = 'index.php';
-//                 </script>
-//                     ";
-//         } else {
-//             echo mysqli_error($conn);
-//         }
-//     } else {
-//         echo "
-//             <script>
-//             alert('password konfirmasi tidak sama!');
-//             </script>";
-//     }
-// }
-
 session_start();
 
 if (!isset($_SESSION["admin"])) {
@@ -67,13 +46,6 @@ if (!isset($_SESSION["admin"])) {
               <li class="breadcrumb-item active" aria-current="page">Your Profil</li>
             </ol>
           </div>
-
-          <!-- <div class="card-header">
-            <h5><strong>Your profil</strong></h5>
-          </div>
-          <div class="responsive-image">
-            <img src="img/logo/logo.png">
-          </div> -->
           <div class="card-body">
             <form action="" method="POST">
               <div class="mb-2 px-4">
@@ -108,41 +80,12 @@ if (!isset($_SESSION["admin"])) {
           </div>
 
           <!-- Modal Logout -->
-          <!-- <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                  <a href="login.html" class="btn btn-primary">Logout</a>
-                </div>
-              </div>
-            </div>
-          </div> -->
           <?php require "components/logout.php"?>
 
         </div>
         <!---Container Fluid-->
       </div>
       <!-- Footer -->
-      <!-- <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>copyright &copy; <script> document.write(new Date().getFullYear()); </script> - developed by
-              <b><a href="https://indrijunanda.gitlab.io/" target="_blank">indrijunanda</a></b>
-            </span>
-          </div>
-        </div>
-      </footer> -->
       <?php require "components/footer.php"?>
       <!-- Footer -->
     </div>

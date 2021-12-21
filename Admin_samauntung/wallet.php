@@ -25,6 +25,7 @@ $a = query(" SELECT * FROM pesanan ");
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
+  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -56,10 +57,10 @@ $a = query(" SELECT * FROM pesanan ");
         <div class="container-fluid">
 
         <?php
-          $monthlyTrans = query("SELECT total FROM pesanan WHERE MONTH(tanggal_pesanan) = MONTH(CURRENT_TIMESTAMP) AND status = 'selesai'");
+          $monthlyTrans = query("SELECT subtotal FROM pesanan_detail INNER JOIN pesanan WHERE MONTH(tanggal_pesanan) = MONTH(CURRENT_TIMESTAMP) AND status = 'selesai'");
           $monthlySum = 0;
           for ($i = 0; $i < count($monthlyTrans); $i++) {
-            $monthlySum = $monthlySum + $monthlyTrans[$i]['total'];
+            $monthlySum = $monthlySum + $monthlyTrans[$i]['subtotal'];
           }
           ?>
         <div class="col-xl-4 mb-4">
@@ -77,7 +78,7 @@ $a = query(" SELECT * FROM pesanan ");
                 </div>
               </div>
             </div>
-
+            
           <div class="row">
             <!-- Datatables -->
             <div class="col-lg-12">
@@ -92,9 +93,9 @@ $a = query(" SELECT * FROM pesanan ");
                         <th>No</th>
                         <th>Username</th>
                         <th>Email</th>
-                        <th>Date</th>
+                        <th>Tgl. Transaksi</th>
                         <th>Price</th>
-                        <th></th>
+                        <th>Bukti Pembayaran</th>
                       </tr>
                     </thead>
                     <tfoot>
@@ -102,9 +103,9 @@ $a = query(" SELECT * FROM pesanan ");
                         <th>No</th>
                         <th>Username</th>
                         <th>Email</th>
-                        <th>Date</th>
+                        <th>Tgl. Transaksi</th>
                         <th>Price</th>
-                        <th></th>
+                        <th>Bukti Pembayaran</th>
                       </tr>
                     </tfoot>
                     <tbody>
@@ -124,10 +125,8 @@ $a = query(" SELECT * FROM pesanan ");
                         <td><?= $data['username']; ?></td>
                         <td><?= $data['email_cs']; ?></td>
                         <td><?=date('M d, Y', strtotime($data["tanggal_pesanan"]))?></td>
-                        <td><?= $data['total']; ?></td>
-                        <td>
-                          <a href="detail_wallet.php?id=<?=$data["id_pesanan"]?>" type="button" class="btn btn-primary text-white" data-tooltip="tooltip" data-placement="buttom" data-toggle="modal" data-target="#order-detail" >
-                          <i class="fas fa-eye"></i></a>
+                        <td>Rp. <?= $data['subtotal']; ?></td>
+                        <td><a href="detail_wallet.php?id=<?=$data["id_pesanan"]?>" class="btn btn-warning" id=set_dtl" data-toggle="modal" data-target="#wallet-detail"><i class="fas fa-eye"></i></a>
                         </td>
                       </tr>
                       <?php } ?>
@@ -139,7 +138,7 @@ $a = query(" SELECT * FROM pesanan ");
           </div>
         </div>
 
-        <div class="modal fade" id="order-detail" class="modal" tabindex="-1" role="dialog">
+        <div class="modal fade" id="wallet-detail" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
             </div> 
@@ -167,6 +166,17 @@ $a = query(" SELECT * FROM pesanan ");
 	<!-- js untuk bootstrap -->
 	<script src="js/bootstrap.js"></script>
 <!-- Page level custom scripts -->
+  <!-- Page level plugins -->
+  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script>
+    $(document).ready(function () {
+      $('#dataTable').DataTable(); // ID From dataTable 
+      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+    });
+  </script>
 
 </body>
 
