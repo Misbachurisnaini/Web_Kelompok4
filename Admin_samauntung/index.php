@@ -49,49 +49,106 @@ if (!isset($_SESSION["admin"])){
             <?php } ?>
           </div>
 
-          <?php
-          $monthlyTrans = query("SELECT total FROM pesanan WHERE MONTH(tanggal_pesanan) = MONTH(CURRENT_TIMESTAMP) AND status = 'selesai'");
-          $monthlySum = 0;
-          for ($i = 0; $i < count($monthlyTrans); $i++) {
-            $monthlySum = $monthlySum + $monthlyTrans[$i]['total'];
-          }
-          ?>
-          <div class="row justify-content-center">
-            <!-- Total Pendapatan Bulan ini -->
-            <div class="col-xl-4 mb-4">
-              <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Toal Pendapatan (Bulan ini)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">Rp <?= number_format($monthlySum, 0, "", ","); ?></div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-calendar fa-4x text-gray-300"></i>
-                    </div>
-                  </div>
+                    <!-- card row 1 -->
+          <div class="row">
+            <div class="col-xl-12 mb-2">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-dark">Status Pesanan</h6>
                 </div>
-              </div>
-            </div>
-
-            <?php $pesanan = count(query("SELECT id_pesanan FROM pesanan WHERE MONTH(tanggal_pesanan) = MONTH(CURRENT_TIMESTAMP) AND status = 'selesai'")); ?>
-            <!-- Total Transaksi Bulan ini -->
-            <div class="col-xl-4 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Transaksi (Bulan ini)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $pesanan; ?></div>
+                  <div class="row justify-content-center">
+
+                  <?php
+                  $monthlyTrans = query("SELECT total FROM pesanan WHERE MONTH(tanggal_pesanan) = MONTH(CURRENT_TIMESTAMP) AND status = 'selesai'");
+                  $monthlySum = 0;
+                  for ($i = 0; $i < count($monthlyTrans); $i++) {
+                    $monthlySum = $monthlySum + $monthlyTrans[$i]['total'];
+                  }
+                  ?>
+                    <!-- Pendapatan Bulan ini -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                      <div class="card border-left-warning shadow-sm h-100 py-2">
+                        <a class="text-decoration-none" href="pesanan.php?status=dikonfirmasi">
+                          <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                              <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pendapatan Bulan Ini</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp <?= number_format($monthlySum, 0, "", ","); ?></div>
+                              </div>
+                              <div class="col-auto">
+                                <i class="fas fa-calendar fa-4x text-gray-300"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
                     </div>
-                    <div class="col-auto">
-                      <i class="fas fa-handshake fa-4x text-gray-300"></i>
+
+                    <?php $pesanan = count(query("SELECT id_pesanan FROM pesanan WHERE MONTH(tanggal_pesanan) = MONTH(CURRENT_TIMESTAMP) AND status = 'selesai'")); ?>
+                    <!-- Total Transaksi -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                      <div class="card border-left-danger shadow-sm h-100 py-2">
+                        <a class="text-decoration-none" href="pesanan.php?status=tertunda">
+                          <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                              <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Total Transaksi</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $pesanan; ?></div>
+                              </div>
+                              <div class="col-auto">
+                                <i class="fas fa-handshake fa-4x text-gray-300"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+
+                    
+                    <div class="col-xl-3 col-md-6 mb-4">
+                      <div class="card border-left-warning shadow-sm h-100 py-2">
+                        <a class="text-decoration-none" href="pesanan.php?status=menunggu">
+                          <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                              <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pesanan Menunggu</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                              </div>
+                              <div class="col-auto">
+                                <i class="fas fa-clipboard fa-4x text-gray-300"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+
+                    
+                    <!-- Pesanan Diproses -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                      <div class="card border-left-info shadow-sm h-100 py-2">
+                        <a class="text-decoration-none" href="pesanan.php?status=diproses">
+                          <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                              <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Pesanan Diproses</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                              </div>
+                              <div class="col-auto">
+                                <i class="fas fa-cogs fa-4x text-gray-300"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <!-- </div> -->
 
           <!-- Modal Logout -->
           <?php require "components/logout.php"?>
