@@ -46,37 +46,29 @@ if (!isset($_SESSION["admin"])) {
               <li class="breadcrumb-item active" aria-current="page">Your Profil</li>
             </ol>
           </div>
-          <div class="card-body">
-            <form action="" method="POST">
-              <div class="mb-2 px-4">
-                <label for="" class="col-sm-2 col-form-label">Email</label>
-                <input oninvalid="this.setCustomValidity('format email tidak valid')" type="email" oninput="setCustomValidity('')" maxlength="50" class="form-control" name="email" id="email" placeholder="insert your active email" required>
+          <div class="card">
+            <div class="card-body shadow-sm">
+              <div class="row justify-content-center">
+
+                <div class="col-md-7 pt-2">
+                  <div class="form-group">
+                    <div class="d-flex justify-content-between">
+                      <label for="name">Email</label>
+                      <a href="ubah_email.php" class="text-success small font-weight-bold">Ubah Email</a>
+                    </div>
+                    <p class="form-control bg-light"><?= $_SESSION['email-admin']; ?></p>
+                  </div>
+                  <div class="form-group">
+                    <div class="d-flex justify-content-between">
+                      <label for="jenkel">Password</label>
+                      <a href="ubah_password.php" class="text-success font-weight-bold small">Ubah Password</a>
+                    </div>
+                    <p class="form-control bg-light">*******</p>
+                  </div>
+                </div>
+
               </div>
-              <div class="mb-2 px-4">
-                <label for="" class="col-sm-2 col-form-label">Email</label>
-                <input oninvalid="this.setCustomValidity('format email tidak valid')" type="email" oninput="setCustomValidity('')" maxlength="50" class="form-control" name="email" id="email" placeholder="insert your active email" required>
-              </div>
-              <div class="mb-2 px-4">
-                <label for="" class="col-sm-2 col-form-label">Email</label>
-                <input oninvalid="this.setCustomValidity('format email tidak valid')" type="email" oninput="setCustomValidity('')" maxlength="50" class="form-control" name="email" id="email" placeholder="insert your active email" required>
-              </div>
-              <div class="mb-2 px-4">
-                <label for="" class="col-sm-2 col-form-label">Email</label>
-                <input oninvalid="this.setCustomValidity('format email tidak valid')" type="email" oninput="setCustomValidity('')" maxlength="50" class="form-control" name="email" id="email" placeholder="insert your active email" required>
-              </div>
-              <div class="mb-2 px-4">
-                <label for="" class="col-sm-2 col-form-label">Password</label>
-                <input oninvalid="this.setCustomValidity('format password terlalu pendek')" oninput="setCustomValidity('')" minlength="8" type="password" class="form-control" name="password" id="password" placeholder="insert your password" required>
-              </div>
-              <div class="mb-3 px-4">
-                <label for="" class="col-sm-2 col-form-label">Confirm Password</label>
-                <input oninvalid="this.setCustomValidity('format password terlalu pendek')" oninput="setCustomValidity('')" minlength="8" type="password" class="form-control" name="password2" id="password2" placeholder="confirm your password" required>
-              </div>
-              <div class="mb-2 px-4">
-                <button type="submit" name="submit" class="btn btn-primary">Add Admin</button>
-                <button type="clear" class="btn btn-outline-danger">Clear Form</button>
-              </div>
-            </form>
+            </div>
           </div>
 
           <!-- Modal Logout -->

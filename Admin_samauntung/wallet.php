@@ -57,10 +57,10 @@ $a = query(" SELECT * FROM pesanan ");
         <div class="container-fluid">
 
         <?php
-          $monthlyTrans = query("SELECT subtotal FROM pesanan_detail INNER JOIN pesanan WHERE MONTH(tanggal_pesanan) = MONTH(CURRENT_TIMESTAMP) AND status = 'selesai'");
+          $monthlyTrans = query("SELECT total FROM pesanan WHERE status = 'selesai'");
           $monthlySum = 0;
           for ($i = 0; $i < count($monthlyTrans); $i++) {
-            $monthlySum = $monthlySum + $monthlyTrans[$i]['subtotal'];
+            $monthlySum = $monthlySum + $monthlyTrans[$i]['total'];
           }
           ?>
         <div class="col-xl-4 mb-4">
@@ -98,16 +98,6 @@ $a = query(" SELECT * FROM pesanan ");
                         <th>Bukti Pembayaran</th>
                       </tr>
                     </thead>
-                    <tfoot>
-                      <tr>
-                        <th>No</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Tgl. Transaksi</th>
-                        <th>Price</th>
-                        <th>Bukti Pembayaran</th>
-                      </tr>
-                    </tfoot>
                     <tbody>
                       <?php $i=1 ?>
                       <?php 
@@ -125,7 +115,7 @@ $a = query(" SELECT * FROM pesanan ");
                         <td><?= $data['username']; ?></td>
                         <td><?= $data['email_cs']; ?></td>
                         <td><?=date('M d, Y', strtotime($data["tanggal_pesanan"]))?></td>
-                        <td>Rp. <?= $data['subtotal']; ?></td>
+                        <td>Rp. <?= $data['total']; ?></td>
                         <td><a href="detail_wallet.php?id=<?=$data["id_pesanan"]?>" class="btn btn-warning" id=set_dtl" data-toggle="modal" data-target="#wallet-detail"><i class="fas fa-eye"></i></a>
                         </td>
                       </tr>

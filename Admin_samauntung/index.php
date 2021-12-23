@@ -7,6 +7,12 @@ if (!isset($_SESSION["admin"])){
     header("Location: login.php");
     exit;
 }
+
+// $pendapatan = mysqli_query($conn, "SELECT tanggal_pesanan FROM pesanan GROUP BY month(tanggal_pesanan)");
+// $penjualan = mysqli_query($conn, "SELECT total FROM pesanan GROUP BY month(tanggal_pesanan)");
+
+// $pendapatan = mysqli_query($conn, "SELECT subtotal FROM pesanan_detail INNER JOIN pesanan WHERE MONTH(tanggal_pesanan) AND status = 'selesai'");
+
 ?>
 
 <!DOCTYPE html>
@@ -57,10 +63,10 @@ if (!isset($_SESSION["admin"])){
                   <div class="row justify-content-center">
 
                     <?php
-                    $monthlyTrans = query("SELECT subtotal FROM pesanan_detail INNER JOIN pesanan WHERE MONTH(tanggal_pesanan) = MONTH(CURRENT_TIMESTAMP) AND status = 'selesai'");
+                    $monthlyTrans = query("SELECT total FROM pesanan WHERE MONTH(tanggal_pesanan) = MONTH(CURRENT_TIMESTAMP) AND status = 'selesai'");
                     $monthlySum = 0;
                     for ($i = 0; $i < count($monthlyTrans); $i++) {
-                      $monthlySum = $monthlySum + $monthlyTrans[$i]['subtotal'];
+                      $monthlySum = $monthlySum + $monthlyTrans[$i]['total'];
                     }
                     ?>
                     <!-- Pendapatan Bulan ini -->
@@ -82,7 +88,7 @@ if (!isset($_SESSION["admin"])){
                       </div>
                     </div>
 
-                    <?php $pesanan = count(query("SELECT id_pesanan FROM pesanan WHERE MONTH(tanggal_pesanan) = MONTH(CURRENT_TIMESTAMP) AND status = 'selesai'")); ?>
+                    <?php $pesanan = count(query("SELECT id_pesanan FROM pesanan WHERE status = 'selesai'")); ?>
                     <!-- Total Transaksi -->
                     <div class="col-xl-3 col-md-6 mb-4">
                       <div class="card border-left-danger shadow-sm h-100 py-2">
@@ -162,7 +168,7 @@ if (!isset($_SESSION["admin"])){
                 </div>
                 <div class="card-body">
                   <div class="chart-area">
-                    <canvas id="myBarChart"></canvas>
+                    <canvas id="mychart"></canvas>
                   </div>
                   <hr>
                 </div>
@@ -193,7 +199,7 @@ if (!isset($_SESSION["admin"])){
   <script src="js/demo/chart-bar-demo.js"></script>
   <script>
     // Bar Chart Example / diagram batang
-    var ctx = document.getElementById("myBarChart");
+    var ctx = document.getElementById("mychart");
     var myBarChart = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -205,11 +211,12 @@ if (!isset($_SESSION["admin"])){
           borderColor: "#4e73df",
           data: [
             <?php
+            // while($row = mysqli_fetch_array($penjualan)) {echo '"'.$row['total'].'",';}
             for ($j = 1; $j <= 12; $j++) {
-              $trans = query("SELECT subtotal FROM pesanan_detail INNER JOIN pesanan WHERE MONTH(tanggal_pesanan) = $j AND status = 'selesai'");
+              $trans = query("SELECT * FROM pesanan WHERE MONTH(tanggal_pesanan) = $j AND status = 'selesai'");
               $sum = 0;
               for ($i = 0; $i < count($trans); $i++) {
-                $sum = $sum + $trans[$i]['subtotal'];
+                $sum = $trans[$i]['total'];
               }
               echo ($j == 12 ? $sum :  $sum . ",");
             }

@@ -37,6 +37,21 @@ function delete($query){
     return mysqli_affected_rows($conn);
 }
 
+function deletecustomer($query){
+    global $conn;
+
+    $img = query("SELECT foto FROM customer WHERE id_customer = $query")[0]['foto'];
+
+    unlink("img/posting/$img");
+
+    $del = "DELETE FROM customer WHERE id_customer = $query";
+
+    mysqli_query($conn, $del);
+
+    return mysqli_affected_rows($conn);
+
+}
+
 function editadmin($query) {
     global $conn;
 
@@ -235,4 +250,36 @@ function uploadGambar()
     move_uploaded_file($tmpName, 'img/posting/' . $newFileName);
 
     return $newFileName;
+}
+
+function ubahEmail($data)
+{
+    global $conn;
+
+    $kdAkun = $data['id_user'];
+    $emailBaru = $data['emailBaru'];
+
+    $akunUpdate = "UPDATE user SET email = '$emailBaru' WHERE id_user = $kdAkun";
+    mysqli_query($conn, $akunUpdate);
+
+    $_SESSION['email-admin'] = $emailBaru;
+
+    return mysqli_affected_rows($conn);
+}
+
+function ubahPassword($data)
+{
+    global $conn;
+
+    $kdAkun = $data['kdAkun'];
+    $passwordBaru = $data['passwordBaru1'];
+
+    // enkripsi password
+    $passwordBaru = password_hash($passwordBaru, PASSWORD_DEFAULT);
+
+    // tambah ubah password ke database
+    $pass = "UPDATE user SET password = '$passwordBaru' WHERE id_user = $kdAkun";
+    mysqli_query($conn, $pass);
+
+    return mysqli_affected_rows($conn);
 }

@@ -9,6 +9,8 @@ if(!isset($_SESSION["admin"])){
     exit;
 }
 
+$cos = query("SELECT * FROM customer");
+
 ?>
 
 <!DOCTYPE html>
@@ -76,13 +78,7 @@ if(!isset($_SESSION["admin"])){
                       </tr>
                     </tfoot>
                     <tbody>
-                      <?php 
-                      $query = "SELECT * FROM customer 
-                      ";
-                      
-                      $sql_rm = mysqli_query($conn, $query) or die (mysqli_error($conn));
-                      while ($data = mysqli_fetch_array($sql_rm)) {
-                      ?>
+                      <?php foreach ($cos as $data) : ?>
                       <tr>
                         <td><img src="img/posting/<?=$data['foto']?>" width="50px" height="50px"></td>
                         <td><?=$data["username"]?></td>
@@ -90,12 +86,14 @@ if(!isset($_SESSION["admin"])){
                         <td><?=$data["date_register"]?></td>
                         <td>
                           <a href="edit_customer.php?id=<?= $data['id_customer']; ?>" class="btn btn-primary"><i class="material-icons"></i>Edit</a>
-                          <a href="detail_customer.php" class="btn btn-warning" id=set_dtl" data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-eye"></i></a>
-                          <a href="hapusadmin.php?id=<?= $p['id_customer']; ?>" type="button" class="btn btn-danger text-white" data-tooltip="tooltip" data-placement="buttom" >
+                          <a href="detail_customer.php?id=<?= $data['id_customer']; ?>" class="btn btn-warning" id=set_dtl" data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-eye"></i></a>
+                          <a type="button" class="btn btn-danger text-white" onclick="return confirm('konfirmasi hapus, apakah anda ingin menghapus figure')" href="hapuscustomer.php?id=<?= $data['id_customer'];?>" >
                             <i class="fas fa-solid fa-trash"></i>
+                          </a>
+
                         </td>
                       </tr>
-                      <?php } ?>
+                    <?php endforeach; ?>
                     </tbody>
                   </table>
                 </div>
@@ -109,8 +107,6 @@ if(!isset($_SESSION["admin"])){
             </div> 
           </div> 
         </div>
-
-    <?php require "components/logout.php"?>
 
   </div>
   <!---Container Fluid-->

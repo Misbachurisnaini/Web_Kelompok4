@@ -138,7 +138,7 @@ $data=mysqli_fetch_array($query);
                   <div class="d-flex flex-row-reverse mb-5">
                   <button type="submit" class="btn btn-success ml-3">Simpan</button>
                       <button type="reset" class="btn btn-secondary ml-3">Reset</button>
-                      <a id="batal-produk" class="btn btn-outline-secondary" href="customer.php">Batal</a>
+                      <a id="batal-produk" class="btn btn-outline-secondary" href="produk.php">Batal</a>
                   </div>
                   
                 </form>

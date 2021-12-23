@@ -18,8 +18,8 @@ if (!(isset($_GET['id']))) {
 $id = $_GET['id'];
 
 
-$data = query("SELECT * FROM customer WHERE id_customer")[0];
-$data2 = query("SELECT * FROM customer_detail WHERE id_customer_detail")[0];
+$data = query("SELECT * FROM customer WHERE id_customer = $id")[0];
+$data2 = query("SELECT * FROM customer_detail WHERE id_customer = $id")[0];
 
 if (isset($_POST['simpan-produk'])) {
     if (editcustomer($_POST) > 0) {
