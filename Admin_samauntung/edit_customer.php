@@ -128,8 +128,6 @@ if (isset($_POST['simpan-produk'])) {
           </div>
         </div>
 
-          <?php require "components/logout.php"?>
-
         </div>
         <!---Container Fluid-->
       </div>
