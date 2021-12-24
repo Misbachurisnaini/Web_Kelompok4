@@ -2,6 +2,11 @@
 
  require "config/function.php";
 
+ $id = $_GET['id'];
+
+ $data = query("SELECT * FROM pesanan WHERE id_pesanan = $id")[0];
+
+
 ?>
 
 <div class="modal-content">
@@ -13,16 +18,7 @@
   </div>
   <div class="modal-body table-responsive">
 
-  <?php 
-  $query = "SELECT * FROM pesanan";
-                                
-  $sql_rm = mysqli_query($conn, $query) or die (mysqli_error($conn));
-  while ($data = mysqli_fetch_array($sql_rm)) {
-  ?>
-
   <center style="margin-top: 39px;margin-bottom:100px"><img src="img/bukti_bayar/<?=$data['bukti_bayar']?>" width="190px" height="190px"></center>
-              
-  <?php } ?>
 
   </div>
 </div>
