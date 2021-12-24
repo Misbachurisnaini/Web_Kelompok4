@@ -68,15 +68,6 @@ $cos = query("SELECT * FROM customer");
                         <th>TINDAKAN</th>
                       </tr>
                     </thead>
-                    <tfoot>
-                      <tr>
-                        <th> </th>
-                        <th>USERNAME</th>
-                        <th>EMAIL</th>
-                        <th>DATE REGISTER</th>
-                        <th>TINDAKAN</th>
-                      </tr>
-                    </tfoot>
                     <tbody>
                       <?php foreach ($cos as $data) : ?>
                       <tr>
