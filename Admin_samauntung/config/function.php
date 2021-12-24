@@ -173,14 +173,9 @@ function editorders($query)
 {
     global $conn;
 
-    htmlspecialchars($nama = $query['nama']);
-    htmlspecialchars($email = $query['email_cs']);
-    htmlspecialchars($alamat = $query['alamat']);
-    htmlspecialchars($id_cs = $query['id_customer']);
+    htmlspecialchars($status = $query['status']);
+    htmlspecialchars($id_pesan = $query['id_pesanan']);
     htmlspecialchars($imageOld = $query['image-old']);
-    htmlspecialchars($orders = $query['orders']);
-    htmlspecialchars($total = $query['total_spend']);
-    htmlspecialchars($id_dcs = $query['id_customer_detail']);
 
     // apakah user upload foto baru
     if ($_FILES['image']['error'] === 4) {
@@ -193,12 +188,13 @@ function editorders($query)
         }
     }
 
-    $update = "UPDATE customer, customer_detail SET customer.nama = '$nama', customer.email_cs = '$email', customer.alamat = '$alamat', customer.foto = '$img', customer_detail.orders = '$orders', customer_detail.total_spend = '$total' WHERE customer.id_customer = '$id_cs'";
+    $update = "UPDATE pesanan SET status = '$status', bukti_bayar = '$img' WHERE id_pesanan = '$id_pesan'";
 
     mysqli_query($conn, $update);
 
     return mysqli_affected_rows($conn);
 }
+
 
 
 function uploadGambar()
