@@ -6,23 +6,18 @@ if (!isset($_SESSION["admin"])) {
     exit;
 }
 
-
-
 require "config/function.php";
 
 if (!(isset($_GET['id']))) {
-    header("Location:orders.php");
+    header("orders.php");
     exit;
 }
 
 $id = $_GET['id'];
 
 
-$data = query("SELECT * FROM pesanan_detail 
-INNER JOIN produk ON pesanan_detail.id_produk = produk.id_produk
-INNER JOIN pesanan ON pesanan_detail.id_pesanan = pesanan.id_pesanan
-INNER JOIN customer ON pesanan_detail.id_customer = customer.id_customer
-")[0];
+$pesanan = query("SELECT * FROM pesanan WHERE id_pesanan = $id")[0];
+
 
 if (isset($_POST['simpan-produk'])) {
     if (editorders($_POST) > 0) {
@@ -42,6 +37,7 @@ if (isset($_POST['simpan-produk'])) {
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,7 +72,7 @@ if (isset($_POST['simpan-produk'])) {
             <h1 class="h3 mb-0 text-gray-800">Edit Orders</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./">Home</a></li>
-              <li class="breadcrumb-item">Orders</li>
+              <li class="breadcrumb-item"><a href="orders.php">Orders</a></li>
               <li class="breadcrumb-item active" aria-current="page">Edit Orders</li>
             </ol>
           </div>
@@ -86,54 +82,32 @@ if (isset($_POST['simpan-produk'])) {
              <div class="card mb-4">
               <div class="card-body">
                 <form action="" method="post"  enctype="multipart/form-data">
-                  <div class="form-group required">
-                    <label for="produk" class="control-label">Id Produk</label>
-                    <input type="text" class="form-control" id="produk" name="produk" required value="<?=$data["id_produk"]?>">
-                  </div>
-                  <div class="form-group required">
-                    <label for="tanggaldt" class="control-label">Tanggal Terima</label>
-                    <input type="text" class="form-control" id="tanggaldt" name="tanggaldt" required value="<?=$data["tanggal_terima"]?>">
+                <input type="hidden" name="id_pesanan" value="<?= $pesanan["id_pesanan"] ?>">
+                  <div class="form-group">
+                    <label for="status">Ubah Status Transaksi</label>
+                    <select class="form-control" name="status" required value="<?= $pesanan["status"] ?>">
+                      <option value="1"> </option>
+                      <option value="2">Belum bayar</option>
+                      <option value="3">Sudah bayar</option>
+                      <option value="4">Pengiriman</option>
+                      <option value="5">Selesai</option>
+                    </select>
                   </div>
                   <div class="form-group">
-                    <label for="status" class="control-label">Status</label>
-                    <input type="number" class="form-control" id="status" name="status" required value="<?=$data["status"]?>">
+                    <label for="bukti_bayar">Bukti Pembayaran</label>
+                    <input type="file" class="form-control"  name="image">
+                    <input type="hidden" name="image-old" value="<?= $pesanan["bukti_bayar"] ?>">
                   </div>
-                  <div class="form-group">
-                    <label for="qty" class="control-label">Qty</label>
-                    <input type="number" class="form-control" id="qty" name="qty" required value="<?=$data["jumlah"]?>">
-                  </div>
-                  <div class="form-group required">
-                    <label for="ongkir" class="control-label">Ongkir</label>
-                    <div class="input-group mb-2">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">Rp</div>
-                      </div>
-                      <input type="number" class="form-control" id="ongkir" name="ongkir" placeholder="Ex :  15.000"  required value="<?=$data["ongkir"]?>">
-                  </div>
-                  <div class="form-group">
-                    <label for="alamat" class="control-label">Alamat</label>
-                    <textarea class="form-control" id="alamat" rows="3" name="alamat"><?=$data["alamat_lengkap"]?></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="bukti" class="control-label">Bukti Bayar</label>
-                    <input type="number" class="form-control" id="bukti" name="bukti" placeholder="Ex :  Tidak Ada" required value=" <?=$data["bukti_bayar"]?>">
-                  </div>
-                  <div class="form-group">
-                    <label for="keterangan" class="control-label">Keterangan</label>
-                    <textarea class="form-control" id="keterangan" rows="3" name="keterangan"><?=$data["keterangan"]?></textarea>
-                  </div>
-                  <div style="display:flex;justify-content:right;margin-top:25px">
-                    <button type="reset" class="btn btn-outline-dark" style="margin-right: 25px;">Batal</button>
-                    <button type="submit" class="btn btn-success">Simpan</button>
+                  <div class="d-flex flex-row-reverse mb-5">
+                  <button id="simpan-produk" name="simpan-produk" type="submit" class="btn btn-primary ml-3">Simpan</button>
+                      <button type="reset" class="btn btn-secondary ml-3">Reset</button>
+                      <a id="batal-produk" class="btn btn-outline-secondary" href="orders.php">Batal</a>
                   </div>
                 </form>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-    <?php require "components/logout.php"?>
 
   </div>
   <!---Container Fluid-->
@@ -153,14 +127,6 @@ if (isset($_POST['simpan-produk'])) {
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 <script src="js/ruang-admin.min.js"></script>
-<script>
-$('#foto').on('change',function(){
-//get the file name
-var fileName = $(this).val();
-//replace the "Choose a file" label
-$(this).next('.custom-file-label').html(fileName);
-})
-</script>
 </body>
 
 </html>
