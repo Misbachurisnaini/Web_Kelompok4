@@ -87,8 +87,8 @@ if(!isset($_SESSION["admin"])){
                         <td><?=date('M d, Y', strtotime($data["tanggal_terima"]))?></td>
                         <td><?=$data["total"]?></td>
                         <td><span class="badge badge-secondary"><?=$data["status"]?></span></td>
-                        <td><a href="edit_order.php?id_pesanan=<?=$data["id_pesanan"]?>" class="btn btn-primary"><i class="material-icons"></i>Edit</a>
-                          <a href="detail_order.php?id=<?=$data["id_pesanan"]?>" class="btn btn-warning" id=set_dtl" data-toggle="modal" data-target="#order-detail"><i class="fas fa-eye"></i></a>
+                        <td><a href="edit_order.php?id=<?=$data["id_pesanan"]?>" class="btn btn-primary"><i class="material-icons"></i>Edit</a>
+                          <a href="detail_order.php?id=<?=$data["id_pesanan_detail"]?>" class="btn btn-warning" id=set_dtl" data-toggle="modal" data-target="#order-detail"><i class="fas fa-eye"></i></a>
                         </td>
                       </tr>
                     <?php } ?>
