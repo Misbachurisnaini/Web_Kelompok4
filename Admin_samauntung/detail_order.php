@@ -3,9 +3,16 @@
  require "config/function.php";
 
  $id = $_GET['id'];
+//  $data = query("SELECT nama, email_cs, alamat, jumlah, subtotal, id_pesanan, status, total, ongkir, nama_produk FROM pesanan_detail INNER JOIN pesanan, customer, produk ON pesanan_detail.id_pesanan = pesanan.id_pesanan pesanan_detail.id_customer = customer.id_customer pesanan_detail.id_produk = produk.id_produk WHERE pesanan_detail.id_pesanan_detail = '$id'")[0];
 
- $pesanan = query("SELECT * FROM pesanan WHERE id_pesanan = $id")[0];
- $detail = query("SELECT * FROM pesanan_detail WHERE id_pesanan = $id")[0];
+$data = query("SELECT a.*, b.id_pesanan, b.status, b.total, b.ongkir, c.nama, c.email_cs, c.alamat, d.nama_produk FROM pesanan_detail a
+INNER JOIN pesanan b ON a.id_pesanan = b.id_pesanan
+INNER JOIN customer c ON a.id_customer = c.id_customer
+INNER JOIN produk d ON a.id_produk = d.id_produk
+AND a.id_pesanan_detail = '$id'")[0];
+
+// $pesanan = query("SELECT * FROM pesanan WHERE id_pesanan = $id")[0];
+// $pesanan2 = query("SELECT * FROM pesanan_detail WHERE id_pesanan = $id")[0];
 
 ?>
 
@@ -31,8 +38,8 @@
           <td style="color: #052747;font-weight:600;font-size:18px">: <?= $data["status"]; ?></td>
         </tr>
         <tr>
-          <td style="padding-right:43px;color: #8E8E8E;font-weight:400;font-size:18px">USERNAME</td>
-          <td style="color: #052747;font-weight:600;font-size:18px">: <?= $data["user_name"]; ?></td>
+          <td style="padding-right:43px;color: #8E8E8E;font-weight:400;font-size:18px">jumlah</td>
+          <td style="color: #052747;font-weight:600;font-size:18px">: <?= $data["jumlah"]; ?></td>
         </tr>
         <tr>
           <td style="padding-right:43px;color: #8E8E8E;font-weight:400;font-size:18px">NAMA</td>
@@ -44,7 +51,7 @@
         </tr>  
         <tr>
           <td style="padding-right:43px;color: #8E8E8E;font-weight:400;font-size:18px">ALAMAT</td>
-          <td style="color: #052747;font-weight:600;font-size:18px">: <?= $data["alamat"]; ?></td>
+          <td style="color: #052747;font-weight:600;font-size:18px">: <?= $data["nama_produk"]; ?></td>
         </tr>  
       </table>
     </div>

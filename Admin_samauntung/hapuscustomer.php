@@ -2,15 +2,17 @@
 
 session_start();
 
+if(!isset($_SESSION["admin"])){
+    header("location: login.php");
+    exit;
+}
 require "config/function.php";
 
-// if(isset($_SESSION["admin"])){
-//     header("location: login.php");
-//     exit;
-// }
 
 $id = $_GET["id"];
-if(deletecustomer($id > 0)) {
+// var_dump($id);
+
+if(deletecustomer($id) > 0) {
     echo "
     <script>
         alert('Data berhasil dihapus!');

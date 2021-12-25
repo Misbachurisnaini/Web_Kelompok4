@@ -20,7 +20,7 @@ if (isset($_POST['simpan-produk'])) {
         echo "
         <script>
             alert('Data gagal ditambahkan!');
-            location = 'produk.php';
+            // location = 'produk.php';
         </script>";
     }
 }
@@ -80,13 +80,13 @@ if (isset($_POST['simpan-kategori'])) {
             <div class="tab-pane fade show active" id="v-pills-item" role="tabpanel" aria-labelledby="v-pills-item-tab">
               <div class="card card-outline-secondary my-4">
                 <div class="card-body">
-                  <form id="form_validation" action="tambah_produk.php" method="POST">
+                  <form method="POST" enctype="multipart/form-data" >
                       <div class="form-row">
-                        <div class="form-group col-md-12 font-weight-bold">
-                          <label class="col-md-4 font-weight-bold" for="foto-produk">Upload foto produk</label>
-                            <div class="col">
-                              <input required name="image" type="file" class="form-control-file" id="foto-produk">
-                            </div>
+                        <div class="form-group row mb-4">
+                          <label class="col-md-4 font-weight-bold" for="gambar_produk">Upload foto produk</label>
+                          <div class="col">
+                            <input required name="image" type="file" class="form-control-file" id="gambar_produk">
+                          </div>
                         </div>
                       </div>
                       <div class="form-row">

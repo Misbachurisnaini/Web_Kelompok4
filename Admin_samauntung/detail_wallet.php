@@ -18,7 +18,7 @@
   </div>
   <div class="modal-body table-responsive">
 
-  <center style="margin-top: 39px;margin-bottom:100px"><img src="img/bukti_bayar/<?=$data['bukti_bayar']?>" width="190px" height="190px"></center>
+  <center style="margin-top: 39px;margin-bottom:100px"><img src="img/posting/<?=$data['bukti_bayar']?>" width="190px" height="190px"></center>
 
   </div>
 </div>

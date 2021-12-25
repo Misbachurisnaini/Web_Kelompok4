@@ -7,7 +7,6 @@ if(!isset($_SESSION["admin"])){
     header("Location: login.php");
     exit;
 }
-
 ?>
 
 
@@ -53,6 +52,9 @@ if(!isset($_SESSION["admin"])){
           <div class="row">
             <div class="col-md-12">
              <div class="card mb-4">
+             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">DataTables with Hover</h6>
+                </div>
               <div class="table-responsive p-3">
                 <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                   <thead class="thead-light">
@@ -118,7 +120,6 @@ if(!isset($_SESSION["admin"])){
     </div>
   </div>
 
-
 <!-- <div class="modal fade" id="modal_provinsi" tabindex="-1" role="dialog" aria-labelledby="provinsi" aria-hidden="true"></div> -->
 
 <!-- Scroll to top -->
@@ -154,7 +155,8 @@ if(!isset($_SESSION["admin"])){
 	<script src="js/bootstrap.js"></script>
 <!-- Page level custom scripts -->
 <script>
-  $(document).ready(function () {
+    $(document).ready(function () {
+      $('#dataTable').DataTable(); // ID From dataTable 
       $('#dataTableHover').DataTable(); // ID From dataTable with Hover
     });
   </script>

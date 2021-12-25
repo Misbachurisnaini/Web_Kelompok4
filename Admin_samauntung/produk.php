@@ -76,7 +76,7 @@ $query = mysqli_query($konek, "SELECT produk.gambar_produk,produk.id_produk, pro
                 <tbody> 
                   <?php while($data=mysqli_fetch_array($query)){ ?>
                     <tr>
-                      <td><img src="uploads/<?=$data["gambar_produk"]?>" width="50px" height="50px"></td>
+                      <td><img src="img/posting/<?=$data["gambar_produk"]?>" width="50px" height="50px"></td>
                       <td><?=$data["nama_produk"]?></td>
                       <td><?=$data["nama_kategori"]?></td>
                       <td>Rp<?=$data["harga"]?></td>
@@ -85,7 +85,7 @@ $query = mysqli_query($konek, "SELECT produk.gambar_produk,produk.id_produk, pro
                         <a href="edit_produk.php?id=<?=$data["id_produk"]?>" type="button" class="btn btn-primary text-white" data-tooltip="tooltip" data-placement="buttom" >
                         <i class="fas fa-solid fa-pen"></i>
                       </a>
-                      <a href="hapusadmin.php?id=<?= $p['id_user']; ?>" type="button" class="btn btn-danger text-white" data-tooltip="tooltip" data-placement="buttom" >
+                      <a href="hapusproduk.php?id=<?= $data['id_produk']; ?>" type="button" class="btn btn-danger text-white" data-tooltip="tooltip" data-placement="buttom" >
                         <i class="fas fa-solid fa-trash"></i>
                       </a>
                       </td>

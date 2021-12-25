@@ -40,16 +40,29 @@ function delete($query){
 function deletecustomer($query){
     global $conn;
 
-    $img = query("SELECT foto FROM customer WHERE id_customer = $query")[0]['foto'];
+    // $img = query("SELECT foto FROM customer WHERE id_customer = $query")[0]['foto'];
 
-    unlink("img/posting/$img");
+    // unlink("img/posting/$img");
 
     $del = "DELETE FROM customer WHERE id_customer = $query";
 
     mysqli_query($conn, $del);
 
     return mysqli_affected_rows($conn);
+}
 
+function deleteproduk($query){
+    global $conn;
+
+    // $img = query("SELECT gambar_produk FROM produk WHERE id_produk = $query")[0]['gambar_produk'];
+
+    // unlink("img/posting/$img");
+
+    $del = "DELETE FROM produk WHERE id_produk = $query";
+
+    mysqli_query($conn, $del);
+
+    return mysqli_affected_rows($conn);
 }
 
 function editadmin($query) {
@@ -89,7 +102,7 @@ function tambahProduk($data)
     global $conn;
 
     strtolower(htmlspecialchars($namaProduk = $data['nama_produk']));
-    htmlspecialchars($kategori = $data['nama_kategori']);
+    htmlspecialchars($kategori = $data['kategori']);
     htmlspecialchars($stok = $data['stok']);
     htmlspecialchars($harga = $data['harga']);
     strtolower(htmlspecialchars($deskripsi = $data['deskripsi_produk']));
@@ -101,7 +114,7 @@ function tambahProduk($data)
         return false;
     }
 
-    $add = "INSERT INTO produk VALUES (0, '$namaProduk', '$kategori', '$stok', '$harga', '$deskripsi', '$img')";
+    $add = "INSERT INTO produk VALUES (0, '$kategori', '$namaProduk', '$img', '$deskripsi', '$stok', '$harga')";
 
     mysqli_query($conn, $add);
 
