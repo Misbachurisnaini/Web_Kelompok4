@@ -20,8 +20,8 @@ AND a.id_pesanan_detail = '$id'")[0];
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="row">
-    <div class="col-xl-6">
+
+  <div class="col-xl-6">
       <table class="modal-body table-responsive">
         <tr>
           <td style="padding-right:43px;color: #8E8E8E;font-weight:400;font-size:18px">ID Order</td>
@@ -30,10 +30,6 @@ AND a.id_pesanan_detail = '$id'")[0];
         <tr>
           <td style="padding-right:43px;color: #8E8E8E;font-weight:400;font-size:18px">Status</td>
           <td style="color: #052747;font-weight:600;font-size:18px">: <?= $data["status"]; ?></td>
-        </tr>
-        <tr>
-          <td style="padding-right:43px;color: #8E8E8E;font-weight:400;font-size:18px">Quantity</td>
-          <td style="color: #052747;font-weight:600;font-size:18px">: <?= $data["jumlah"]; ?></td>
         </tr>
         <tr>
           <td style="padding-right:43px;color: #8E8E8E;font-weight:400;font-size:18px">Name</td>
@@ -49,6 +45,46 @@ AND a.id_pesanan_detail = '$id'")[0];
         </tr>  
       </table>
     </div>
-  </div>
+
+    <div class="table-responsive p-3">
+      <table class="table align-items-center table-flush table-hover">
+        <thead class="thead-light">
+          <tr>
+            <th>NO</th>
+            <th>product</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php $i=1 ?>
+          <tr>
+            <td scope="row"><b><?= $i++ ?></b></td>
+            <td><b><?=$data["nama_produk"]?></b></td>
+            <td><b><?=$data["jumlah"]?></b></td>
+            <td><b><?=$data["subtotal"]?></b></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- <div class="row"> -->
+    <div class="col-xl-6">
+      <table class="modal-body table-responsive">
+        <tr>
+          <td style="padding-right:43px;color: #8E8E8E;font-weight:400;font-size:18px">Total Price</td>
+          <td style="color: #052747;font-weight:600;font-size:18px">: <?= $data["subtotal"]; ?></td>
+        </tr>
+        <tr>
+          <td style="padding-right:43px;color: #8E8E8E;font-weight:400;font-size:18px">Ongkir</td>
+          <td style="color: #052747;font-weight:600;font-size:18px">: <?= $data["ongkir"]; ?></td>
+        </tr>
+        <tr>
+          <td style="padding-right:43px;color: #8E8E8E;font-weight:400;font-size:18px">Total Transaction</td>
+          <td style="color: #052747;font-weight:600;font-size:18px">: <?= $data["total"]; ?></td>
+        </tr>
+      </table>
+    </div>
+  <!-- </div> -->
  
 </div>

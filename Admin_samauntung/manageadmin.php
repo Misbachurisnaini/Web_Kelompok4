@@ -60,53 +60,53 @@ $data = query(" SELECT * FROM user ");
         </div>
         <!---Container Fluid-->
         <div class="container-fluid">
-        <div class="custom-table card shadow ms-1">
-          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-dark">
-              Manage Admin
-            </h6>
-          </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-striped" id="dataTable" >
-                <div class="py-2">
-                  <a href="addadmin.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                  <i class="fas fa-download fa-sm text-white-50"></i> Add Admin </a>
-                </div>
-                <thead>
-                  <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Email</th>
-                    <th>Role</th>
-                    <th scope="col">Manage</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php $i=1 ?>
-                  <?php foreach($data as $p) : ?>
-                  <tr>
-                    <th scope="row"><?= $i++ ?></th>
-                    <th><?= $p['user_name']; ?></th>
-                    <th><?= $p['email']; ?></th>
-                    <th><?= $p['user_level']; ?></th>
-                    <th>
-                      <a href="editadmin.php?id=<?= $p['id_user']; ?>" type="button" class="btn btn-primary text-white" data-tooltip="tooltip" data-placement="buttom" >
-                        <i class="fas fa-solid fa-pen"></i>
-                      </a>
-                      <a href="hapusadmin.php?id=<?= $p['id_user']; ?>" type="button" class="btn btn-danger text-white" data-tooltip="tooltip" data-placement="buttom" >
-                        <i class="fas fa-solid fa-trash"></i>
-                      </a>
-                    </th>
-                  </tr>
-                  <?php endforeach; ?>
-                </tbody>
-              </table>
+          <div class="custom-table card shadow ms-1">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h6 class="m-0 font-weight-bold text-dark">
+                Manage Admin
+              </h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-striped" id="dataTable" >
+                  <div class="py-2">
+                    <a href="addadmin.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                    <i class="fas fa-download fa-sm text-white-50"></i> Add Admin </a>
+                  </div>
+                  <thead>
+                    <tr>
+                      <th scope="col">No</th>
+                      <th scope="col">Username</th>
+                      <th scope="col">Email</th>
+                      <th>Role</th>
+                      <th scope="col">Manage</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php $i=1 ?>
+                    <?php foreach($data as $p) : ?>
+                    <tr>
+                      <th scope="row"><?= $i++ ?></th>
+                      <th><?= $p['user_name']; ?></th>
+                      <th><?= $p['email']; ?></th>
+                      <th><?= $p['user_level']; ?></th>
+                      <th>
+                        <a href="editadmin.php?id=<?= $p['id_user']; ?>" type="button" class="btn btn-primary text-white" data-tooltip="tooltip" data-placement="buttom" >
+                          <i class="fas fa-solid fa-pen"></i>
+                        </a>
+                        <a href="hapusadmin.php?id=<?= $p['id_user']; ?>" type="button" class="btn btn-danger text-white" data-tooltip="tooltip" data-placement="buttom" >
+                          <i class="fas fa-solid fa-trash"></i>
+                        </a>
+                      </th>
+                    </tr>
+                    <?php endforeach; ?>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
-        </div>
-        </div>
+      </div>
       <!-- Footer -->
       <?php require "components/footer.php"?>
       <!-- Footer -->

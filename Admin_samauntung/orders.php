@@ -99,7 +99,7 @@ if(!isset($_SESSION["admin"])){
         </div>
 
         
-        <div class="modal fade" id="order-detail" class="modal" tabindex="-1" role="dialog">
+        <div class="modal fade" id="order-detail" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
             </div> 

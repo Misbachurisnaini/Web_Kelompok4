@@ -153,11 +153,11 @@ if (isset($_POST['simpan-kategori'])) {
                       <a id="batal-produk" class="btn btn-outline-secondary" href="produk.php">Batal</a>
                     </div>
                 </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
       <!-- Footer -->
     <?php require "components/footer.php"?>
     <!-- Footer -->
@@ -174,15 +174,15 @@ if (isset($_POST['simpan-kategori'])) {
             </button>
           </div>
           <form action="" method="POST">
-              <div class="modal-body">
-                <div class="form-group">
-                  <input type="text" name="kategori" id="inputKategori" class="form-control" placeholder="Masukkan kategori baru...">
-                </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <input type="text" name="kategori" id="inputKategori" class="form-control" placeholder="Masukkan kategori baru...">
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button name="simpan-kategori" type="submit" id="simpan-kategori" class="btn btn-primary">Simpan</button>
-              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+              <button name="simpan-kategori" type="submit" id="simpan-kategori" class="btn btn-primary">Simpan</button>
+            </div>
           </form>
         </div>
       </div>

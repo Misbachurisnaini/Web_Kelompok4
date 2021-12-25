@@ -90,50 +90,50 @@ $cos = query("SELECT * FROM customer");
                 </div>
               </div>
             </div>
+          </div>
+
+          <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+              </div> 
+            </div> 
+          </div>
+
+        </div>
+        <!---Container Fluid-->
       </div>
 
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-            </div> 
-          </div> 
-        </div>
+      <!-- Footer -->
+      <?php require "components/footer.php"?>
+      <!-- Footer -->
 
+    </div>
   </div>
-  <!---Container Fluid-->
-</div>
-<!-- Footer -->
-<?php require "components/footer.php"?>
-<!-- Footer -->
-</div>
-</div>
 
-<!-- Scroll to top -->
-<a class="scroll-to-top rounded" href="#page-top">
-  <i class="fas fa-angle-up"></i>
-</a>
+  <!-- Scroll to top -->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
 
 
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="js/ruang-admin.min.js"></script>
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="js/ruang-admin.min.js"></script>
   <!-- Page level plugins -->
   <script src="vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-<!-- js untuk jquery -->
-<script src="js/jquery-1.11.2.min.js"></script>
+  <!-- js untuk jquery -->
+  <script src="js/jquery-1.11.2.min.js"></script>
 	<!-- js untuk bootstrap -->
 	<script src="js/bootstrap.js"></script>
-<!-- Page level custom scripts -->
-
-    <!-- Page level custom scripts -->
-    <script>
-    $(document).ready(function () {
-      $('#dataTable').DataTable(); // ID From dataTable 
-      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
-    });
+  <!-- Page level custom scripts -->
+  <script>
+  $(document).ready(function () {
+    $('#dataTable').DataTable(); // ID From dataTable 
+    $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+  });
   </script>
 </body>
 

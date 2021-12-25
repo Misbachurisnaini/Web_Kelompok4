@@ -75,80 +75,79 @@ $baris = count($query);
         <!---Container Fluid-->
 
         <div class="container-fluid">
+            <div class="card shadow">
+                <div class="card-body">
+                    <!-- form kategori -->
+                    <div class="col-md-4 pt-2">
+                        <span>Amount Of Data: <b><?= $baris ?></b></span>
+                    </div>
+                    <div class="col-md-8">
+                        <form method="POST" action="" class="form-inline">
+                            <label for="date1" class="mr-2">Month Transaction</label>
+                            <select class="form-control mr-2" name="bulan">
+                                <option value="0">All</option>
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            <button type="submit" name="submit" class="btn btn-primary">Show</button>
+                        </form>
+                    </div>
 
-
-                    <div class="card shadow">
+                    <!-- isi table -->
+                    <div class="card mb-4 mt-4">
                         <div class="card-body">
-                            <!-- form kategori -->
-                            <div class="col-md-4 pt-2">
-                                <span>Amount Of Data: <b><?= $baris ?></b></span>
-                            </div>
-                            <div class="col-md-8">
-                                <form method="POST" action="" class="form-inline">
-                                    <label for="date1" class="mr-2">Month Transaction</label>
-                                    <select class="form-control mr-2" name="bulan">
-                                        <option value="0">All</option>
-                                        <option value="1">January</option>
-                                        <option value="2">February</option>
-                                        <option value="3">March</option>
-                                        <option value="4">April</option>
-                                        <option value="5">May</option>
-                                        <option value="6">June</option>
-                                        <option value="7">July</option>
-                                        <option value="8">August</option>
-                                        <option value="9">September</option>
-                                        <option value="10">October</option>
-                                        <option value="11">November</option>
-                                        <option value="12">December</option>
-                                    </select>
-                                    <button type="submit" name="submit" class="btn btn-primary">Show</button>
-                                </form>
-                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="dataTable" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Total Transaction</th>
+                                            <th>Date In</th>
+                                        </tr>
+                                    </thead>
+                                    <?php
 
-                            <!-- isi table -->
-                            <div class="card mb-4 mt-4">
+                                    $no = 1;
+                                    foreach ($query as $data) {
+                                    ?>
 
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped" id="dataTable" style="width: 100%;">
-                                            <thead>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Name</th>
-                                                    <th>Email</th>
-                                                    <th>Total Transaction</th>
-                                                    <th>Date In</th>
-                                                </tr>
-                                            </thead>
-                                            <?php
+                                        <tr>
+                                            <td><?= $no++ ?></td>
+                                            <td><?= ucwords(htmlspecialchars($data['nama'])) ?></td>
+                                            <td><?= $data['email_cs'] ?></td>
+                                            <td><?= $data['total'] ?></td>
+                                            <td><?= date('d-M-Y', strtotime($data['tanggal_pesanan'])) ?></td>
+                                        </tr>
 
-                                            $no = 1;
-                                            foreach ($query as $data) {
-                                            ?>
+                                    <?php
+                                    }
+                                    ?>
 
-                                                <tr>
-                                                    <td><?= $no++ ?></td>
-                                                    <td><?= ucwords(htmlspecialchars($data['nama'])) ?></td>
-                                                    <td><?= $data['email_cs'] ?></td>
-                                                    <td><?= $data['total'] ?></td>
-                                                    <td><?= date('d-M-Y', strtotime($data['tanggal_pesanan'])) ?></td>
-                                                </tr>
-
-                                            <?php
-                                            }
-                                            ?>
-
-                                        </table>
-                                    </div>
-                                </div>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
       </div>
+
       <!-- Footer -->
       <?php require "components/footer.php"?>
       <!-- Footer -->
+      
     </div>
   </div>
 

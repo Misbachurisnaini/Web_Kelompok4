@@ -107,105 +107,104 @@ if (isset($_POST['simpan-kategori'])) {
 
           <div class="row">
             <div class="col-md-12">
-             <div class="card mb-4">
-              <div class="card-body">
-                <form action="edit_produk.php?id=<?=$_GET['id']?>" method="post"  enctype="multipart/form-data">
-                  <div class="form-group">
-                    <label for="foto">Image Product</label>
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="foto" name="foto">
-                      <label class="custom-file-label" for="foto">choose photo</label>
-                    </div>
-                  </div>
-
-                  <div class="form-group required">
-                    <label for="nama" class="control-label">Product Name</label>
-                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Ex :  Musae Chips - Milk" required value="<?=$data["nama_produk"]?>">
-                  </div>
-                  <div class="form-group">
-                          <label for="kategori">Categories</label>
-                          <div class="select-kategori">
-                            <select required name="kategori" class="form-control custom-select" id="nama_kategori">
-                              <option class="text-center" value="">---Choose Categories ---</option>
-                                <?php
-                                $kategori = mysqli_query($conn, "SELECT * FROM kategori");
-                                while ($dataKategori = mysqli_fetch_array($kategori)) {
-                                ?>
-                              <option value="<?= $dataKategori['id_kategori']; ?>"><?= ucwords($dataKategori['nama_kategori']); ?></option>
-                                <?php } ?>
-                            </select>
-                          </div>
-
-                          <div>
-                            <br>
-                          </div>
-
-                          <!--Tombol Tambah kategori -->
-                          <div class="d-flex flex-row-reverse mb-5">
-                            <!-- Button tambah kategori -->
-                            <button type="button" class="btn btn-outline-primary custom-btn ml-3" data-toggle="modal" data-target="#tambahKategori">
-                              <i class="fa fa-fw fa-plus-square"></i>
-                                <span>Add New Categories</span>
-                            </button>
-                          </div>
+              <div class="card mb-4">
+                <div class="card-body">
+                  <form action="edit_produk.php?id=<?=$_GET['id']?>" method="post"  enctype="multipart/form-data">
+                    <div class="form-group">
+                      <label for="foto">Image Product</label>
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="foto" name="foto">
+                        <label class="custom-file-label" for="foto">choose photo</label>
                       </div>
-                  <div class="form-group">
-                    <label for="stok" class="control-label">Stok</label>
-                    <input type="number" class="form-control" id="stok" name="stok" placeholder="Ex :  100" required value="<?=$data["stok"]?>">
-                  </div>
-                  <div class="form-group required">
-                    <label for="harga" class="control-label">Harga Produk</label>
-                    <div class="input-group mb-2">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">Rp</div>
-                      </div>
-                      <input type="number" class="form-control" id="harga" name="harga" placeholder="Ex :  15.000"  required value="<?=$data["harga"]?>">
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="deskripsi" class="control-label">Deskripsi Produk (Opsional)</label>
-                    <textarea class="form-control" id="deskripsi" rows="3" name="deskripsi" placeholder="Ex :  Weight  : 90 g"><?=$data["deskripsi_produk"]?></textarea>
-                  </div>
-                  <div class="d-flex flex-row-reverse mb-5">
-                  <button type="submit" class="btn btn-success ml-3">Save</button>
-                      <button type="reset" class="btn btn-secondary ml-3">Reset</button>
-                      <a id="batal-produk" class="btn btn-outline-secondary" href="produk.php">Cancel</a>
-                  </div>
-                  
-                </form>
+
+                    <div class="form-group required">
+                      <label for="nama" class="control-label">Product Name</label>
+                      <input type="text" class="form-control" id="nama" name="nama" placeholder="Ex :  Musae Chips - Milk" required value="<?=$data["nama_produk"]?>">
+                    </div>
+                    <div class="form-group">
+                            <label for="kategori">Categories</label>
+                            <div class="select-kategori">
+                              <select required name="kategori" class="form-control custom-select" id="nama_kategori">
+                                <option class="text-center" value="">---Choose Categories ---</option>
+                                  <?php
+                                  $kategori = mysqli_query($conn, "SELECT * FROM kategori");
+                                  while ($dataKategori = mysqli_fetch_array($kategori)) {
+                                  ?>
+                                <option value="<?= $dataKategori['id_kategori']; ?>"><?= ucwords($dataKategori['nama_kategori']); ?></option>
+                                  <?php } ?>
+                              </select>
+                            </div>
+
+                            <div>
+                              <br>
+                            </div>
+
+                            <!--Tombol Tambah kategori -->
+                            <div class="d-flex flex-row-reverse mb-5">
+                              <!-- Button tambah kategori -->
+                              <button type="button" class="btn btn-outline-primary custom-btn ml-3" data-toggle="modal" data-target="#tambahKategori">
+                                <i class="fa fa-fw fa-plus-square"></i>
+                                  <span>Add New Categories</span>
+                              </button>
+                            </div>
+                        </div>
+                    <div class="form-group">
+                      <label for="stok" class="control-label">Stok</label>
+                      <input type="number" class="form-control" id="stok" name="stok" placeholder="Ex :  100" required value="<?=$data["stok"]?>">
+                    </div>
+                    <div class="form-group required">
+                      <label for="harga" class="control-label">Harga Produk</label>
+                      <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">Rp</div>
+                        </div>
+                        <input type="number" class="form-control" id="harga" name="harga" placeholder="Ex :  15.000"  required value="<?=$data["harga"]?>">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="deskripsi" class="control-label">Deskripsi Produk (Opsional)</label>
+                      <textarea class="form-control" id="deskripsi" rows="3" name="deskripsi" placeholder="Ex :  Weight  : 90 g"><?=$data["deskripsi_produk"]?></textarea>
+                    </div>
+                    <div class="d-flex flex-row-reverse mb-5">
+                    <button type="submit" class="btn btn-success ml-3">Save</button>
+                        <button type="reset" class="btn btn-secondary ml-3">Reset</button>
+                        <a id="batal-produk" class="btn btn-outline-secondary" href="produk.php">Cancel</a>
+                    </div>
+                    
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-    <?php require "components/logout.php"?>
-
+  
+        <!---Container Fluid-->
+      </div>
+      <!-- Footer -->
+      <?php require "components/footer.php"?>
+      <!-- Footer -->
+    </div>
   </div>
-  <!---Container Fluid-->
-</div>
-<!-- Footer -->
-<?php require "components/footer.php"?>
-<!-- Footer -->
-</div>
-</div>
 
-<!-- Scroll to top -->
-<a class="scroll-to-top rounded" href="#page-top">
-  <i class="fas fa-angle-up"></i>
-</a>
+  <!-- Scroll to top -->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
 
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="js/ruang-admin.min.js"></script>
-<script>
-$('#foto').on('change',function(){
-//get the file name
-var fileName = $(this).val();
-//replace the "Choose a file" label
-$(this).next('.custom-file-label').html(fileName);
-})
-</script>
-    </body>
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="js/ruang-admin.min.js"></script>
+  <script>
+  $('#foto').on('change',function(){
+  //get the file name
+  var fileName = $(this).val();
+  //replace the "Choose a file" label
+  $(this).next('.custom-file-label').html(fileName);
+  })
+  </script>
+
+</body>
 
 </html>
