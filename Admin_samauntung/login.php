@@ -72,9 +72,6 @@ if (isset($_POST['login'])){
                       <div class="form-group">
                         <button class="btn btn-primary btn-user btn-block" name="login" type="submit"> Login </button>
                       </div>
-                      <div class="text-center">
-                        <a class="font-weight-bold medium" href="index.html">Go to SAMAUNTUNG</a>
-                      </div>
                     </div>
                   </div>
                 </div>

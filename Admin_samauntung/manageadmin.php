@@ -71,7 +71,7 @@ $data = query(" SELECT * FROM user ");
               <table class="table table-striped" id="dataTable" >
                 <div class="py-2">
                   <a href="addadmin.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                  <i class="fas fa-download fa-sm text-white-50"></i> Tambahkan User Admin </a>
+                  <i class="fas fa-download fa-sm text-white-50"></i> Add Admin </a>
                 </div>
                 <thead>
                   <tr>

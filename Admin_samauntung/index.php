@@ -8,11 +8,6 @@ if (!isset($_SESSION["admin"])){
     exit;
 }
 
-// $pendapatan = mysqli_query($conn, "SELECT tanggal_pesanan FROM pesanan GROUP BY month(tanggal_pesanan)");
-// $penjualan = mysqli_query($conn, "SELECT total FROM pesanan GROUP BY month(tanggal_pesanan)");
-
-// $pendapatan = mysqli_query($conn, "SELECT subtotal FROM pesanan_detail INNER JOIN pesanan WHERE MONTH(tanggal_pesanan) AND status = 'selesai'");
-
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +71,7 @@ if (!isset($_SESSION["admin"])){
                           <div class="card-body">
                             <div class="row no-gutters align-items-center">
                               <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pendapatan Bulan Ini</div>
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Income Of This Month</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">Rp <?= number_format($monthlySum, 0, "", ","); ?></div>
                               </div>
                               <div class="col-auto">
@@ -96,7 +91,7 @@ if (!isset($_SESSION["admin"])){
                           <div class="card-body">
                             <div class="row no-gutters align-items-center">
                               <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Total Transaksi</div>
+                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Total Transactions</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $pesanan; ?></div>
                               </div>
                               <div class="col-auto">
@@ -116,7 +111,7 @@ if (!isset($_SESSION["admin"])){
                           <div class="card-body">
                             <div class="row no-gutters align-items-center">
                               <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Dropshiper</div>
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Dropshipper</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $customer; ?></div>
                               </div>
                               <div class="col-auto">
@@ -142,7 +137,7 @@ if (!isset($_SESSION["admin"])){
                           <div class="card-body">
                             <div class="row no-gutters align-items-center">
                               <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Produk</div>
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Product Catalogue</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800"><?= number_format($monthlySum, 0, "", ","); ?></div>
                               </div>
                               <div class="col-auto">
@@ -164,7 +159,7 @@ if (!isset($_SESSION["admin"])){
           <div class="col-lg-12">
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Income Chart</h6>
                 </div>
                 <div class="card-body">
                   <div class="chart-area">

@@ -73,7 +73,7 @@ if (isset($_POST['simpan-produk'])) {
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./">Home</a></li>
               <li class="breadcrumb-item"><a href="orders.php">Orders</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Edit Orders</li>
+              <li class="breadcrumb-item active" aria-current="page">Edit Order</li>
             </ol>
           </div>
  
@@ -84,24 +84,23 @@ if (isset($_POST['simpan-produk'])) {
                 <form action="" method="post"  enctype="multipart/form-data">
                 <input type="hidden" name="id_pesanan" value="<?= $pesanan["id_pesanan"] ?>">
                   <div class="form-group">
-                    <label for="status">Ubah Status Transaksi</label>
+                    <label for="status">Change Transaction Status</label>
                     <select class="form-control" name="status" required value="<?= $pesanan["status"] ?>">
                       <option value="1"> </option>
-                      <option value="2">Belum bayar</option>
+                      <option value="2">Proses</option>
                       <option value="3">Sudah bayar</option>
-                      <option value="4">Pengiriman</option>
-                      <option value="5">Selesai</option>
+                      <option value="4">Selesai</option>
                     </select>
                   </div>
                   <div class="form-group">
-                    <label for="bukti_bayar">Bukti Pembayaran</label>
+                    <label for="bukti_bayar">Payment Receipt</label>
                     <input type="file" class="form-control"  name="image">
                     <input type="hidden" name="image-old" value="<?= $pesanan["bukti_bayar"] ?>">
                   </div>
                   <div class="d-flex flex-row-reverse mb-5">
-                  <button id="simpan-produk" name="simpan-produk" type="submit" class="btn btn-primary ml-3">Simpan</button>
+                  <button id="simpan-produk" name="simpan-produk" type="submit" class="btn btn-primary ml-3">Save</button>
                       <button type="reset" class="btn btn-secondary ml-3">Reset</button>
-                      <a id="batal-produk" class="btn btn-outline-secondary" href="orders.php">Batal</a>
+                      <a id="batal-produk" class="btn btn-outline-secondary" href="orders.php">Cancel</a>
                   </div>
                 </form>
               </div>

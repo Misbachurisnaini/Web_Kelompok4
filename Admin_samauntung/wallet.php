@@ -21,7 +21,7 @@ $a = query(" SELECT * FROM pesanan ");
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
-  <title>samauntung</title>
+  <title>SAMAUNTUNG</title>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
@@ -68,7 +68,7 @@ $a = query(" SELECT * FROM pesanan ");
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Pendapatan</div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Income</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">Rp <?= number_format($monthlySum, 0, "", ","); ?></div>
                     </div>
                     <div class="col-auto">
@@ -93,9 +93,9 @@ $a = query(" SELECT * FROM pesanan ");
                         <th>No</th>
                         <th>Username</th>
                         <th>Email</th>
-                        <th>Tgl. Transaksi</th>
-                        <th>Price</th>
-                        <th>Bukti Pembayaran</th>
+                        <th>Date In</th>
+                        <th>Total</th>
+                        <th>Payment Receipt</th>
                       </tr>
                     </thead>
                     <tbody>

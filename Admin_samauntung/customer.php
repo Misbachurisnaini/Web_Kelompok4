@@ -23,7 +23,7 @@ $cos = query("SELECT * FROM customer");
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
-  <title>Detail Dropshiper Samauntung</title>
+  <title>SAMAUNTUNG</title>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
@@ -45,10 +45,10 @@ $cos = query("SELECT * FROM customer");
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dropshiper</h1>
+            <h1 class="h3 mb-0 text-gray-800">Dropshipper</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Dropshiper</li>
+              <li class="breadcrumb-item active" aria-current="page">Dropshipper</li>
             </ol>
           </div>
 
@@ -65,7 +65,7 @@ $cos = query("SELECT * FROM customer");
                         <th>USERNAME</th>
                         <th>EMAIL</th>
                         <th>DATE REGISTER</th>
-                        <th>TINDAKAN</th>
+                        <th>ACTION</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -76,7 +76,7 @@ $cos = query("SELECT * FROM customer");
                         <td><?=$data["email_cs"]?></td>
                         <td><?=$data["date_register"]?></td>
                         <td>
-                          <a href="edit_customer.php?id=<?= $data['id_customer']; ?>" class="btn btn-primary"><i class="material-icons"></i>Edit</a>
+                          <a href="edit_customer.php?id=<?= $data['id_customer']; ?>" class="btn btn-primary"><i class="fas fa-solid fa-pen"></i></a>
                           <a href="detail_customer.php?id=<?= $data['id_customer']; ?>" class="btn btn-warning" id=set_dtl" data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-eye"></i></a>
                           <a type="button" class="btn btn-danger text-white" onclick="return confirm('konfirmasi hapus, apakah anda ingin menghapus figure')" href="hapuscustomer.php?id=<?= $data['id_customer'];?>" >
                             <i class="fas fa-solid fa-trash"></i>

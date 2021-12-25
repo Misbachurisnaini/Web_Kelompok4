@@ -17,7 +17,6 @@ if (!(isset($_GET['id']))) {
 
 $id = $_GET['id'];
 
-
 $data = query("SELECT * FROM customer WHERE id_customer = $id")[0];
 $data2 = query("SELECT * FROM customer_detail WHERE id_customer = $id")[0];
 
@@ -33,7 +32,7 @@ if (isset($_POST['simpan-produk'])) {
         echo "
         <script>
             alert('Data gagal diedit!');
-            // location = 'customer.php';
+            location = 'customer.php';
         </script>";
     }
 }
@@ -49,7 +48,7 @@ if (isset($_POST['simpan-produk'])) {
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
-  <title>Ubah Customer Samauntung</title>
+  <title>SAMAUNTUNG</title>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
@@ -70,14 +69,14 @@ if (isset($_POST['simpan-produk'])) {
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Ubah Dropshiper</h1>
+            <h1 class="h3 mb-0 text-gray-800">Edit Dropshipper</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./">Home</a></li>
-              <li class="breadcrumb-item">Customer</li>
-              <li class="breadcrumb-item active" aria-current="page">Ubah Dropshiper</li>
+              <li class="breadcrumb-item"><a href="customer.php">Dropshipper</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Edit Dropshiper</li>
             </ol>
           </div>
-
+ 
           <div class="row">
             <div class="col-md-12">
              <div class="card mb-4">
@@ -87,12 +86,12 @@ if (isset($_POST['simpan-produk'])) {
                 <input type="hidden" name="id_customer" value="<?= $data["id_customer"] ?>">
                 <input type="hidden" name="id_customer_detail" value="<?= $data2["id_customer_detail"] ?>">
                   <div class="form-group">
-                    <label for="foto">Foto</label>
+                    <label for="foto">Image</label>
                     <input type="file" class="form-control"  name="image">
                     <input type="hidden" name="image-old" value="<?= $data["foto"] ?>">
                   </div>
                   <div class="form-group required">
-                    <label for="nama" class="control-label">Nama</label>
+                    <label for="nama" class="control-label">Name</label>
                     <input type="text" class="form-control" id="nama" name="nama" placeholder="Ex :  Charles" required value="<?=$data["nama"]?>">
                   </div>
                   <div class="form-group required">
@@ -100,7 +99,7 @@ if (isset($_POST['simpan-produk'])) {
                     <input type="email" class="form-control" id="email" name="email_cs" placeholder="Ex :  test@test.com" required value="<?=$data["email_cs"]?>">
                   </div>
                   <div class="form-group required">
-                    <label for="alamat" class="control-label">alamat</label>
+                    <label for="alamat" class="control-label">Address</label>
                     <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Ex :  Indonesia" value="<?=$data["alamat"]?>">
                   </div>
                   <div class="form-group required">
@@ -118,9 +117,9 @@ if (isset($_POST['simpan-produk'])) {
                   </div>
                   
                   <div class="d-flex flex-row-reverse mb-5">
-                      <button id="simpan-produk" name="simpan-produk" type="submit" class="btn btn-primary ml-3">Simpan</button>
+                      <button id="simpan-produk" name="simpan-produk" type="submit" class="btn btn-primary ml-3">Save</button>
                       <button type="reset" class="btn btn-secondary ml-3">Reset</button>
-                      <a id="batal-produk" class="btn btn-outline-secondary" href="customer.php">Batal</a>
+                      <a id="batal-produk" class="btn btn-outline-secondary" href="customer.php">Cancel</a>
                   </div>
                 </form>
               </div>

@@ -52,9 +52,6 @@ if(!isset($_SESSION["admin"])){
           <div class="row">
             <div class="col-md-12">
              <div class="card mb-4">
-             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">DataTables with Hover</h6>
-                </div>
               <div class="table-responsive p-3">
                 <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                   <thead class="thead-light">
@@ -66,7 +63,7 @@ if(!isset($_SESSION["admin"])){
                       <th>DELIVERED AT</th>
                       <th>TOTAL</th>
                       <th>STATUS</th>
-                      <th>AKSI</th>
+                      <th>ACTION</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -89,7 +86,7 @@ if(!isset($_SESSION["admin"])){
                         <td><?=date('M d, Y', strtotime($data["tanggal_terima"]))?></td>
                         <td><?=$data["total"]?></td>
                         <td><span class="badge badge-secondary"><?=$data["status"]?></span></td>
-                        <td><a href="edit_order.php?id=<?=$data["id_pesanan"]?>" class="btn btn-primary"><i class="material-icons"></i>Edit</a>
+                        <td><a href="edit_order.php?id=<?=$data["id_pesanan"]?>" class="btn btn-primary"><i class="fas fa-solid fa-pen"></i></a>
                           <a href="detail_order.php?id=<?=$data["id_pesanan_detail"]?>" class="btn btn-warning" id=set_dtl" data-toggle="modal" data-target="#order-detail"><i class="fas fa-eye"></i></a>
                         </td>
                       </tr>
@@ -119,8 +116,6 @@ if(!isset($_SESSION["admin"])){
     <!-- Footer -->
     </div>
   </div>
-
-<!-- <div class="modal fade" id="modal_provinsi" tabindex="-1" role="dialog" aria-labelledby="provinsi" aria-hidden="true"></div> -->
 
 <!-- Scroll to top -->
 <a class="scroll-to-top rounded" href="#page-top">
@@ -156,7 +151,6 @@ if(!isset($_SESSION["admin"])){
 <!-- Page level custom scripts -->
 <script>
     $(document).ready(function () {
-      $('#dataTable').DataTable(); // ID From dataTable 
       $('#dataTableHover').DataTable(); // ID From dataTable with Hover
     });
   </script>

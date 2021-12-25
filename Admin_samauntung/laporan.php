@@ -44,7 +44,7 @@ $baris = count($query);
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
-  <title>RuangAdmin - Blank Page</title>
+  <title>SAMAUNTUNG</title>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
@@ -64,14 +64,12 @@ $baris = count($query);
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Laporan</h1>
+            <h1 class="h3 mb-0 text-gray-800">Report</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Laporan</li>
+              <li class="breadcrumb-item active" aria-current="page">Report</li>
             </ol>
           </div>
-          <!-- Modal Logout -->
-          <?php require "components/logout.php"?>
 
         </div>
         <!---Container Fluid-->
@@ -83,27 +81,27 @@ $baris = count($query);
                         <div class="card-body">
                             <!-- form kategori -->
                             <div class="col-md-4 pt-2">
-                                <span>Jumlah data: <b><?= $baris ?></b></span>
+                                <span>Amount Of Data: <b><?= $baris ?></b></span>
                             </div>
                             <div class="col-md-8">
                                 <form method="POST" action="" class="form-inline">
-                                    <label for="date1" class="mr-2">Tampilkan transaksi bulan </label>
+                                    <label for="date1" class="mr-2">Month Transaction</label>
                                     <select class="form-control mr-2" name="bulan">
-                                        <option value="0">Semua</option>
-                                        <option value="1">Januari</option>
-                                        <option value="2">Februari</option>
-                                        <option value="3">Maret</option>
+                                        <option value="0">All</option>
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
                                         <option value="4">April</option>
-                                        <option value="5">Mei</option>
-                                        <option value="6">Juni</option>
-                                        <option value="7">Juli</option>
-                                        <option value="8">Agustus</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
                                         <option value="9">September</option>
-                                        <option value="10">Oktober</option>
+                                        <option value="10">October</option>
                                         <option value="11">November</option>
-                                        <option value="12">Desember</option>
+                                        <option value="12">December</option>
                                     </select>
-                                    <button type="submit" name="submit" class="btn btn-primary">Tampilkan</button>
+                                    <button type="submit" name="submit" class="btn btn-primary">Show</button>
                                 </form>
                             </div>
 
@@ -116,10 +114,10 @@ $baris = count($query);
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Nama</th>
-                                                    <th>No Telepon</th>
-                                                    <th>Total Bayar</th>
-                                                    <th>Tgl. Transaksi</th>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Total Transaction</th>
+                                                    <th>Date In</th>
                                                 </tr>
                                             </thead>
                                             <?php

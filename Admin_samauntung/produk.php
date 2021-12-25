@@ -23,7 +23,7 @@ $query = mysqli_query($konek, "SELECT produk.gambar_produk,produk.id_produk, pro
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
-  <title>Katalog Produk Samauntung</title>
+  <title>SAMAUNTUNG</title>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
@@ -45,11 +45,10 @@ $query = mysqli_query($konek, "SELECT produk.gambar_produk,produk.id_produk, pro
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Katalog Produk</h1>
+            <h1 class="h3 mb-0 text-gray-800">Product Catalogue</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./">Home</a></li>
-              <!-- <li class="breadcrumb-item">Customer</li> -->
-              <li class="breadcrumb-item active" aria-current="page">Katalog Produk</li>
+              <li class="breadcrumb-item active" aria-current="page">Product Catalogue</li>
             </ol>
           </div>
 
@@ -58,7 +57,7 @@ $query = mysqli_query($konek, "SELECT produk.gambar_produk,produk.id_produk, pro
              <div class="card mb-4">
               <div class="card-header">
                 <a hr class="btn btn-success" href="tambah_produk.php">
-                Tambah Produk
+                Add Product
               </a>
             </div>
             <div class="card-body">
@@ -66,11 +65,11 @@ $query = mysqli_query($konek, "SELECT produk.gambar_produk,produk.id_produk, pro
                <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                 <thead class="thead-light">
                   <tr>
-                    <th colspan="2">NAMA PRODUK</th>
-                    <th>KATEGORI</th>
-                    <th>HARGA</th>
-                    <th>STATUS</th>
-                    <th>TINDAKAN</th>
+                    <th colspan="2">Product Name</th>
+                    <th>Categories</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody> 
@@ -98,8 +97,6 @@ $query = mysqli_query($konek, "SELECT produk.gambar_produk,produk.id_produk, pro
         </div>
       </div>
     </div>
-
-    <?php require "components/logout.php"?>
 
   </div>
   <!---Container Fluid-->

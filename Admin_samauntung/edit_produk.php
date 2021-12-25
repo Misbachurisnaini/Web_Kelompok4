@@ -13,7 +13,7 @@ include 'koneksi.php';
 if(isset($_POST["nama"])) {
   $namaFile = $_FILES['foto']['name'];
   $namaSementara = $_FILES['foto']['tmp_name'];
-  $dirUpload = "uploads/";
+  $dirUpload = "img/posting/";
   $terupload = move_uploaded_file($namaSementara, $dirUpload.$namaFile);
   if ($terupload) {
     $sql = "UPDATE produk 
@@ -55,6 +55,14 @@ if(isset($_POST["nama"])) {
 $sql = "SELECT produk.deskripsi_produk, produk.nama_produk, produk.id_kategori, produk.harga, produk.stok FROM produk WHERE produk.id_produk = ".$_GET['id'];
 $query = mysqli_query($konek, $sql);
 $data=mysqli_fetch_array($query);
+
+if (isset($_POST['simpan-kategori'])) {
+  $kategoriBaru = $_POST['kategori'];
+  $simpan = "INSERT INTO kategori VALUES (0, '$kategoriBaru')";
+
+  mysqli_query($conn, $simpan);
+}
+
 ?>
 
 
@@ -68,7 +76,7 @@ $data=mysqli_fetch_array($query);
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
-  <title>Ubah Customer Samauntung</title>
+  <title>SAMAUNTUNG</title>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
@@ -89,11 +97,11 @@ $data=mysqli_fetch_array($query);
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Ubah Katalog Produk</h1>
+            <h1 class="h3 mb-0 text-gray-800">Edit Product</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./">Home</a></li>
-              <li class="breadcrumb-item">Katalog Produk</li>
-              <li class="breadcrumb-item active" aria-current="page">Ubah Katalog Produk</li>
+              <li class="breadcrumb-item"><a href="produk.php">Product Catalogue</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Edit Product</li>
             </ol>
           </div>
 
@@ -103,21 +111,44 @@ $data=mysqli_fetch_array($query);
               <div class="card-body">
                 <form action="edit_produk.php?id=<?=$_GET['id']?>" method="post"  enctype="multipart/form-data">
                   <div class="form-group">
-                    <label for="foto">Foto Produk</label>
+                    <label for="foto">Image Product</label>
                     <div class="custom-file">
                       <input type="file" class="custom-file-input" id="foto" name="foto">
-                      <label class="custom-file-label" for="foto">Pilih foto</label>
+                      <label class="custom-file-label" for="foto">choose photo</label>
                     </div>
                   </div>
 
                   <div class="form-group required">
-                    <label for="nama" class="control-label">Nama Produk</label>
+                    <label for="nama" class="control-label">Product Name</label>
                     <input type="text" class="form-control" id="nama" name="nama" placeholder="Ex :  Musae Chips - Milk" required value="<?=$data["nama_produk"]?>">
                   </div>
                   <div class="form-group">
-                    <label for="kategori" class="control-label">Kategori Produk (Opsional)</label>
-                    <input type="number" class="form-control" id="kategori" name="kategori" placeholder="Ex :  Makanan & Minuman"value="<?=$data["id_kategori"]?>">
-                  </div>
+                          <label for="kategori">Categories</label>
+                          <div class="select-kategori">
+                            <select required name="kategori" class="form-control custom-select" id="nama_kategori">
+                              <option class="text-center" value="">---Choose Categories ---</option>
+                                <?php
+                                $kategori = mysqli_query($conn, "SELECT * FROM kategori");
+                                while ($dataKategori = mysqli_fetch_array($kategori)) {
+                                ?>
+                              <option value="<?= $dataKategori['id_kategori']; ?>"><?= ucwords($dataKategori['nama_kategori']); ?></option>
+                                <?php } ?>
+                            </select>
+                          </div>
+
+                          <div>
+                            <br>
+                          </div>
+
+                          <!--Tombol Tambah kategori -->
+                          <div class="d-flex flex-row-reverse mb-5">
+                            <!-- Button tambah kategori -->
+                            <button type="button" class="btn btn-outline-primary custom-btn ml-3" data-toggle="modal" data-target="#tambahKategori">
+                              <i class="fa fa-fw fa-plus-square"></i>
+                                <span>Add New Categories</span>
+                            </button>
+                          </div>
+                      </div>
                   <div class="form-group">
                     <label for="stok" class="control-label">Stok</label>
                     <input type="number" class="form-control" id="stok" name="stok" placeholder="Ex :  100" required value="<?=$data["stok"]?>">
@@ -136,9 +167,9 @@ $data=mysqli_fetch_array($query);
                     <textarea class="form-control" id="deskripsi" rows="3" name="deskripsi" placeholder="Ex :  Weight  : 90 g"><?=$data["deskripsi_produk"]?></textarea>
                   </div>
                   <div class="d-flex flex-row-reverse mb-5">
-                  <button type="submit" class="btn btn-success ml-3">Simpan</button>
+                  <button type="submit" class="btn btn-success ml-3">Save</button>
                       <button type="reset" class="btn btn-secondary ml-3">Reset</button>
-                      <a id="batal-produk" class="btn btn-outline-secondary" href="produk.php">Batal</a>
+                      <a id="batal-produk" class="btn btn-outline-secondary" href="produk.php">Cancel</a>
                   </div>
                   
                 </form>
@@ -146,8 +177,6 @@ $data=mysqli_fetch_array($query);
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
     <?php require "components/logout.php"?>
 
