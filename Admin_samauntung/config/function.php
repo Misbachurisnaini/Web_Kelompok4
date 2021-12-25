@@ -1,9 +1,9 @@
 <?php 
 
 $servername = "localhost";
-$database = "samauntung";
-$username = "root";
-$password =  "";
+$database = "u1694897_b_reg_6_db";
+$username = "u1694897_b_reg_6";
+$password =  "jtipolije";
 
 // untuk tulisan bercetak tebal silakan sesuaikan dengan detail database Anda
 // membuat koneksi
