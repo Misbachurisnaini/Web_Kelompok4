@@ -57,10 +57,10 @@ $a = query(" SELECT * FROM pesanan ");
         <div class="container-fluid">
 
         <?php
-          $monthlyTrans = query("SELECT total FROM pesanan WHERE status = 'selesai'");
-          $monthlySum = 0;
-          for ($i = 0; $i < count($monthlyTrans); $i++) {
-            $monthlySum = $monthlySum + $monthlyTrans[$i]['total'];
+          $trans = query("SELECT total FROM pesanan WHERE status = 'selesai'");
+          $Sum = 0;
+          for ($i = 0; $i < count($trans); $i++) {
+            $Sum = $Sum + $trans[$i]['total'];
           }
           ?>
         <div class="col-xl-4 mb-4">
@@ -69,7 +69,7 @@ $a = query(" SELECT * FROM pesanan ");
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Income</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">Rp <?= number_format($monthlySum, 0, "", ","); ?></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">Rp <?= number_format($Sum, 0, "", ","); ?></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-4x text-gray-300"></i>

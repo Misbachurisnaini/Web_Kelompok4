@@ -85,11 +85,12 @@ if (isset($_POST['simpan-produk'])) {
                   <input type="hidden" name="id_pesanan" value="<?= $pesanan["id_pesanan"] ?>">
                     <div class="form-group">
                       <label for="status">Change Transaction Status</label>
-                      <select class="form-control" name="status" required value="<?= $pesanan["status"] ?>">
-                        <option value="1"> </option>
-                        <option value="2">Proses</option>
-                        <option value="3">Sudah bayar</option>
-                        <option value="4">Selesai</option>
+                      <input class="form-control" name="status" required value="<?= $pesanan["status"] ?>">
+                      <select>
+                        <option value=" "> </option>
+                        <option value="Proses">Proses</option>
+                        <option value="Sudah bayar">Sudah bayar</option>
+                        <option value="Selesai">Selesai</option>
                       </select>
                     </div>
                     <div class="form-group">
