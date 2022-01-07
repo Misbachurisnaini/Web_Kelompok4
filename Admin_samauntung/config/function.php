@@ -182,43 +182,12 @@ function editcustomer($query)
     return mysqli_affected_rows($conn);
 }
 
-// function editproduk($query)
-// {
-//     global $conn;
-
-//     htmlspecialchars($namaProduk = $query['nama_produk']);
-//     htmlspecialchars($kategori = $query['kategori']);
-//     htmlspecialchars($stok = $query['stok']);
-//     htmlspecialchars($harga = $query['harga']);
-//     htmlspecialchars($deskripsi = $query['deskripsi']);
-//     htmlspecialchars($idProduk = $query['id_produk']);
-//     htmlspecialchars($imageOld = $query['image-old']);
-
-
-//     // apakah user upload foto baru
-//     if ($_FILES['image']['error'] === 4) {
-//         $img = $imageOld;
-//     } else {
-//         $img = uploadGambar();
-//         unlink("img/produk/$imageOld");
-//         if (!$img) {
-//             return false;
-//         }
-//     }
-
-//     $update = "UPDATE produk SET nama_produk = '$namaProduk', id_kategori = '$kategori', stok = '$stok', harga = '$harga', deskripsi_produk = '$deskripsi', gambar_produk = '$img' WHERE id_produk = $idProduk";
-
-//     mysqli_query($conn, $update);
-
-//     return mysqli_affected_rows($conn);
-// }
-
 function editorders($query)
 {
     global $conn;
 
-    htmlspecialchars($status = $query['status']);
     htmlspecialchars($id_pesan = $query['id_pesanan']);
+    htmlspecialchars($sts = $query['status']);
     htmlspecialchars($imageOld = $query['image-old']);
 
     // apakah user upload foto baru
@@ -232,7 +201,7 @@ function editorders($query)
         }
     }
 
-    $update = "UPDATE pesanan SET status = '$status', bukti_bayar = '$img' WHERE id_pesanan = '$id_pesan'";
+    $update = "UPDATE pesanan SET bukti_bayar = '$img', status = '$sts' WHERE id_pesanan = '$id_pesan'";
 
     mysqli_query($conn, $update);
 

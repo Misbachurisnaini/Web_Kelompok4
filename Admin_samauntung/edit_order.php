@@ -8,16 +8,9 @@ if (!isset($_SESSION["admin"])) {
 
 require "config/function.php";
 
-if (!(isset($_GET['id']))) {
-    header("orders.php");
-    exit;
-}
-
 $id = $_GET['id'];
 
-
 $pesanan = query("SELECT * FROM pesanan WHERE id_pesanan = $id")[0];
-
 
 if (isset($_POST['simpan-produk'])) {
     if (editorders($_POST) > 0) {
@@ -35,6 +28,7 @@ if (isset($_POST['simpan-produk'])) {
         </script>";
     }
 }
+
 
 ?>
 
@@ -81,25 +75,25 @@ if (isset($_POST['simpan-produk'])) {
             <div class="col-md-12">
               <div class="card mb-4">
                 <div class="card-body">
-                  <form action="" method="post"  enctype="multipart/form-data">
+                  <form action="" method="POST"  enctype="multipart/form-data">
                   <input type="hidden" name="id_pesanan" value="<?= $pesanan["id_pesanan"] ?>">
-                    <div class="form-group">
-                      <label for="status">Change Transaction Status</label>
-                      <input class="form-control" name="status" required value="<?= $pesanan["status"] ?>">
-                      <select>
-                        <option value=" "> </option>
-                        <option value="Proses">Proses</option>
-                        <option value="Sudah bayar">Sudah bayar</option>
-                        <option value="Selesai">Selesai</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label for="bukti_bayar">Payment Receipt</label>
-                      <input type="file" class="form-control"  name="image">
-                      <input type="hidden" name="image-old" value="<?= $pesanan["bukti_bayar"] ?>">
-                    </div>
+                  <div class="form-group">
+                  <label for="status">Ubah Status Transaksi</label>
+                    <select class="form-control" name="status" required ">
+                      <option value="<?= $pesanan['status'] ?>"><?= $pesanan['status'] ?></option>
+                      <option value="Belum bayar">Belum bayar</option>
+                      <option value="Sudah bayar">Sudah bayar</option>
+                      <option value="Pengiriman">Pengiriman</option>
+                      <option value="Selesai">Selesai</option>
+                    </select>
+                        </div>
+                        <div class="form-group">
+                    <label for="bukti_bayar">Image</label>
+                    <input type="file" class="form-group-file"  name="image">
+                    <input type="hidden" name="image-old" value="<?= $pesanan["bukti_bayar"] ?>">
+                  </div>
                     <div class="d-flex flex-row-reverse mb-5">
-                    <button id="simpan-produk" name="simpan-produk" type="submit" class="btn btn-primary ml-3">Save</button>
+                      <button id="simpan-produk" name="simpan-produk" type="submit" class="btn btn-primary ml-3">Save</button>
                         <button type="reset" class="btn btn-secondary ml-3">Reset</button>
                         <a id="batal-produk" class="btn btn-outline-secondary" href="orders.php">Cancel</a>
                     </div>
@@ -108,8 +102,8 @@ if (isset($_POST['simpan-produk'])) {
               </div>
             </div>
           </div>
-
         </div>
+
       <!---Container Fluid-->
       </div>
       <!-- Footer -->
@@ -127,6 +121,18 @@ if (isset($_POST['simpan-produk'])) {
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="js/ruang-admin.min.js"></script>
+  <script>
+        $(document).ready(function() {
+            $("select#status option[value='<?= $kat; ?>']").attr("selected", "selected");
+        });
+  </script>
+  <script>
+    $(document).ready(function() {
+      $('.tambahbtn').on('click',function() {
+        $('#tambahstatus').modal('show');
+      });
+    });
+  </script>
 </body>
 
 </html>

@@ -178,6 +178,30 @@ if (isset($_POST['simpan-kategori'])) {
             </div>
           </div>
         </div>
+
+        <div class="modal fade" id="tambahKategori" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Tambah Kategori</h5>
+              <button id="close-kategori" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="" method="POST">
+              <div class="modal-body">
+                <div class="form-group">
+                  <input type="text" name="kategori" id="inputKategori" class="form-control" placeholder="Masukkan kategori baru...">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button name="simpan-kategori" type="submit" id="simpan-kategori" class="btn btn-primary">Simpan</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
   
         <!---Container Fluid-->
       </div>
